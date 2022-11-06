@@ -4,10 +4,7 @@ import Rating from "../components/homeComponents/Rating";
 import { Link } from "react-router-dom";
 import Message from "./../components/LoadingError/Error";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  createProductReview,
-  listProductDetails,
-} from "../Redux/Actions/ProductActions";
+import {createProductReview, listProductDetails,} from "../Redux/Actions/ProductActions";
 import Loading from "../components/LoadingError/Loading";
 import { PRODUCT_CREATE_REVIEW_RESET } from "../Redux/Constants/ProductConstants";
 import moment from "moment";
@@ -75,6 +72,7 @@ const SingleProduct = ({ history, match }) => {
                   <div className="product-info">
                     <div className="product-name">{product.name}</div>
                   </div>
+                  <p>Categories: {product.categories}</p>
                   <p>{product.description}</p>
 
                   <div className="product-count col-lg-7 ">

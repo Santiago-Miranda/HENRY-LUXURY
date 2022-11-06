@@ -36,12 +36,9 @@ const CartScreen = ({ match, location, history }) => {
         {cartItems.length === 0 ? (
           <div className=" alert alert-info text-center mt-3">
             Your cart is empty
-            <Link
+            <Link to="/"
               className="btn btn-success mx-5 px-5 py-3"
-              to="/"
-              style={{
-                fontSize: "12px",
-              }}
+              style={{fontSize: "12px",}}
             >
               SHOPPING NOW
             </Link>
