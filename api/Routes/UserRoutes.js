@@ -7,9 +7,7 @@ import User from "./../Models/UserModel.js";
 const userRouter = express.Router();
 
 // LOGIN
-userRouter.post(
-  "/login",
-  asyncHandler(async (req, res) => {
+userRouter.post("/login", asyncHandler(async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
 
@@ -30,9 +28,7 @@ userRouter.post(
 );
 
 // REGISTER
-userRouter.post(
-  "/",
-  asyncHandler(async (req, res) => {
+userRouter.post("/", asyncHandler(async (req, res) => {
     const { name, email, password } = req.body;
 
     const userExists = await User.findOne({ email });
@@ -52,8 +48,10 @@ userRouter.post(
       res.status(201).json({
         _id: user._id,
         name: user.name,
+        image: user.image,
         email: user.email,
         isAdmin: user.isAdmin,
+        isBaned: user.isBaned,
         token: generateToken(user._id),
       });
     } else {
@@ -64,10 +62,7 @@ userRouter.post(
 );
 
 // PROFILE
-userRouter.get(
-  "/profile",
-  protect,
-  asyncHandler(async (req, res) => {
+userRouter.get("/profile", protect, asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
 
     if (user) {
@@ -86,10 +81,7 @@ userRouter.get(
 );
 
 // UPDATE PROFILE
-userRouter.put(
-  "/profile",
-  protect,
-  asyncHandler(async (req, res) => {
+userRouter.put("/profile", protect, asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
 
     if (user) {
@@ -115,11 +107,7 @@ userRouter.put(
 );
 
 // GET ALL USER ADMIN
-userRouter.get(
-  "/",
-  protect,
-  admin,
-  asyncHandler(async (req, res) => {
+userRouter.get("/", protect, admin, asyncHandler(async (req, res) => {
     const users = await User.find({});
     res.json(users);
   })

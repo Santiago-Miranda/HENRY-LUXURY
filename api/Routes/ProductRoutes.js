@@ -6,9 +6,7 @@ import { admin, protect } from "./../Middleware/AuthMiddleware.js";
 const productRoute = express.Router();
 
 // GET ALL PRODUCT
-productRoute.get(
-  "/",
-  asyncHandler(async (req, res) => {
+productRoute.get("/", asyncHandler(async (req, res) => {
     const pageSize = 12;
     const page = Number(req.query.pageNumber) || 1;
     const keyword = req.query.keyword
@@ -29,20 +27,14 @@ productRoute.get(
 );
 
 // ADMIN GET ALL PRODUCT WITHOUT SEARCH AND PEGINATION
-productRoute.get(
-  "/all",
-  protect,
-  admin,
-  asyncHandler(async (req, res) => {
+productRoute.get("/all", protect, admin, asyncHandler(async (req, res) => {
     const products = await Product.find({}).sort({ _id: -1 });
     res.json(products);
   })
 );
 
 // GET SINGLE PRODUCT
-productRoute.get(
-  "/:id",
-  asyncHandler(async (req, res) => {
+productRoute.get("/:id", asyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
     if (product) {
       res.json(product);
@@ -54,10 +46,7 @@ productRoute.get(
 );
 
 // PRODUCT REVIEW
-productRoute.post(
-  "/:id/review",
-  protect,
-  asyncHandler(async (req, res) => {
+productRoute.post("/:id/review", protect, asyncHandler(async (req, res) => {
     const { rating, comment } = req.body;
     const product = await Product.findById(req.params.id);
 
@@ -92,11 +81,7 @@ productRoute.post(
 );
 
 // DELETE PRODUCT
-productRoute.delete(
-  "/:id",
-  protect,
-  admin,
-  asyncHandler(async (req, res) => {
+productRoute.delete("/:id", protect, admin, asyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
     if (product) {
       await product.remove();
@@ -109,12 +94,8 @@ productRoute.delete(
 );
 
 // CREATE PRODUCT
-productRoute.post(
-  "/",
-  protect,
-  admin,
-  asyncHandler(async (req, res) => {
-    const { name, price, description, image, countInStock } = req.body;
+productRoute.post("/", protect, admin, asyncHandler(async (req, res) => {
+    const { name, price, description, categories, image, countInStock } = req.body;
     const productExist = await Product.findOne({ name });
     if (productExist) {
       res.status(400);
@@ -124,6 +105,7 @@ productRoute.post(
         name,
         price,
         description,
+        categories,
         image,
         countInStock,
         user: req.user._id,
@@ -140,11 +122,7 @@ productRoute.post(
 );
 
 // UPDATE PRODUCT
-productRoute.put(
-  "/:id",
-  protect,
-  admin,
-  asyncHandler(async (req, res) => {
+productRoute.put("/:id", protect, admin, asyncHandler(async (req, res) => {
     const { name, price, description, image, countInStock } = req.body;
     const product = await Product.findById(req.params.id);
     if (product) {

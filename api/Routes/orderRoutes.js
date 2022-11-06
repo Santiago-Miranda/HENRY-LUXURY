@@ -6,10 +6,7 @@ import Order from "./../Models/OrderModel.js";
 const orderRouter = express.Router();
 
 // CREATE ORDER
-orderRouter.post(
-  "/",
-  protect,
-  asyncHandler(async (req, res) => {
+orderRouter.post("/", protect, asyncHandler(async (req, res) => {
     const {
       orderItems,
       shippingAddress,
@@ -43,11 +40,7 @@ orderRouter.post(
 );
 
 // ADMIN GET ALL ORDERS
-orderRouter.get(
-  "/all",
-  protect,
-  admin,
-  asyncHandler(async (req, res) => {
+orderRouter.get("/all", protect, admin, asyncHandler(async (req, res) => {
     const orders = await Order.find({})
       .sort({ _id: -1 })
       .populate("user", "id name email");
@@ -55,20 +48,14 @@ orderRouter.get(
   })
 );
 // USER LOGIN ORDERS
-orderRouter.get(
-  "/",
-  protect,
-  asyncHandler(async (req, res) => {
+orderRouter.get("/", protect, asyncHandler(async (req, res) => {
     const order = await Order.find({ user: req.user._id }).sort({ _id: -1 });
     res.json(order);
   })
 );
 
 // GET ORDER BY ID
-orderRouter.get(
-  "/:id",
-  protect,
-  asyncHandler(async (req, res) => {
+orderRouter.get("/:id", protect, asyncHandler(async (req, res) => {
     const order = await Order.findById(req.params.id).populate(
       "user",
       "name email"
@@ -84,10 +71,7 @@ orderRouter.get(
 );
 
 // ORDER IS PAID
-orderRouter.put(
-  "/:id/pay",
-  protect,
-  asyncHandler(async (req, res) => {
+orderRouter.put("/:id/pay", protect, asyncHandler(async (req, res) => {
     const order = await Order.findById(req.params.id);
 
     if (order) {
@@ -110,10 +94,7 @@ orderRouter.put(
 );
 
 // ORDER IS PAID
-orderRouter.put(
-  "/:id/delivered",
-  protect,
-  asyncHandler(async (req, res) => {
+orderRouter.put("/:id/delivered", protect, asyncHandler(async (req, res) => {
     const order = await Order.findById(req.params.id);
 
     if (order) {

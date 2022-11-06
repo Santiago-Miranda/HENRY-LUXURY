@@ -83,7 +83,7 @@ textarea:focus {
   margin-right: 0rem;
 }
 .badge {
-  background-color: red;
+  background-color: #faad02;
   position: absolute;
   top: -20px;
   border-radius: 100px;
@@ -110,7 +110,7 @@ textarea:focus {
   margin: 0 !important;
 }
 .dropdown-menu a:hover {
-  background-color: #1cb803 !important;
+  background-color: #faad02 !important;
   color: #ffffff !important;
 }
 .mobile-header {
@@ -166,7 +166,7 @@ textarea:focus {
   position: relative;
   overflow: hidden;
   width: 100%;
-  background-color: #f3fbf7;
+  background-color: #ffffff;
 }
 .shopBack img {
   width: 100%;
@@ -199,9 +199,7 @@ textarea:focus {
 
 /* NEWSLATTER */
 .subscribe-section {
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.226), rgba(0, 0, 0, 0.226)),
-    url("https://sasshoes-com.s3.us-west-2.amazonaws.com/img/banner-uplift-21.jpg")
-      no-repeat scroll center / cover;
+  background: #cccccc;
   padding: 100px 0 100px;
 }
 .subscribe-head h2 {
@@ -233,7 +231,7 @@ textarea:focus {
   width: 460px;
 }
 .form-section input[type="submit"] {
-  background: #1cb803;
+  background: #faad02;
   border: 0 none;
   border-radius: 25px;
   color: #fff;
@@ -264,10 +262,10 @@ textarea:focus {
 .info-image {
   width: 50px;
   height: 50px;
-  border: 2px solid #1cb803;
+  border: 2px solid #b47b00;
   border-radius: 100px;
   font-size: 20px;
-  color: #1cb803;
+  color: #faad02;
 }
 .box-info h5 {
   font-weight: bold;
@@ -285,12 +283,11 @@ textarea:focus {
   margin-bottom: 50px;
 }
 .single-image {
-  background-color: #f3fbf7;
+  background-color: #ffffff;
   margin-right: 20px;
   height: 700px;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 .single-image img {
   width: 90%;
@@ -352,7 +349,7 @@ textarea:focus {
 }
 .round-black-btn:hover,
 .round-black-btn:focus {
-  background: #1cb803;
+  background: #faad02;
 }
 
 /* LOGIN */
@@ -385,11 +382,17 @@ textarea:focus {
   margin-top: 20px;
   padding: 20px 0;
   border: 0;
-  background-color: #1cb803;
+  background-color: black;
   border-radius: 5px;
   text-transform: uppercase;
   color: white;
 }
+.Login button:hover,
+.Login2 button:focus {
+  background: #faad02;
+  color: black;
+}
+
 .Login button a,
 .Login2 button a {
   text-transform: uppercase;
@@ -437,7 +440,7 @@ textarea:focus {
   border-top: 1px solid #e4e4e4;
 }
 .wizard .nav .active {
-  background-color: #e5fee9;
+  background-color: #ffffff;
   color: black;
 }
 .badge2 {
@@ -455,14 +458,14 @@ textarea:focus {
 }
 .form label {
   padding: 10px 0;
-  color: #8a8a8a;
+  color: #ffffff;
   text-transform: uppercase;
   font-size: 13px;
 }
 .form input {
   padding: 20px 10px;
   font-size: 17px;
-  background-color: #e5fee9;
+  background-color: #ffffff;
 }
 .form-container button {
   padding: 15px 0;
@@ -470,7 +473,7 @@ textarea:focus {
   margin-top: 20px;
   text-transform: uppercase;
   font-size: 13px;
-  background-color: #1cb803;
+  background-color: #faad02;
   color: #ffffff;
 }
 /* orders */
@@ -520,19 +523,19 @@ textarea:focus {
 .cart-text p {
   margin-top: 10px;
   font-size: 15px;
-  color: #7a7a7a;
+  color: #ffffff;
 }
 .cart-qty select {
   width: 100%;
   font-size: 15px;
   padding: 15px;
-  border: 1px solid #c5c5c5;
+  border: 1px solid #ffffff;
   border-radius: 5px;
 }
 .cart-qty h6,
 .cart-price h6 {
   margin-bottom: 15px;
-  color: #8c8c8c;
+  color: #ffffff;
   font-size: 13px;
   text-transform: uppercase;
 }
@@ -543,7 +546,7 @@ textarea:focus {
   padding: 0 30px;
 }
 .total .sub {
-  color: #8c8c8c;
+  color: #ffffff;
   font-size: 20px;
   text-transform: uppercase;
   margin-right: 20px;
@@ -563,7 +566,7 @@ textarea:focus {
   border: 0px;
   text-transform: uppercase;
   font-size: 13px;
-  background-color: #1cb803;
+  background-color: #faad02;
   color: #ffffff;
 }
 .cart-buttons a:nth-child(1) button {
@@ -603,7 +606,7 @@ textarea:focus {
 }
 .order-detail {
   padding: 30px 0;
-  background-color: #e5fee9;
+  background-color: #ffffff;
 }
 .order-detail h5 {
   margin-bottom: 6px;
@@ -619,7 +622,7 @@ textarea:focus {
 }
 .order-product {
   margin: 40px 0;
-  border-bottom: 2px solid #f3f3f3;
+  border-bottom: 2px solid #ffffff;
   position: relative;
 }
 .order-product h4 {
@@ -640,7 +643,7 @@ textarea:focus {
   border: 0px;
   text-transform: uppercase;
   font-size: 13px;
-  background-color: #1cb803;
+  background-color: #faad02;
   color: #ffffff;
 }
 
