@@ -1,21 +1,80 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Message from "../LoadingError/Error";
 import Loading from "../LoadingError/Loading";
 import Orders from "./Orders";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import $ from "jquery";
+import { logout } from "../../Redux/Actions/userActions";
+import logo from "../logo.png"
+import { Link } from "react-router-dom";
 
 const OrderMain = () => {
   const orderList = useSelector((state) => state.orderList);
   const { loading, error, orders } = orderList;
+  const dispatch = useDispatch();
+
+
+  useEffect(() => {
+    $("[data-trigger]").on("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      var offcanvas_id = $(this).attr("data-trigger");
+      $(offcanvas_id).toggleClass("show");
+    });
+
+    $(".btn-aside-minimize").on("click", function () {
+      if (window.innerWidth < 768) {
+        $("body").removeClass("aside-mini");
+        $(".navbar-aside").removeClass("show");
+      } else {
+        // minimize sidebar on desktop
+        $("body").toggleClass("aside-mini");
+      }
+    });
+  }, []);
+
+  const logoutHandler = () => {
+    dispatch(logout());
+  };
+
+ 
+
 
   return (
     <section className="content-main">
       <div className="content-header">
         <h2 className="content-title">Orders</h2>
+        <ul className="nav">
+
+          <li className="dropdown nav-item">
+            <Link className="dropdown-toggle" data-bs-toggle="dropdown" to="#">
+              <img
+                className="img-xs rounded-circle"
+                src={logo}
+                alt="User"
+              />
+            </Link>
+            <div className="dropdown-menu dropdown-menu-end">
+              <Link className="dropdown-item" to="/">
+                My profile
+              </Link>
+              <Link className="dropdown-item" to="#">
+                Settings
+              </Link>
+              <Link
+                onClick={logoutHandler}
+                className="dropdown-item text-danger"
+                to="#"
+              >
+                Exit
+              </Link>
+            </div>
+          </li>
+        </ul>
       </div>
 
       <div className="card mb-4 shadow-sm">
-        <header className="card-header bg-white">
+        {/* <header className="card-header">
           <div className="row gx-3 py-3">
             <div className="col-lg-4 col-md-6 me-auto">
               <input
@@ -40,7 +99,7 @@ const OrderMain = () => {
               </select>
             </div>
           </div>
-        </header>
+        </header> */}
         <div className="card-body">
           <div className="table-responsive">
             {loading ? (
