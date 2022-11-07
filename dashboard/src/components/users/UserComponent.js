@@ -16,7 +16,7 @@ const UserComponent = () => {
   const [disableCategory, setDisableCategory] = useState(false)
   const [disableStatus, setDisableStatus] = useState(false)
   const [disablePrice, setDisablePrice] = useState(false)
-  const [disableAction, setDisableAction] = useState(false)
+  // const [disableAction, setDisableAction] = useState(false)
 
   const userList = useSelector((state) => state.userList);
   const { loading, error, users } = userList;
@@ -86,157 +86,207 @@ const UserComponent = () => {
       <div className="card mb-4 shadow-sm">
         <header className="card-header ">
           <div className="row gx-3 py-3">
-            <div className="col-lg-4 col-md-6 me-auto ">
-              <input
-                type="search"
-                placeholder="Search..."
-                className="form-control p-2"
-              />
-            </div>
+
             <div className="col-lg-2 col-6 col-md-3">
-              <select className="form-select">
-                <option>All category</option>
-                <option>Electronics</option>
-                <option>Clothings</option>
-                <option>Something else</option>
-              </select>
-            </div>
-            <div className="col-lg-2 col-6 col-md-3">
-              <select className="form-select">
-                <option>Latest added</option>
-                <option>Cheap first</option>
-                <option>Most viewed</option>
-              </select>
+              <ul className="nav">
+
+                <li className="dropdown nav-item">
+                  <Link className="dropdown-toggle" data-bs-toggle="dropdown" to="#">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      className="feather feather-list"
+                    >
+                      <line x1="8" y1="6" x2="21" y2="6" />
+                      <line x1="8" y1="12" x2="21" y2="12" />
+                      <line x1="8" y1="18" x2="21" y2="18" />
+                      <line x1="3" y1="6" x2="3.01" y2="6" />
+                      <line x1="3" y1="12" x2="3.01" y2="12" />
+                      <line x1="3" y1="18" x2="3.01" y2="18" />
+                    </svg>
+                  </Link>
+                  <div className="dropdown-menu dropdown-menu-end">
+                    <button onClick={() => {
+                      if (disableItem === false) {
+                        setDisableItem(true)
+                      } else {
+                        setDisableItem(false)
+
+                      }
+                    }} className="dropdown-item" to="/">
+                      Customers
+                    </button>
+                    <button onClick={() => {
+                      if (disableCategory === false) {
+                        setDisableCategory(true)
+                      } else {
+                        setDisableCategory(false)
+
+                      }
+                    }} className="dropdown-item" to="/">
+                      Email
+                    </button>
+                    
+                    <button onClick={() => {
+                      if (disableStatus === false) {
+                        setDisableStatus(true)
+                      } else {
+                        setDisableStatus(false)
+
+                      }
+                    }} className="dropdown-item" to="/">
+                      Status
+                    </button>
+                    <button onClick={() => {
+                      if (disablePrice === false) {
+                        setDisablePrice(true)
+                      } else {
+                        setDisablePrice(false)
+
+                      }
+                    }} className="dropdown-item" to="/">
+                      Market Stall
+                    </button>
+                  </div>
+                </li>
+              </ul>
             </div>
           </div>
         </header>
 
         <div className="card-body">
-          
-            <div class="products-area-wrapper tableView">
-          <div class="products-header">
-            {
-              disableItem === false ?  <div class="product-cell image">
-              Customers
-              <button class="sort-button">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 512 512"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"
-                  />
-                </svg>
-              </button>
-            </div>:null
-            }
-            {
-              disableCategory === false ? <div class="product-cell category">
-              email
-              <button class="sort-button">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 512 512"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"
-                  />
-                </svg>
-              </button>
-            </div>:null
-            }
-            {
-              disableStatus === false ? <div class="product-cell status-cell">
-              Status
-              <button class="sort-button">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 512 512"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"
-                  />
-                </svg>
-              </button>
-            </div>:null
-            }
-           {
-            disablePrice === false ?  <div class="product-cell price">
-            Market Stall
-            <button class="sort-button">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 512 512"
-              >
-                <path
-                  fill="currentColor"
-                  d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"
-                />
-              </svg>
-            </button>
-          </div>:null
-           }
-            {/* {
+
+          <div class="products-area-wrapper tableView">
+            <div class="products-header">
+              {
+                disableItem === false ? <div class="product-cell image">
+                  Customers
+                  <button class="sort-button">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 512 512"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"
+                      />
+                    </svg>
+                  </button>
+                </div> : null
+              }
+              {
+                disableCategory === false ? <div class="product-cell category">
+                  Email
+                  <button class="sort-button">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 512 512"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"
+                      />
+                    </svg>
+                  </button>
+                </div> : null
+              }
+              {
+                disableStatus === false ? <div class="product-cell status-cell">
+                  Status
+                  <button class="sort-button">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 512 512"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"
+                      />
+                    </svg>
+                  </button>
+                </div> : null
+              }
+              {
+                disablePrice === false ? <div class="product-cell price">
+                  Market Stall
+                  <button class="sort-button">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 512 512"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M496.1 138.3L375.7 17.9c-7.9-7.9-20.6-7.9-28.5 0L226.9 138.3c-7.9 7.9-7.9 20.6 0 28.5 7.9 7.9 20.6 7.9 28.5 0l85.7-85.7v352.8c0 11.3 9.1 20.4 20.4 20.4 11.3 0 20.4-9.1 20.4-20.4V81.1l85.7 85.7c7.9 7.9 20.6 7.9 28.5 0 7.9-7.8 7.9-20.6 0-28.5zM287.1 347.2c-7.9-7.9-20.6-7.9-28.5 0l-85.7 85.7V80.1c0-11.3-9.1-20.4-20.4-20.4-11.3 0-20.4 9.1-20.4 20.4v352.8l-85.7-85.7c-7.9-7.9-20.6-7.9-28.5 0-7.9 7.9-7.9 20.6 0 28.5l120.4 120.4c7.9 7.9 20.6 7.9 28.5 0l120.4-120.4c7.8-7.9 7.8-20.7-.1-28.5z"
+                      />
+                    </svg>
+                  </button>
+                </div> : null
+              }
+              {/* {
               disableAction === false ? <div class="product-cell sales">Action</div>: null
             }   */}
-            
-          </div>
-          {users &&
-            users.map(e => (
-              <div key={e._id} class="products-row">
-                {
-                  disableItem === false ?  <div class="product-cell image">
-                  <img className="imagen_prduct" src={logo} alt="product" />
-                  <span>{e.name}</span>
-                </div>: null
-                }
-                {
-                  disableCategory === false ? <div class="product-cell category">
-                  <span class="cell-label">email:</span>
-                  {e.email}
-                </div>: null
-                }
-                {
-                  disableStatus === false ? <div className="product-cell status-cell">
-                  <span className="cell-label">Status:</span>
+
+            </div>
+            {users &&
+              users.map(e => (
+                <div key={e._id} class="products-row">
                   {
-                    e.isBaned && e.isBaned === false ? <span className="status active">Active</span>:<span className="status disabled">Disabled</span>
+                    disableItem === false ? <div class="product-cell image">
+                      <img className="imagen_prduct" src={logo} alt="product" />
+                      <span>{e.name}</span>
+                    </div> : null
                   }
-                </div>:null
-                }
-                {
-                  disablePrice === false ? <div className="product-cell status-cell">
-                  <span className="cell-label">Market Stall:</span>
                   {
-                    e.isAdmin && e.isAdmin === true ? <span className="status active">Admin</span>:<span className="status disabled">User</span>
+                    disableCategory === false ? <div class="product-cell category">
+                      <span class="cell-label">email:</span>
+                      {e.email}
+                    </div> : null
                   }
-                </div>:null
-                }
-                {/* {
+                  {
+                    disableStatus === false ? <div className="product-cell status-cell">
+                      <span className="cell-label">Status:</span>
+                      {
+                        e.isBaned === "false" ? <span className="status active">Active</span> : <span className="status disabled">Disabled</span>
+                      }
+                    </div> : null
+                  }
+                  {
+                    disablePrice === false ? <div className="product-cell status-cell">
+                      <span className="cell-label">Market Stall:</span>
+                      {
+                        e.isAdmin && e.isAdmin === true ? <span className="status active">Admin</span> : <span className="status disabled">User</span>
+                      }
+                    </div> : null
+                  }
+                  {/* {
                   disablePrice === false ?  <div class="product-cell price">
                   <span class="cell-label">Price:</span>${e.price}
                 </div>:null
                 } */}
-                {/* {
+                  {/* {
                   disableAction === false ? <td class="product-cell py-4 whitespace-no-wrap text-sm leading-5">
                  
                 </td>:null
                 } */}
-                
-              </div>
-            ))}
-        </div>
+
+                </div>
+              ))}
+          </div>
         </div>
       </div>
     </section>
