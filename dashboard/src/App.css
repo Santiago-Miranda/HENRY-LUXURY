@@ -5,7 +5,7 @@ INCLUDE STYLES AND COMPONENTS
 ===================== */
 /* ================== HELPERS =================== */
 .table thead th {
-  color: #adb5bd;
+  color: #d3d3d3;
   font-weight: 400;
 }
 .table-lg td,
@@ -19,7 +19,7 @@ tbody tr {
   border-bottom: 1px solid #cfdbe6;
 }
 tbody tr:hover {
-  background-color: #ebf0fd !important;
+  background-color: #1a1a1a !important;
 }
 a.disabled {
   pointer-events: none;
@@ -149,6 +149,7 @@ a.disabled {
 body {
   position: relative;
   min-height: 100vh;
+  background-color: #252525;
 }
 
 body.offcanvas-active {
@@ -157,7 +158,8 @@ body.offcanvas-active {
 
 .main-wrap {
   margin-left: 260px;
-  background-color: #f8f9fa;
+  color: #b8b8b8;
+  background-color: #252525;
 }
 
 .content-main {
@@ -174,10 +176,10 @@ body.offcanvas-active {
   bottom: 0;
   width: 100%;
   overflow-y: auto;
-  background-color: #fff;
-  box-shadow: 0 0.1rem 0.25rem rgba(0, 0, 0, 0.075);
+  background-color: rgb(31, 31, 31);
+  box-shadow: 0 0.1rem 0.25rem rgba(114, 114, 114, 0.075);
   z-index: 10;
-  border-right: 1px solid rgba(108, 117, 125, 0.25);
+  border-right: 1px solid rgba(97, 97, 97, 0.25);
 }
 .navbar-aside .aside-top {
   padding: 1rem 0.5rem;
@@ -213,8 +215,8 @@ body.offcanvas-active {
   text-decoration: none;
 }
 .main-header .nav-link:hover {
-  background-color: #e9ecef;
-  color: #4fa607;
+  background-color: #313131;
+  color: #b8b8b8;
 }
 .main-header .col-search {
   flex-grow: 0.5;
@@ -244,6 +246,12 @@ body.offcanvas-active {
 .inner {
   padding: 1rem;
 }
+
+.row{
+  display: flex;
+  flex-direction: row;
+}
+
 
 body.aside-mini .main-wrap {
   margin-left: 70px;
@@ -278,7 +286,7 @@ body.aside-mini .menu-aside .submenu {
   border: 1px solid #ddd;
   border-radius: 0.25rem;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-  background-color: white;
+  background-color: rgb(31, 31, 31);
   margin-left: 0;
   padding: 10px;
   position: absolute;
@@ -315,14 +323,14 @@ body.aside-mini .menu-aside .menu-item.has-submenu .menu-link:after {
   font-size: 18px;
 }
 .menu-aside .active .icon {
-  color: #4fa607;
+  color: #000000;
 }
 .menu-aside .active {
-  background-color: #ebf0fd;
+  background-color: #555555;
 }
 .menu-aside .menu-link {
   padding: 10px;
-  color: #29335d;
+  color: #e4e4e4;
   font-weight: bold;
   border-radius: 0.3rem;
   position: relative;
@@ -335,7 +343,7 @@ body.aside-mini .menu-aside .menu-item.has-submenu .menu-link:after {
 }
 .menu-aside .menu-link:hover {
   transition: 0.2s linear;
-  background-color: #e9ecef;
+  background-color: #535353;
 }
 .menu-aside .submenu {
   margin-left: 44px;
@@ -450,7 +458,8 @@ a[class*="card"]:hover .title {
   margin-bottom: 5px;
 }
 .itemside a.title:hover {
-  color: #4fa607;
+  color: gray;
+
 }
 
 a.itemside {
@@ -473,7 +482,7 @@ a.itemside:hover .title {
   display: block;
   overflow: hidden;
   position: relative;
-  background: white;
+  background: rgb(31, 31, 31);
 }
 [class*="card-product"] .img-wrap img {
   height: 100%;
@@ -495,7 +504,7 @@ a.itemside:hover .title {
   padding: 1rem;
 }
 .card-product-grid a.title {
-  color: #6c757d;
+  color: #b1b1b1;
   display: block;
   text-decoration: none;
 }
@@ -529,7 +538,7 @@ a.itemside:hover .title {
 .card-user .card-header {
   position: relative;
   height: 100px;
-  background-color: #c3f19d !important;
+  background-color: #292929;
   text-align: center;
 }
 .card-user .img-avatar {
@@ -537,8 +546,16 @@ a.itemside:hover .title {
   transform: translate(-50%, -50%);
   top: 100%;
 }
+.card-header{
+  background-color: #1a1a1a;
+}
 .card-user .card-body {
   text-align: center;
+  background-color: #1a1a1a;
+}
+.card-body {
+  text-align: center;
+  background-color: #1a1a1a;
 }
 
 /* --------- description list --------*/

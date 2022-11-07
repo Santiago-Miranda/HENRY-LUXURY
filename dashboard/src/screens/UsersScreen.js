@@ -8,7 +8,6 @@ const UsersScreen = () => {
     <>
       <Sidebar />
       <main className="main-wrap">
-        <Header />
         <UserComponent />
       </main>
     </>

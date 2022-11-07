@@ -7,6 +7,7 @@ import {
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
   USER_LOGOUT,
+  ORDER_STALL, ORDER_STATUS, ORDER_MAIL, ORDER_NAME
 } from "../Constants/UserContants";
 
 // LOGIN
@@ -36,6 +37,118 @@ export const userListReducer = (state = { users: [] }, action) => {
       return { loading: false, error: action.payload };
     case USER_LIST_RESET:
       return { users: [] };
+
+    case ORDER_NAME:
+
+
+      let orderedCharacters = [...state.users];
+
+      let name = action.payload === "DESCENDENTE" ?
+        orderedCharacters.sort((a, b) => {
+          if (a.name > b.name) {
+            return 1
+          }
+          if (b.name > a.name) {
+            return -1
+          }
+          return 0
+        }) : action.payload === "ASCENDENTE" ?
+          orderedCharacters.sort((a, b) => {
+            if (a.name > b.name) {
+              return -1
+            }
+            if (b.name > a.name) {
+              return 1
+            }
+            return 0
+          }) : orderedCharacters
+
+      return {
+        ...state,
+        users: name
+      }
+    case ORDER_STATUS:
+      const sortPrice = action.payload === "min"
+        ? state.products.sort(function (a, b) {
+          if (a.price > b.price) {
+            return 1;
+          }
+          if (b.price > a.price) {
+            return -1;
+          }
+          return 0;
+        })
+        : action.payload === "max" ? state.products.sort(function (a, b) {
+          if (a.price > b.price) {
+            return -1;
+          }
+          if (b.price > a.price) {
+            return 1;
+          }
+          return 0;
+        }) : state.products
+      return {
+        ...state,
+        product: action.payload === "default" ? state.products : sortPrice,
+      };
+    case ORDER_STALL:
+      let order = [...state.users];
+
+      let stall = action.payload === "DESCENDENTE" ?
+        order.sort((a, b) => {
+          if (a.isAdmin > b.isAdmin) {
+            return 1
+          }
+          if (b.isAdmin > a.isAdmin) {
+            return -1
+          }
+          return 0
+        }) : action.payload === "ASCENDENTE" ?
+          order.sort((a, b) => {
+            if (a.isAdmin > b.isAdmin) {
+              return -1
+            }
+            if (b.isAdmin > a.isAdmin) {
+              return 1
+            }
+            return 0
+          }) : order
+
+      return {
+        ...state,
+        users: stall
+      }
+
+
+
+    case ORDER_MAIL:
+
+      let orderedCategory = [...state.users];
+
+      let category = action.payload === "DESCENDENTE" ?
+        orderedCategory.sort((a, b) => {
+          if (a.email > b.email) {
+            return 1
+          }
+          if (b.email > a.email) {
+            return -1
+          }
+          return 0
+        }) : action.payload === "ASCENDENTE" ?
+          orderedCategory.sort((a, b) => {
+            if (a.email > b.email) {
+              return -1
+            }
+            if (b.email > a.email) {
+              return 1
+            }
+            return 0
+          }) : orderedCharacters
+
+      return {
+        ...state,
+        users: category
+      }
     default:
       return state;
   }

@@ -8,7 +8,7 @@ const AddProduct = () => {
     <>
       <Sidebar />
       <main className="main-wrap">
-        <Header />
+
         <AddProductMain />
       </main>
     </>

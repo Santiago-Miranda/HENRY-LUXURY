@@ -9,7 +9,7 @@ const OrderDetailScreen = ({ match }) => {
     <>
       <Sidebar />
       <main className="main-wrap">
-        <Header />
+   
         <OrderDetailmain orderId={orderId} />
       </main>
     </>
