@@ -7,3 +7,8 @@ export const USER_LIST_REQUEST = "USER_LIST_REQUEST";
 export const USER_LIST_SUCCESS = "USER_LIST_SUCCESS";
 export const USER_LIST_FAIL = "USER_LIST_FAIL";
 export const USER_LIST_RESET = "USER_LIST_RESET";
+
+export const ORDER_NAME = "ORDER_NAME"
+export const ORDER_MAIL ="ORDER_MAIL"
+export const ORDER_STATUS ="ORDER_STATUS"
+export const ORDER_STALL ="ORDER_STALL"

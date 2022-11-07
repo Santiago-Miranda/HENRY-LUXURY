@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { listUser } from "../../Redux/Actions/userActions";
+import { listUser, orderMail, OrderName, orderStall } from "../../Redux/Actions/userActions";
 import Loading from "../LoadingError/Loading";
 import Message from "../LoadingError/Error";
 import logo from "../logo.png";
@@ -18,12 +18,62 @@ const UserComponent = () => {
   const [disablePrice, setDisablePrice] = useState(false)
   // const [disableAction, setDisableAction] = useState(false)
 
+  const [order, setOrder] = useState("");
+  const [name, setName] = useState("ASCENDENTE");
+  const [email, setEmail] = useState("ASCENDENTE");
+  const [stall, setStall] = useState("ASCENDENTE");
+
   const userList = useSelector((state) => state.userList);
   const { loading, error, users } = userList;
 
   useEffect(() => {
     dispatch(listUser());
   }, [dispatch]);
+
+
+  const OrderByNames = e => {
+    if (name === "ASCENDENTE") {
+      e.preventDefault();
+      dispatch(OrderName("DESCENDENTE"));
+      setOrder(name);
+      setName("DESCENDENTE");
+    } else {
+      e.preventDefault();
+      dispatch(OrderName("ASCENDENTE"));
+      setOrder(name);
+      setName("ASCENDENTE");
+    }
+  };
+
+  const OrderByStall = e => {
+    if (stall === "ASCENDENTE") {
+      e.preventDefault();
+      dispatch(orderStall("DESCENDENTE"));
+      setOrder(stall);
+      setStall("DESCENDENTE");
+    } else {
+      e.preventDefault();
+      dispatch(orderStall("ASCENDENTE"));
+      setOrder(stall);
+      setStall("ASCENDENTE");
+    }
+  };
+
+  const OrderByEmails = e => {
+    if (email === "ASCENDENTE") {
+      e.preventDefault();
+      dispatch(orderMail("DESCENDENTE"));
+      setOrder(email);
+      setEmail("DESCENDENTE");
+    } else {
+      e.preventDefault();
+      dispatch(orderMail("ASCENDENTE"));
+      setOrder(email);
+      setEmail("ASCENDENTE");
+    }
+  };
+
+  
 
   useEffect(() => {
     $("[data-trigger]").on("click", function (e) {
@@ -134,7 +184,7 @@ const UserComponent = () => {
                       Email
                     </button>
                     
-                    <button onClick={() => {
+                    {/* <button onClick={() => {
                       if (disableStatus === false) {
                         setDisableStatus(true)
                       } else {
@@ -143,7 +193,7 @@ const UserComponent = () => {
                       }
                     }} className="dropdown-item" to="/">
                       Status
-                    </button>
+                    </button> */}
                     <button onClick={() => {
                       if (disablePrice === false) {
                         setDisablePrice(true)
@@ -168,7 +218,7 @@ const UserComponent = () => {
               {
                 disableItem === false ? <div class="product-cell image">
                   Customers
-                  <button class="sort-button">
+                  <button onClick={OrderByNames} class="sort-button">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -186,7 +236,7 @@ const UserComponent = () => {
               {
                 disableCategory === false ? <div class="product-cell category">
                   Email
-                  <button class="sort-button">
+                  <button onClick={OrderByEmails} class="sort-button">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -201,7 +251,7 @@ const UserComponent = () => {
                   </button>
                 </div> : null
               }
-              {
+              {/* {
                 disableStatus === false ? <div class="product-cell status-cell">
                   Status
                   <button class="sort-button">
@@ -218,11 +268,11 @@ const UserComponent = () => {
                     </svg>
                   </button>
                 </div> : null
-              }
+              } */}
               {
                 disablePrice === false ? <div class="product-cell price">
                   Market Stall
-                  <button class="sort-button">
+                  <button onClick={OrderByStall} class="sort-button">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -257,14 +307,14 @@ const UserComponent = () => {
                       {e.email}
                     </div> : null
                   }
-                  {
+                  {/* {
                     disableStatus === false ? <div className="product-cell status-cell">
                       <span className="cell-label">Status:</span>
                       {
                         e.isBaned === "false" ? <span className="status active">Active</span> : <span className="status disabled">Disabled</span>
                       }
                     </div> : null
-                  }
+                  } */}
                   {
                     disablePrice === false ? <div className="product-cell status-cell">
                       <span className="cell-label">Market Stall:</span>
