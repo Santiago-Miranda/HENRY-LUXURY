@@ -37,7 +37,7 @@ const ShopSection = (props) => {
                         className="shop col-lg-4 col-md-6 col-sm-6"
                         key={product._id}
                       >
-                        <div className="border-product">
+                        <div className="shadow-sm p-3 mb-5 bg-white rounded">
                           <Link to={`/products/${product._id}`}>
                             <div className="shopBack">
                               <img src={product.image} alt={product.name} />
