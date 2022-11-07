@@ -8,6 +8,9 @@ import {
   orderRating,
 } from "../Redux/Actions/ProductActions";
 
+
+import './FilterProduct.css'
+
 const FilterProduct = () => {
   const dispatch = useDispatch();
   const [order, setOrder] = useState("");
@@ -46,9 +49,17 @@ const FilterProduct = () => {
     setOrder("Ordenado por" + e.target.value);
   };
 
-  return (
+ 
+
+return (
     <>
-      <div class="inline-block flex w-50">
+
+<div>
+<nav>
+<input type="checkbox" id="menu"/>
+  <label for="menu"> ☰ </label>
+    <ul>
+      <li><a href="#">
         <select
           class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
           onChange={OrderByNames}
@@ -60,13 +71,10 @@ const FilterProduct = () => {
           <option value="ASCENDENTE">A-Z</option>
           <option value="DESCENDENTE">Z-A</option>
 
-          {/*}  <option disabled selected defaultValue>
-  Alphabetical order
-  </option>
-  <option value="A-Z">A-Z</option>
-  <option value="Z-A">Z-A</option>*/}
         </select>
+        </a></li>
 
+        <li><a href="#">
         <select
           class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
           onChange={OrderByRating}
@@ -77,7 +85,10 @@ const FilterProduct = () => {
           <option value="max">Max rating</option>
           <option value="min">Min rating</option>
         </select>
+        </a></li>
 
+
+        <li><a href="#">
         <select
           class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
           onChange={orderByPrice}
@@ -88,7 +99,10 @@ const FilterProduct = () => {
           <option value="max">Max Price</option>
           <option value="min">Min Price</option>
         </select>
+        </a></li>
 
+
+        <li><a href="#">
         <select
           class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
           onChange={orderByCountinStock}
@@ -99,6 +113,9 @@ const FilterProduct = () => {
           <option value="max">Max CountInStock</option>
           <option value="min">Min CountInStock</option>
         </select>
+        </a></li>
+
+        <li><a href="#">
         <select onChange={filterCategory}  class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
           <option disabled selected defaultValue>
             Category
@@ -114,6 +131,11 @@ const FilterProduct = () => {
           <option value="Vehicle">Vehicle</option>
         
         </select>
+        </a></li>
+
+      
+      </ul>
+      </nav>
       </div>
     </>
   );
