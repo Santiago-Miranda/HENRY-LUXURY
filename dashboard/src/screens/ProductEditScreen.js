@@ -9,7 +9,7 @@ const ProductEditScreen = ({ match }) => {
     <>
       <Sidebar />
       <main className="main-wrap">
-        <Header />
+    
         <EditProductMain productId={productId} />
       </main>
     </>

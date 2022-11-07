@@ -8,7 +8,6 @@ const CategoriesScreen = () => {
     <>
       <Sidebar />
       <main className="main-wrap">
-        <Header />
         <MainCategories />
       </main>
     </>
