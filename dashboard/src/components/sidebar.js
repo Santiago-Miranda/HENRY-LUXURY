@@ -45,7 +45,7 @@ const Sidebar = () => {
                 <span className="text">Products</span>
               </NavLink>
             </li>
-            <li className="menu-item">
+            {/* <li className="menu-item">
               <NavLink
                 activeClassName="active"
                 className="menu-link"
@@ -54,7 +54,7 @@ const Sidebar = () => {
                 <i className="icon fas fa-list"></i>
                 <span className="text">Categories</span>
               </NavLink>
-            </li>
+            </li> */}
             <li className="menu-item">
               <NavLink
                 activeClassName="active"

@@ -123,7 +123,7 @@ productRoute.post("/", protect, admin, asyncHandler(async (req, res) => {
 
 // UPDATE PRODUCT
 productRoute.put("/:id", protect, admin, asyncHandler(async (req, res) => {
-    const { name, price, description, image, countInStock } = req.body;
+    const { name, price, description, image, countInStock, categories } = req.body;
     const product = await Product.findById(req.params.id);
     if (product) {
       product.name = name || product.name;
@@ -131,7 +131,7 @@ productRoute.put("/:id", protect, admin, asyncHandler(async (req, res) => {
       product.description = description || product.description;
       product.image = image || product.image;
       product.countInStock = countInStock || product.countInStock;
-
+      product.categories = categories || product.categories;
       const updatedProduct = await product.save();
       res.json(updatedProduct);
     } else {
