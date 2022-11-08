@@ -14,6 +14,7 @@ INCLUDE STYLES AND COMPONENTS
 }
 tbody td {
   border-bottom: 0;
+  color: #cfdbe6;
 }
 tbody tr {
   border-bottom: 1px solid #cfdbe6;
@@ -449,6 +450,7 @@ a[class*="card"]:hover .title {
 .itemside .info {
   padding-left: 15px;
   padding-right: 7px;
+  color: #b8b8b8;
 }
 .itemside p {
   margin-bottom: 0;
@@ -555,6 +557,7 @@ a.itemside:hover .title {
 }
 .card-body {
   text-align: center;
+  color: #cfdbe6;
   background-color: #1a1a1a;
 }
 
@@ -783,8 +786,6 @@ ul.row-sm {
 .box {
   padding: 1rem;
   border-radius: 0.25rem;
-  border: 1px solid rgba(108, 117, 125, 0.2);
-  background: #fff;
 }
 .box img {
   max-width: 100%;

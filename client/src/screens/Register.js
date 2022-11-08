@@ -10,7 +10,9 @@ const Register = ({ location, history }) => {
   window.scrollTo(0, 0);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [newPassword, setNewPassword] = useState("");
   const [password, setPassword] = useState("");
+  const [ingrese, setIngrese] = useState(false)
 
   const dispatch = useDispatch();
   const redirect = location.search ? location.search.split("=")[1] : "/";
@@ -25,8 +27,17 @@ const Register = ({ location, history }) => {
   }, [userInfo, history, redirect]);
 
   const submitHandler = (e) => {
-    e.preventDefault();
-    dispatch(register(name, email, password));
+    if (password !== newPassword) {
+      setIngrese(true)
+    }else{
+      e.preventDefault();
+      dispatch(register(name, email, password));
+      setIngrese(false);
+      setEmail("");
+      setName("");
+      setNewPassword("");
+      setPassword("")
+    }
   };
 
   return (
@@ -34,6 +45,9 @@ const Register = ({ location, history }) => {
       <Header />
       <div className="container d-flex flex-column justify-content-center align-items-center login-center">
         {error && <Message variant="alert-danger">{error}</Message>}
+        {
+            ingrese === true ? <Message variant="alert-danger">Please Confirm Your Password</Message> : null
+          }
         {loading && <Loading />}
 
         <form
@@ -55,9 +69,20 @@ const Register = ({ location, history }) => {
           <input
             type="password"
             placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
           />
+          <input
+            type="password"
+            placeholder="Confirm Password"
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+              setIngrese(false)
+            }}
+          />
+         
+          
 
           <button type="submit">Register</button>
           <p>
