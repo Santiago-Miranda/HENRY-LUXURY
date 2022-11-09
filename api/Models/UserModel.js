@@ -31,7 +31,9 @@ const userSchema = mongoose.Schema(
       required: true,
       default: false,
     },
-  },
+    code: { type: String, required: true },
+    status: { type: String, required: true, default: 'UNVERIFIED' }
+    },
   {
     timestamps: true,
   }

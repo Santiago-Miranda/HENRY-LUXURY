@@ -1,8 +1,12 @@
 import express from "express";
 import asyncHandler from "express-async-handler";
 import { protect, admin } from "../Middleware/AuthMiddleware.js";
+
 import generateToken from "../utils/generateToken.js";
 import User from "./../Models/UserModel.js";
+import nodemailer from "nodemailer"
+import passport from "passport"
+
 
 const userRouter = express.Router();
 
@@ -32,7 +36,7 @@ userRouter.post("/", asyncHandler(async (req, res) => {
     const { name, email, password } = req.body;
 
     const userExists = await User.findOne({ email });
-
+   
     if (userExists) {
       res.status(400);
       throw new Error("User already exists");
@@ -43,6 +47,7 @@ userRouter.post("/", asyncHandler(async (req, res) => {
       email,
       password,
     });
+    
 
     if (user) {
       res.status(201).json({
@@ -112,5 +117,6 @@ userRouter.get("/", protect, admin, asyncHandler(async (req, res) => {
     res.json(users);
   })
 );
+
 
 export default userRouter;
