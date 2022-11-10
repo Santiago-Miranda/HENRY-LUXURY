@@ -9,17 +9,19 @@ import Login from "./screens/Login";
 import Register from "./screens/Register";
 import CartScreen from "./screens/CartScreen";
 import ShippingScreen from "./screens/ShippingScreen";
-//import ProfileScreen from "./screens/ProfileScreen";
+import ProfileScreen from "./screens/ProfileScreen";
 import PaymentScreen from "./screens/PaymentScreen";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import OrderScreen from "./screens/OrderScreen";
 import NotFound from "./screens/NotFound";
 import PrivateRouter from "./PrivateRouter";
+import { AuthProvider} from './context/AuthContext.js'
 //import CartFavorite from "./screens/CartFavorite"
 //<PrivateRouter path="/favorite" component={CartFavorite} />
 
 const App = () => {
   return (
+    <AuthProvider>
     <Router>
       <Switch>
         <Route path="/" component={HomeScreen} exact />
@@ -33,16 +35,16 @@ const App = () => {
         <Route path="/products/:id" component={SingleProduct} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
-        {/*<PrivateRouter path="/profile" component={ProfileScreen} />*/}
+        <PrivateRouter path="/profile" component={ProfileScreen} />
         <Route path="/cart/:id?" component={CartScreen} />
         <PrivateRouter path="/shipping" component={ShippingScreen} />
         <PrivateRouter path="/payment" component={PaymentScreen} />
         <PrivateRouter path="/placeorder" component={PlaceOrderScreen} />
         <PrivateRouter path="/order/:id" component={OrderScreen} />
-      
         <Route path="*" component={NotFound} />
       </Switch>
     </Router>
+    </AuthProvider>
   );
 };
 
