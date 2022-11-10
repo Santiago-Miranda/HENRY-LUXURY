@@ -22,11 +22,20 @@ connectDatabase();
 const app = express();
 
 
-/*app.use(
-  cookieSession({ name: "session", keys: ["lama"], maxAge: 24 * 60 * 60 * 100 })
-); */
-
 app.use(
+  cookieSession({ name: "session", keys: ["lama"], maxAge: 24 * 60 * 60 * 100 })
+); 
+
+app.use(express.json());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    methods: "GET,POST,PUT,DELETE",
+    credentials: true,
+  })
+);
+
+/*app.use(
   session({
     secret: "secretcode",
     resave: true,
@@ -36,24 +45,17 @@ app.use(
       secure: true,
       maxAge: 1000 * 60 * 60 * 24 * 7 // One Week
     }
-  })) 
-
+  }))*/
 
 
 app.use(passport.initialize());
 app.use(passport.session());
 
 
-app.use(express.json());
+
 app.use(bodyParser.json({limit: '1gb', extended: true}));
 app.use(bodyParser.urlencoded({limit: '1gb', extended: true}));
-app.use(
-  cors({
-    origin: "http://localhost:3000",
-    methods: "GET,POST,PUT,DELETE",
-    credentials: true,
-  })
-);
+
 
 // API
 app.use("/api/import", ImportData);

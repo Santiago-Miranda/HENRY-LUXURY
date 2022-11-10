@@ -5,14 +5,17 @@ import Message from "../components/LoadingError/Error";
 import Loading from "../components/LoadingError/Loading";
 import Header from "./../components/Header";
 import { login } from "./../Redux/Actions/userActions";
-import { useAuth } from "../context/AuthContext";
+import GoogleLogin from 'react-google-login'
+import googleOneTap from "google-one-tap";
+
+
 
 const Login = ({ location, history }) => {
   window.scrollTo(0, 0);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { loginWithGoogle} = useAuth();
- 
+
+  
 
   const dispatch = useDispatch();
   const redirect = location.search ? location.search.split("=")[1] : "/";
@@ -33,18 +36,13 @@ const Login = ({ location, history }) => {
   };
 
   
-  const handleGoogleSignin = async () => {
-    try {
-      await loginWithGoogle();
-      history.push(redirect);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  
 
   const google = () => {
     window.open("http://localhost:3001/auth/google", "_self");
   };
+
+  
 
   return (
     <>
@@ -69,8 +67,8 @@ const Login = ({ location, history }) => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <button type="submit">Login</button>
-          
-          <button onClick={google}>Login with Google</button>
+          <button onClick={google}>Continue with Google</button>
+       
           <p>
             <Link
               to={redirect ? `/register?redirect=${redirect}` : "/register"}
