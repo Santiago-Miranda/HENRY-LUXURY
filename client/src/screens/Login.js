@@ -5,11 +5,15 @@ import Message from "../components/LoadingError/Error";
 import Loading from "../components/LoadingError/Loading";
 import Header from "./../components/Header";
 import { login } from "./../Redux/Actions/userActions";
+import { useAuth } from "../context/AuthContext";
+
 
 const Login = ({ location, history }) => {
   window.scrollTo(0, 0);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const { loginWithGoogle} = useAuth();
 
   const dispatch = useDispatch();
   const redirect = location.search ? location.search.split("=")[1] : "/";
@@ -20,13 +24,31 @@ const Login = ({ location, history }) => {
   useEffect(() => {
     if (userInfo) {
       history.push(redirect);
+
     }
-  }, [userInfo, history, redirect]);
+  }, [userInfo, history, redirect,]);
 
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(login(email, password));
   };
+
+  
+  
+
+  /*const google = () => {
+    window.open("http://localhost:3001/auth/google", "_self");
+  }; */
+ 
+  const handleGoogleSignin = async () => {
+    try {
+      await loginWithGoogle();
+      history.push("/");
+    } catch (error) {
+    console.log(error)
+    }
+  };
+  
 
   return (
     <>
@@ -51,6 +73,8 @@ const Login = ({ location, history }) => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <button type="submit">Login</button>
+          <button onClick={handleGoogleSignin}>Continue with Google</button>
+       
           <p>
             <Link
               to={redirect ? `/register?redirect=${redirect}` : "/register"}
