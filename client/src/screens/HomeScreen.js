@@ -4,7 +4,7 @@ import ShopSection from "./../components/homeComponents/ShopSection";
 import ContactInfo from "./../components/homeComponents/ContactInfo";
 import CalltoActionSection from "./../components/homeComponents/CalltoActionSection";
 import Footer from "./../components/Footer";
-//import FIlterProduct from "./FilterProduct";
+//// import FIlterProduct from "./FilterProduct";
 //<FIlterProduct />
 
 const HomeScreen = ({ match }) => {
@@ -14,7 +14,7 @@ const HomeScreen = ({ match }) => {
   return (
     <div>
       <Header />
-      
+      {/*  */}
       <ShopSection keyword={keyword} pagenumber={pagenumber} />
       <CalltoActionSection />
       <ContactInfo />

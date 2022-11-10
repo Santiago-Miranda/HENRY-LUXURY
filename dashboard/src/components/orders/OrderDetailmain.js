@@ -86,7 +86,7 @@ const OrderDetailmain = (props) => {
               </div>
               {/* Payment Info */}
               <div className="col-lg-3">
-                <div className="box shadow-sm bg-light">
+                <div className="box shadow-sm">
                   {order.isDelivered ? (
                     <button className="btn btn-success col-12">
                       DELIVERED AT ({" "}
