@@ -9,6 +9,7 @@ const productRoute = express.Router();
 productRoute.get("/", asyncHandler(async (req, res) => {
     const pageSize = 12;
     const page = Number(req.query.pageNumber) || 1;
+    const priceFilter = req.query.min && req.query.max ? { price: { $gte: req.query.min, $lte: req.query.max } } : {};
     const keyword = req.query.keyword
       ? {
           name: {
@@ -17,7 +18,7 @@ productRoute.get("/", asyncHandler(async (req, res) => {
           },
         }
       : {};
-    const count = await Product.countDocuments({ ...keyword });
+    const count = await Product.countDocuments({ ...keyword, ...priceFilter});
     const products = await Product.find({ ...keyword })
       .limit(pageSize)
       .skip(pageSize * (page - 1))
