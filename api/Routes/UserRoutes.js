@@ -1,7 +1,7 @@
 import e from "express";
 import express from "express";
 import asyncHandler from "express-async-handler";
-import sendConfirmationEmail from "../config/nodemailer.js";
+import {sendConfirmationEmail, sendBanEmail, sendUnbanEmail} from "../config/nodemailer.js";
 import { protect, admin } from "../Middleware/AuthMiddleware.js";
 
 import generateToken from "../utils/generateToken.js";
@@ -19,6 +19,7 @@ userRouter.post("/login", asyncHandler(async (req, res) => {
 
 
     if (user && user.status === "Pending"){
+      console.log(user.status)
       res.status(401)
       throw new Error("Please confirm your email.")
     } else if (user && (await user.matchPassword(password))) {
@@ -124,11 +125,19 @@ userRouter.put("/profile", protect, asyncHandler(async (req, res) => {
   })
 );
 
-// CONFIRMATE EMAIL, necesito ayuda aca jeje
-userRouter.put("/authMail", protect, asyncHandler(async(req, res) => {
-  console.log(user)
-  const userExists = await await User.findOne({ email })
-  
+// CONFIRMATE EMAIL
+userRouter.put("/authMail", asyncHandler(async(req, res) => {
+  const {email, confirmationCode} = req.body
+  const userExists = await await User.findOne({email: email })
+
+  if(userExists.status === "Pending" && userExists.confirmationCode === confirmationCode){
+    userExists.status = "Active"
+    userExists.save()
+    res.status(200).send("Email verified succesfully")
+  } else {
+    res.status(404);
+    throw new Error("Wrong user or token.")
+  }
 }))
 
 //BORRADO LOGICO
@@ -138,10 +147,12 @@ userRouter.put("/ban", protect, asyncHandler(async(req, res) => {
     
     if(user && !user.isBaned) {
       user.isBaned = true
+      sendBanEmail(user.name, user.email)
       user.save()
       res.status(200).send("User banned.")
     } else if (user && user.isBaned){
       user.isBaned = false
+      sendUnbanEmail(user.name, user.email)
       user.save()
       res.status(200).send("User unbanned.")
     } else {res.status(404);
