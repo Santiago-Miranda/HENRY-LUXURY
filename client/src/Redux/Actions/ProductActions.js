@@ -1,5 +1,6 @@
 import axios from "axios";
 import {
+  ADD_FAVORITES,
   FILTER_BY_TYPES_CATEGORY,
   GET_ALL_CATEGORY,
   ORDER_COUNTINSTOCK,
@@ -15,6 +16,7 @@ import {
   PRODUCT_LIST_FAIL,
   PRODUCT_LIST_REQUEST,
   PRODUCT_LIST_SUCCESS,
+  REMOVE_FAVORITES,
 } from "../Constants/ProductConstants";
 import { logout } from "./userActions";
 
@@ -140,3 +142,17 @@ export function filterByTypesCategory(payload){
          type: FILTER_BY_TYPES_CATEGORY,
          payload
  }}
+
+
+//* Favoritos Prueba
+
+
+export function add_Favorites (data) {
+  return { type: ADD_FAVORITES, payload: data };
+};
+
+
+export function remove_Favorites(id){
+  return { type: REMOVE_FAVORITES, payload: id };
+};
+

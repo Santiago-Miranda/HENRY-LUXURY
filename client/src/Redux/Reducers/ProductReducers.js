@@ -1,4 +1,5 @@
 import {
+  ADD_FAVORITES,
   FILTER_BY_TYPES_CATEGORY,
   GET_ALL_CATEGORY,
   ORDER_COUNTINSTOCK,
@@ -15,15 +16,16 @@ import {
   PRODUCT_LIST_FAIL,
   PRODUCT_LIST_REQUEST,
   PRODUCT_LIST_SUCCESS,
+  REMOVE_FAVORITES,
 } from "../Constants/ProductConstants";
 
 
 
 // PRODUCT LIST
-export const productListReducer = (state = { products: [] ,allProduct:[]}, action) => {
+export const productListReducer = (state = { products: [] ,allProduct:[] ,favorites:[]}, action) => {
   switch (action.type ) {
     case PRODUCT_LIST_REQUEST:
-      return { loading: true, products: [] ,allProduct:[]};
+      return { loading: true, products: [] ,allProduct:[],favorites:[]};
     case PRODUCT_LIST_SUCCESS:
       return {
         loading: false,
@@ -143,6 +145,19 @@ export const productListReducer = (state = { products: [] ,allProduct:[]}, actio
             products: productFiltered
     
           }
+
+          case ADD_FAVORITES:
+            return {
+              ...state,
+              favorites: state.favorites.concat(action.payload),
+            };
+      
+          case REMOVE_FAVORITES:
+            return {
+              ...state,
+              favorites: state.favorites.filter((products) => products.id !== action.payload
+              ),
+            };
 
 
 

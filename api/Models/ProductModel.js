@@ -38,7 +38,7 @@ const productSchema = mongoose.Schema(
       required: true,
     },
     categories:{
-      type: String,
+      enum : ['Shoes','Brand clothing', 'Watches', 'Jewerly', 'Antique', 'Vehicle', 'Motorbike', 'Collectable'],
       required: true,
     },
     reviews: [reviewSchema],
