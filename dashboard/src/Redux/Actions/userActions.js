@@ -7,6 +7,7 @@ import {
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
   USER_LOGOUT,
+  ORDER_STALL,ORDER_STATUS,ORDER_MAIL,ORDER_NAME
 } from "../Constants/UserContants";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -98,3 +99,32 @@ export const listUser = () => async (dispatch, getState) => {
     });
   }
 };
+
+
+export function OrderName(payload) {
+  return { 
+      type: ORDER_NAME,
+      payload
+  }
+};
+//* Filter por Score
+export function orderStall(payload){
+  return{
+      type:ORDER_STALL,
+      payload
+  }
+}
+//* filter por Price  
+export function orderStatus(payload){
+  return{
+      type:ORDER_STATUS,
+      payload
+  }
+}
+
+export function orderMail(payload){
+  console.log(payload)
+ return{
+         type: ORDER_MAIL,
+         payload
+ }}

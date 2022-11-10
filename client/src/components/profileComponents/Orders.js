@@ -46,11 +46,11 @@ const Orders = (props) => {
                       key={order._id}
                     >
                       <td>
-                        <a href={`/order/${order._id}`} className="link">
+                        <a href={`/order/${order._id}`} style={{color:"black"}}>
                           {order._id}
                         </a>
                       </td>
-                      <td>{order.isPaid ? <>Paid</> : <>Not Paid</>}</td>
+                      <td>{order.isPaid ? <p style={{color:"green"}}>Paid</p> : <p style={{color:"red"}}>Not Paid</p>}</td>
                       <td>
                         {order.isPaid
                           ? moment(order.paidAt).calendar()

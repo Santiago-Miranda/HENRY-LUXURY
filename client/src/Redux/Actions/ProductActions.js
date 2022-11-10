@@ -1,5 +1,11 @@
 import axios from "axios";
 import {
+  FILTER_BY_TYPES_CATEGORY,
+  GET_ALL_CATEGORY,
+  ORDER_COUNTINSTOCK,
+  ORDER_NAME,
+  ORDER_PRICE,
+  ORDER_RATING,
   PRODUCT_CREATE_REVIEW_FAIL,
   PRODUCT_CREATE_REVIEW_REQUEST,
   PRODUCT_CREATE_REVIEW_SUCCESS,
@@ -51,6 +57,7 @@ export const listProductDetails = (id) => async (dispatch) => {
 };
 
 // PRODUCT REVIEW CREATE
+
 export const createProductReview =
   (productId, review) => async (dispatch, getState) => {
     try {
@@ -83,3 +90,53 @@ export const createProductReview =
       });
     }
   };
+
+  //** Filter Order by name
+export function OrderName(payload) {
+  return { 
+      type: ORDER_NAME,
+      payload
+  }
+};
+//* Filter por Score
+export function orderRating(payload){
+  return{
+      type:ORDER_RATING,
+      payload
+  }
+}
+//* filter por Price  
+export function orderPrice(payload){
+  return{
+      type:ORDER_PRICE,
+      payload
+  }
+}
+//* filter por CountInStock
+export function orderCountinStock(payload){
+  return{
+
+      type:ORDER_COUNTINSTOCK,
+       payload
+  }
+}
+
+
+//* Ruta de Todas las Categorias
+export function getAllCategory(){
+  return async function(dispatch){
+      const resul = await axios.get("http://localhost:3001/api/category")
+      console.log(resul)
+      dispatch({
+          type:GET_ALL_CATEGORY,
+      payload:resul.data
+      })
+  }
+} 
+//*Filtrado por Categorias
+export function filterByTypesCategory(payload){
+  console.log(payload)
+ return{
+         type: FILTER_BY_TYPES_CATEGORY,
+         payload
+ }}

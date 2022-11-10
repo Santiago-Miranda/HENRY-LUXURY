@@ -31,9 +31,15 @@ const userSchema = mongoose.Schema(
       required: true,
       default: false,
     },
-    code: { type: String, required: true },
-    status: { type: String, required: true, default: 'UNVERIFIED' }
+    status:{
+      type: String,
+      enum: ['Pending', 'Active'],
+      default: 'Pending'
     },
+    confirmationCode: { 
+      type: String, 
+      unique: true }
+  },
   {
     timestamps: true,
   }

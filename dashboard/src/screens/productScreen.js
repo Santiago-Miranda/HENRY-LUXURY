@@ -8,7 +8,7 @@ const ProductScreen = () => {
     <>
       <Sidebar />
       <main className="main-wrap">
-        <Header />
+     
         <MainProducts />
       </main>
     </>

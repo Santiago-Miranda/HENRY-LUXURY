@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../Redux/Actions/userActions";
 import logo from "./images/logo.jpg";
 
+
+
 const Header = () => {
   const [keyword, setKeyword] = useState();
   const dispatch = useDispatch();
@@ -61,8 +63,11 @@ const Header = () => {
     <div>
       {/* Top Header */}
       <div className="Announcement ">
-        <div className="container">
+        <div className="container"> 
+   
+
           <div className="row">
+         
             <div className="col-md-6 d-flex align-items-center display-none">
               <p>+123 123 123 123</p>
               <p>info@luxury.com</p>

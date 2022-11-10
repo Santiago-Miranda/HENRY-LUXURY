@@ -2,6 +2,7 @@ import express from "express";
 import asyncHandler from "express-async-handler";
 import Product from "./../Models/ProductModel.js";
 import { admin, protect } from "./../Middleware/AuthMiddleware.js";
+import sendConfirmationEmail from "../config/nodemailer.js";
 
 const productRoute = express.Router();
 
@@ -38,6 +39,7 @@ productRoute.get("/:id", asyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
     if (product) {
       res.json(product);
+
     } else {
       res.status(404);
       throw new Error("Product not Found");
@@ -123,7 +125,7 @@ productRoute.post("/", protect, admin, asyncHandler(async (req, res) => {
 
 // UPDATE PRODUCT
 productRoute.put("/:id", protect, admin, asyncHandler(async (req, res) => {
-    const { name, price, description, image, countInStock } = req.body;
+    const { name, price, description, image, countInStock, categories } = req.body;
     const product = await Product.findById(req.params.id);
     if (product) {
       product.name = name || product.name;
@@ -131,7 +133,7 @@ productRoute.put("/:id", protect, admin, asyncHandler(async (req, res) => {
       product.description = description || product.description;
       product.image = image || product.image;
       product.countInStock = countInStock || product.countInStock;
-
+      product.categories = categories || product.categories;
       const updatedProduct = await product.save();
       res.json(updatedProduct);
     } else {
