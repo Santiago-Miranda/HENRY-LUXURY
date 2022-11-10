@@ -2,7 +2,7 @@ import express from "express";
 import asyncHandler from "express-async-handler";
 import Product from "./../Models/ProductModel.js";
 import { admin, protect } from "./../Middleware/AuthMiddleware.js";
-import sendConfirmationEmail from "../config/nodemailer.js";
+import { sendConfirmationEmail } from "../config/nodemailer.js";
 
 const productRoute = express.Router();
 
