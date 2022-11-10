@@ -97,19 +97,12 @@ const CartFavorite = ({ match, location, history }) => {
               </div>
             ))}
 
-            
             <hr />
             <div className="cart-buttons d-flex align-items-center row">
               <Link to="/" className="col-md-6 ">
                 <button>Continue To Shopping</button>
               </Link>
-             
-                
-                 
-              
-            
-           
-             
+                                       
             </div>
           </>
         )}
