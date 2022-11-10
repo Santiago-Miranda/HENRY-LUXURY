@@ -15,9 +15,11 @@ import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import OrderScreen from "./screens/OrderScreen";
 import NotFound from "./screens/NotFound";
 import PrivateRouter from "./PrivateRouter";
+import { AuthProvider} from './context/AuthContext.js'
 
 const App = () => {
   return (
+    <AuthProvider>
     <Router>
       <Switch>
         <Route path="/" component={HomeScreen} exact />
@@ -40,6 +42,7 @@ const App = () => {
         <Route path="*" component={NotFound} />
       </Switch>
     </Router>
+    </AuthProvider>
   );
 };
 
