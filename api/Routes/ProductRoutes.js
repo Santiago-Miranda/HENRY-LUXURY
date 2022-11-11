@@ -1,8 +1,8 @@
 import express from "express";
 import asyncHandler from "express-async-handler";
 import Product from "./../Models/ProductModel.js";
+import Category from "../Models/Category.js";
 import { admin, protect } from "./../Middleware/AuthMiddleware.js";
-import { sendConfirmationEmail } from "../config/nodemailer.js";
 
 const productRoute = express.Router();
 
@@ -95,9 +95,9 @@ productRoute.delete("/:id", protect, admin, asyncHandler(async (req, res) => {
   })
 );
 
-// CREATE PRODUCT
+// CREATE PRODUCT 
 productRoute.post("/", protect, admin, asyncHandler(async (req, res) => {
-    const { name, price, description, categories, image, countInStock } = req.body;
+    const { name, price, description, categories, image, countInStock } = req.body;//categories= array de id's de categorias
     const productExist = await Product.findOne({ name });
     if (productExist) {
       res.status(400);
@@ -107,12 +107,15 @@ productRoute.post("/", protect, admin, asyncHandler(async (req, res) => {
         name,
         price,
         description,
-        categories,
         image,
         countInStock,
         user: req.user._id,
       });
       if (product) {
+        for(var i = 0; i < categories.length; i++){
+          let adding = await Category.findById(categories[i])
+          product.categories = [...product.categories, adding]
+        }
         const createdproduct = await product.save();
         res.status(201).json(createdproduct);
       } else {
