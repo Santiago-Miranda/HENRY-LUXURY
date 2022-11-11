@@ -9,6 +9,7 @@ import { updateUserProfile } from "../../Redux/Actions/userActions";
 const ProfileTabs = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [image, setImage] = useState();
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const toastId = React.useRef(null);
@@ -32,6 +33,7 @@ const ProfileTabs = () => {
     if (user) {
       setName(user.name);
       setEmail(user.email);
+      setImage(user.image)
     }
   }, [dispatch, user]);
 
@@ -56,6 +58,8 @@ const ProfileTabs = () => {
       {loading && <Loading />}
       {updateLoading && <Loading />}
       <form className="row  form-container" onSubmit={submitHandler}>
+
+        
         <div className="col-md-6">
           <div className="form">
             <label for="account-fn">UserName</label>

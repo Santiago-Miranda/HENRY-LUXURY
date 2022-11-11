@@ -3,7 +3,8 @@ import asyncHandler from "express-async-handler";
 import Product from "./../Models/ProductModel.js";
 import { admin, protect } from "./../Middleware/AuthMiddleware.js";
 import { sendConfirmationEmail } from "../config/nodemailer.js";
-import cloudinary from '../config/Cloudinary.js'
+import cloudinary from "../config/Cloudinary.js";
+
 
 const productRoute = express.Router();
 
@@ -97,39 +98,39 @@ productRoute.delete("/:id", protect, admin, asyncHandler(async (req, res) => {
 );
 
 // CREATE PRODUCT
-productRoute.post("/", protect, admin, asyncHandler(async (req, res) => {
-  const { name, price, description, categories, countInStock, image } = req.body;
-  const productExist = await Product.findOne({ name });
-  if (productExist) {
-    res.status(400);
-    throw new Error("Product name already exist");
-  } else {
-    if(image){
-      const uploadResponse = await cloudinary.uploader.upload(image,{
-        upload_preset: 'products'
-      });
-    if(uploadResponse){
-    const product = new Product({
-      name,
-      price,
-      description,
-      categories,
-      image: uploadResponse,
-      countInStock,
-      user: req.user._id,
-    });
-
-    if (product) {
-      const createdproduct = await product.save();
-      res.status(201).json(createdproduct);
-         }
-      }
-    } else {
+productRoute.post("/", protect, asyncHandler(async (req, res) => {
+    const { name, price, description, categories, countInStock, image } = req.body;
+    const productExist = await Product.findOne({ name });
+    if (productExist) {
       res.status(400);
-      throw new Error("Invalid product data");
+      throw new Error("Product name already exist");
+    } else {
+      if(image){
+        const uploadResponse = await cloudinary.uploader.upload(image,{
+          upload_preset: 'products'
+        });
+      if(uploadResponse){
+      const product = new Product({
+        name,
+        price,
+        description,
+        categories,
+        image: uploadResponse,
+        countInStock,
+        user: req.user._id,
+      });
+
+      if (product) {
+        const createdproduct = await product.save();
+        res.status(201).json(createdproduct);
+           }
+        }
+      } else {
+        res.status(400);
+        throw new Error("Invalid product data");
+      }
     }
-  }
-})
+  })
 );
 
 // UPDATE PRODUCT

@@ -26,7 +26,7 @@ function Cloudinary({ setCloudinary }) {
     console.log(file.secure_url);
     setLoading(false);
     const cloudinary = { public_id: file.public_id, url: file.secure_url };
-    //setCloudinary(cloudinary);
+    setCloudinary(cloudinary);
     console.log(cloudinary.url)
   };
 
@@ -43,10 +43,8 @@ function Cloudinary({ setCloudinary }) {
           style={{ cursor: "pointer" }}
           onChange={uploadImage}
         />
+        {loading ? (<h3>Cargando...</h3>) : (<img src={image} style={{width: "200px"}} alt="img"/>)}
       </label>
-      </div>
-      <div>
-        <button type="submit" onChange={setImage}>submit</button>
       </div>
     </div>
   );
