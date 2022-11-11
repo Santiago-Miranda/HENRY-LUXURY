@@ -17,6 +17,7 @@
     "react-dom": "^17.0.2",
     "react-google-login": "^5.2.2",
     "react-login": "^0.1.0",
+    "react-modal": "^3.16.1",
     "react-paypal-button-v2": "^2.6.3",
     "react-redux": "^7.2.6",
     "react-router": "^6.0.2",
@@ -26,6 +27,7 @@
     "redux": "^4.1.2",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.0",
+    "sass": "^1.56.1",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
