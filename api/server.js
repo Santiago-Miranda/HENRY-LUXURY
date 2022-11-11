@@ -15,6 +15,8 @@ import session from "express-session"
 import MongoStore from "connect-mongo"
 import cookieSession from "cookie-session"
 import('./passport.js')
+import fileUpload from "express-fileupload";
+
 
 dotenv.config();
 
@@ -22,6 +24,12 @@ connectDatabase();
 
 const app = express();
 
+app.use(
+  fileUpload({
+    useTempFiles: true,
+    tempFileDir: "./uploads",
+  })
+);
 
 app.use(
   cookieSession({ name: "session", keys: ["lama"], maxAge: 24 * 60 * 60 * 100 })
@@ -89,3 +97,6 @@ const PORT = process.env.PORT || 1000;
 
 
 app.listen(PORT, console.log(`server run in port ${PORT}`));
+
+
+

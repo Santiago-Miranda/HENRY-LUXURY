@@ -32,13 +32,16 @@ const productSchema = mongoose.Schema(
       required: true,
     },
     image: {
-      type: String,
+      public_id: String,
+      url: String,
     },
     description: {
       type: String,
       required: true,
     },
+
     categories:[{type: Schema.Types.ObjectId, ref: "Category", unique:true}],
+
     reviews: [reviewSchema],
     rating: {
       type: Number,
