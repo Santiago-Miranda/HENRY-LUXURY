@@ -31,15 +31,17 @@ const productSchema = mongoose.Schema(
       required: true,
     },
     image: {
-      type: String,
+      public_id: String,
+      url: String,
     },
     description: {
       type: String,
       required: true,
     },
     categories:{
-      enum : ['Shoes','Brand clothing', 'Watches', 'Jewerly', 'Antique', 'Vehicle', 'Motorbike', 'Collectable'],
-      //required: true,
+      type: String,
+      enum: ["Watches", "Brand clothing", "Jewerly", "Shoes", "Clothes", "Vehicle", "Motorbike", "Collectable", "Antique", "Phone"],
+      required: true,
     },
     reviews: [reviewSchema],
     rating: {

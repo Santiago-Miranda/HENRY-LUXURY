@@ -18,3 +18,5 @@ function PrivateRouter({ component: Component, ...rest }) {
 }
 
 export default PrivateRouter;
+
+

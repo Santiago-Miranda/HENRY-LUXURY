@@ -13,9 +13,8 @@ const userSchema = mongoose.Schema(
       unique: true,
     },
     image:{
-      type: String,
-      required: true,
-      default: "https://p7.hiclipart.com/preview/505/761/142/login-computer-icons-download-avatar-icon.jpg",
+      public_id: String,
+      url: String,
     },
     password: {
       type: String,

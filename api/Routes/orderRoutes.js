@@ -2,6 +2,7 @@ import express from "express";
 import asyncHandler from "express-async-handler";
 import { admin, protect } from "../Middleware/AuthMiddleware.js";
 import Order from "./../Models/OrderModel.js";
+import { sendOrderEmail, orderPaidEmail, orderDelivered } from "../config/nodemailer.js"
 
 const orderRouter = express.Router();
 
@@ -20,7 +21,6 @@ orderRouter.post("/", protect, asyncHandler(async (req, res) => {
     if (orderItems && orderItems.length === 0) {
       res.status(400);
       throw new Error("No order items");
-      return;
     } else {
       const order = new Order({
         orderItems,
@@ -32,7 +32,7 @@ orderRouter.post("/", protect, asyncHandler(async (req, res) => {
         shippingPrice,
         totalPrice,
       });
-
+      sendOrderEmail(req.user.name, req.user.email, orderItems.length)
       const createOrder = await order.save();
       res.status(201).json(createOrder);
     }
@@ -75,6 +75,7 @@ orderRouter.put("/:id/pay", protect, asyncHandler(async (req, res) => {
     const order = await Order.findById(req.params.id);
 
     if (order) {
+      orderPaidEmail(req.user.name, req.user.email, order.id)
       order.isPaid = true;
       order.paidAt = Date.now();
       order.paymentResult = {
@@ -93,12 +94,13 @@ orderRouter.put("/:id/pay", protect, asyncHandler(async (req, res) => {
   })
 );
 
-// ORDER IS PAID
+// ORDER IS DELIVERED
 orderRouter.put("/:id/delivered", protect, asyncHandler(async (req, res) => {
     const order = await Order.findById(req.params.id);
 
     if (order) {
       order.isDelivered = true;
+      orderDelivered(req.user.name, req.user.email, order.id)
       order.deliveredAt = Date.now();
 
       const updatedOrder = await order.save();
