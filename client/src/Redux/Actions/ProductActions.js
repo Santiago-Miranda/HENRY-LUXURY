@@ -19,14 +19,15 @@ import {
 import { logout } from "./userActions";
 
 // PRODUCT LIST
-export const listProduct =
-  (keyword = " ", pageNumber = " ") =>
+export const listProduct = (order = "", keyword = " ", pageNumber = " ", category = '',min = 0,max = 0,stock = 0,) =>
   async (dispatch) => {
     try {
       dispatch({ type: PRODUCT_LIST_REQUEST });
       const { data } = await axios.get(
-        `/api/products?keyword=${keyword}&pageNumber=${pageNumber}`
+        `/api/products?keyword=${keyword}&pageNumber=${pageNumber}&category=${category}&min=${min}&max=${max}&stock=${stock}&order=${order}`
       );
+      console.log(min)
+      console.log(max)
       dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
     } catch (error) {
       dispatch({
