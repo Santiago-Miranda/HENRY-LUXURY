@@ -150,13 +150,8 @@ productRoute.post("/", protect, admin, asyncHandler(async (req, res) => {
         throw new Error("Invalid product data");
 
       }
-    } else {
-      res.status(400);
-      throw new Error("Invalid product data");
-    }
-  }
-})
-);
+    } 
+  }));
 
 // UPDATE PRODUCT
 productRoute.put("/:id", protect, admin, asyncHandler(async (req, res) => {
