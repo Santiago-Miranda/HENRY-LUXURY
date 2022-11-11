@@ -1,31 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { postCategories } from "../../Redux/Actions/CategoriesActions";
 
 const CreateCategory = () => {
+
+  const [ name, setName ] = useState("");
+  const dispatch = useDispatch();
+
+  const onChange = (e)=>{
+    setName(e)
+    
+  }
+  console.log(name)
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    dispatch(postCategories({name:name}))
+    setName("")
+  }
+
   return (
     <div className="col-md-12 col-lg-4">
-      <form>
+      <form onSubmit={(e)=> onSubmit(e)}>
         <div className="mb-4">
           <label htmlFor="product_name" className="form-label">
             Name
           </label>
           <input
             type="text"
+            value={name}
+            onChange={(e)=> onChange(e.target.value)}
             placeholder="Type here"
             className="form-control py-3"
             id="product_name"
           />
-        </div>
-        <div className="mb-4">
-          <label className="form-label">Images</label>
-          <input className="form-control" type="file" />
-        </div>
-        <div className="mb-4">
-          <label className="form-label">Description</label>
-          <textarea
-            placeholder="Type here"
-            className="form-control"
-            rows="4"
-          ></textarea>
         </div>
 
         <div className="d-grid">
