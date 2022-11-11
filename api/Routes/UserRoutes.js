@@ -3,12 +3,8 @@ import express from "express";
 import asyncHandler from "express-async-handler";
 import {sendConfirmationEmail, sendBanEmail, sendUnbanEmail} from "../config/nodemailer.js";
 import { protect, admin } from "../Middleware/AuthMiddleware.js";
-
 import generateToken from "../utils/generateToken.js";
 import User from "./../Models/UserModel.js";
-import nodemailer from "nodemailer"
-import passport from "passport"
-
 
 const userRouter = express.Router();
 
