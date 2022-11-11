@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { PRODUCT_CREATE_RESET } from "../../Redux/Constants/ProductConstants";
-import { createProduct } from "./../../Redux/Actions/ProductActions";
+import { createProduct, getAllCategory } from "./../../Redux/Actions/ProductActions";
 import Toast from "../LoadingError/Toast";
 import Message from "../LoadingError/Error";
 import Loading from "../LoadingError/Loading";
@@ -18,12 +18,13 @@ const AddProductMain = () => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [image, setImage] = useState("");
-  const [categories, setCategories] = useState("");
+  const [categories, setCategories] = useState([]);
   const [countInStock, setCountInStock] = useState(0);
   const [description, setDescription] = useState("");
 
   const dispatch = useDispatch();
 
+  const category = useSelector(state => state.allCategories);
   const productCreate = useSelector((state) => state.productCreate);
   const { loading, error, product } = productCreate;
 
@@ -35,14 +36,25 @@ const AddProductMain = () => {
       setDescription("");
       setCountInStock(0);
       setImage("");
-      setCategories("");
+      setCategories([]);
       setPrice(0);
     }
   }, [product, dispatch]);
 
+  useEffect(() => {
+    dispatch(getAllCategory());
+  }, [dispatch]);
+
+  //  if (types.includes(e.target.value)) {
+  //  setTypes(types.filter(l => l !== e.target.value))
+
+  function handleSelect(e) {
+    setCategories([...categories, e.target.value]);
+  }
+
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(createProduct(name,  price, description, image, countInStock, categories));
+    dispatch(createProduct(name, price, description, image, countInStock, categories));
   };
 
   return (
@@ -112,24 +124,19 @@ const AddProductMain = () => {
                   </div>
                   <div className="mb-4">
 
-                  <label className="form-label">Category</label>
-                  <select 
-                      onChange={(e) => setCategories(e.target.value)} class="block form-control appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                    <option disabled selected defaultValue>
-                      Category
-                    </option>
-                    <option value="tipos">all</option>
-                    <option value="Jewerly">Jewerly</option>
-                    <option value="Shoes">Shoes</option>
-                    <option value="Phone">Phone</option>
-                    <option value="Brand clothing">Brand clothing</option>
-                    <option value="Watches">Watches</option>
-                    <option value="Clothes">Clothes</option>
-                    <option value="Antique">Antique</option>
-                    <option value="Motorbike">Motorbike</option>
-                    <option value="Vehicle">Vehicle</option>
-
-                  </select>
+                    <label className="form-label">Category</label>
+                    <select
+                      onChange={(e) => handleSelect(e.target.value)} class="block form-control appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                      <option disabled selected defaultValue>
+                        Category
+                      </option>
+                      <option value="tipos">all</option>
+                      {
+                        category && category.map(e => (
+                          <option value={e._id}>{e.name}</option>
+                        ))
+                      }
+                    </select>
                   </div>
                   <div className="mb-4">
                     <label className="form-label">Description</label>
