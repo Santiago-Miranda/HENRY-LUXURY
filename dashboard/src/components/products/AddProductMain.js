@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { PRODUCT_CREATE_RESET } from "../../Redux/Constants/ProductConstants";
-import { createProduct, getAllCategory } from "./../../Redux/Actions/ProductActions";
+import { createProduct } from "./../../Redux/Actions/ProductActions";
+import { getCategories } from "../../Redux/Actions/CategoriesActions";
 import Toast from "../LoadingError/Toast";
 import Message from "../LoadingError/Error";
 import Loading from "../LoadingError/Loading";
@@ -25,9 +26,10 @@ const AddProductMain = () => {
 
   const dispatch = useDispatch();
 
-  const category = useSelector(state => state.allCategories);
+  const category = useSelector(state => state.getCategories);
   const productCreate = useSelector((state) => state.productCreate);
   const { loading, error, product } = productCreate;
+
 
   useEffect(() => {
     if (product) {
@@ -43,7 +45,7 @@ const AddProductMain = () => {
   }, [product, dispatch]);
 
   useEffect(() => {
-    dispatch(getAllCategory());
+    dispatch(getCategories());
   }, [dispatch]);
 
   //  if (types.includes(e.target.value)) {
@@ -133,7 +135,7 @@ const AddProductMain = () => {
                       </option>
                       <option value="tipos">all</option>
                       {
-                        category && category.map(e => (
+                        category && category.data.map(e => (
                           <option value={e._id}>{e.name}</option>
                         ))
                       }

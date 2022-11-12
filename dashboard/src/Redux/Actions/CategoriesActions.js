@@ -13,7 +13,7 @@ export const getCategories = () => {
 
 export const postCategories = (payload) => {
     return async () => {
-        const post = await axios.post('/api/categories/', payload);
+        const post = await axios.post("/api/categories/", payload);
         return post;
     }
 }
