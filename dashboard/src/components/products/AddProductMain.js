@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { PRODUCT_CREATE_RESET } from "../../Redux/Constants/ProductConstants";
-import { createProduct, getAllCategory } from "./../../Redux/Actions/ProductActions";
+import { createProduct } from "./../../Redux/Actions/ProductActions";
+import { getCategories } from "../../Redux/Actions/CategoriesActions";
 import Toast from "../LoadingError/Toast";
 import Message from "../LoadingError/Error";
 import Loading from "../LoadingError/Loading";
@@ -19,16 +20,14 @@ const AddProductMain = () => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [image, setImage] = useState("");
-  const [categories, setCategories] = useState([]);
+  const [categorias, setCategorias] = useState([]);
   const [countInStock, setCountInStock] = useState(0);
   const [description, setDescription] = useState("");
-
   const dispatch = useDispatch();
-
   const category = useSelector(state => state.allCategories);
+  const { categories } = category
   const productCreate = useSelector((state) => state.productCreate);
   const { loading, error, product } = productCreate;
-
   useEffect(() => {
     if (product) {
       toast.success("Product Added", ToastObjects);
@@ -37,27 +36,24 @@ const AddProductMain = () => {
       setDescription("");
       setCountInStock(0);
       setImage("");
-      setCategories([]);
+      setCategorias([]);
       setPrice(0);
     }
   }, [product, dispatch]);
 
   useEffect(() => {
-    dispatch(getAllCategory());
+    dispatch(getCategories());
   }, [dispatch]);
 
-  //  if (types.includes(e.target.value)) {
-  //  setTypes(types.filter(l => l !== e.target.value))
-
   function handleSelect(e) {
-    setCategories([...categories, e.target.value]);
+    setCategorias([...categorias, e]);
   }
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(createProduct(name, price, description, image, countInStock, categories));
+    dispatch(createProduct(name, price, description, image.url, countInStock, categorias));
   };
-
+  
   return (
     <>
       <Toast />
@@ -131,11 +127,10 @@ const AddProductMain = () => {
                       <option disabled selected defaultValue>
                         Category
                       </option>
-                      <option value="tipos">all</option>
                       {
-                        category && category.map(e => (
+                          categories.map(e =>
                           <option value={e._id}>{e.name}</option>
-                        ))
+                        )
                       }
                     </select>
                   </div>
@@ -153,7 +148,7 @@ const AddProductMain = () => {
                   <div>
                     {image === 0 ? (
                       <>
-                       <img src={image} alt="img" />
+                       <img src= {image} alt="img"  />
                       </>
                        ):(
                       <>
