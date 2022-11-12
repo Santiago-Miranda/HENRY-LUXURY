@@ -18,10 +18,11 @@ function Cloudinary({ setCloudinary }) {
         method: "POST",
         body: data,
       }
+     
     );
     const file = await res.json();
     console.log(res);
-    setImage(file.secure_url);
+    setImage(file.url);
     console.log(file.public_id);
     console.log(file.secure_url);
     setLoading(false);
@@ -29,6 +30,10 @@ function Cloudinary({ setCloudinary }) {
     setCloudinary(cloudinary);
     console.log(cloudinary.url)
   };
+
+  
+
+
 
   return (
     <div>

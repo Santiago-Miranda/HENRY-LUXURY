@@ -37,25 +37,9 @@ const ProfileScreen = () => {
               <div className="author-card-profile row">
                 <div className="author-card-avatar col-md-5">
 
-                  {userInfo.image === 0 ? (
-                    <>
-                       <img src={userInfo.image} alt="userprofileimage" />
-                    </>
-                  ):(
-                
-                    <>
-                    
-                  <Cloudinary setCloudinary={setCloudinary}/>
-                    </>
-
-                  )}
-               
-
-
+                <img src="./images/user.png" alt="userprofileimage" />
+                      {/* <img src={setCloudinary} alt="userprofileimage" />*/}
                  
-
-
-
 
                 </div>
 

@@ -20,7 +20,7 @@ const HomeScreen = ({ match }) => {
   const keyword = match.params.keyword;
   const pagenumber = match.params.pagenumber;
   const [order, setOrder] = useState()
-  const [category, setCategory] = useState();
+  //const [category, setCategory] = useState();
   const [min, setMin] = useState(0)
   const [max, setMax] = useState(20000)
   const [price, setPrice] = useState("");
@@ -35,8 +35,8 @@ const HomeScreen = ({ match }) => {
   const { loading, error, products, page, pages } = productList;
 
   useEffect(() => {
-    dispatch(listProduct(order, keyword, pagenumber, category, min, max,stock));
-  }, [dispatch, order, keyword, pagenumber, category, min, max,stock]);
+    dispatch(listProduct(order, keyword, pagenumber ,min, max,stock));
+  }, [dispatch, order, keyword, pagenumber, min, max,stock]);
 
   useEffect(() => {
     if (price === "") {
@@ -67,8 +67,7 @@ const HomeScreen = ({ match }) => {
   return (
     <div>
       <Header />
-      <Filtered setOrder={setOrder} stock={stock} setStock={setStock} price={price} setPrice={setPrice} setMin={setMin} setMax={setMax} setCategory={setCategory} products={products} />
-
+      <Filtered setOrder={setOrder} stock={stock} setStock={setStock} price={price} setPrice={setPrice} setMin={setMin} setMax={setMax}  products={products} />
       <ShopSection keyword={keyword} loading={loading} error={error} products={products} page={page} pages={pages} pagenumber={pagenumber} />
       <CalltoActionSection />
       <ContactInfo />

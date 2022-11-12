@@ -5,14 +5,16 @@ import Toast from "./../LoadingError/Toast";
 import Loading from "./../LoadingError/Loading";
 import { toast } from "react-toastify";
 import { updateUserProfile } from "../../Redux/Actions/userActions";
+import Cloudinary from "../../screens/Cloudinary";
 
 const ProfileTabs = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [image, setImage] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const toastId = React.useRef(null);
-
+ 
   const Toastobjects = {
     pauseOnFocusLoss: false,
     draggable: false,
@@ -32,6 +34,7 @@ const ProfileTabs = () => {
     if (user) {
       setName(user.name);
       setEmail(user.email);
+      setImage(user.image)
     }
   }, [dispatch, user]);
 
@@ -43,7 +46,7 @@ const ProfileTabs = () => {
         toastId.current = toast.error("Password does not match", Toastobjects);
       }
     } else {
-      dispatch(updateUserProfile({ id: user._id, name, email, password }));
+      dispatch(updateUserProfile({ id: user._id, name, email, password ,image}));
       if (!toast.isActive(toastId.current)) {
         toastId.current = toast.success("Profile Updated", Toastobjects);
       }
@@ -56,6 +59,20 @@ const ProfileTabs = () => {
       {loading && <Loading />}
       {updateLoading && <Loading />}
       <form className="row  form-container" onSubmit={submitHandler}>
+
+<div>
+      {user.image === 0 ? (
+                    <>
+                       <img src={user.image} alt="userprofileimage" />
+                    </>
+                  ):(
+                
+                    <>
+                   
+                  <Cloudinary setCloudinary={setImage}/>
+                    </>
+                  )}
+                </div>
         <div className="col-md-6">
           <div className="form">
             <label for="account-fn">UserName</label>

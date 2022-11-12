@@ -121,33 +121,28 @@ productRoute.delete("/:id", protect, admin, asyncHandler(async (req, res) => {
 );
 
 // CREATE PRODUCT
-productRoute.post("/", protect, admin, asyncHandler(async (req, res) => {
+productRoute.post("/", asyncHandler(async (req, res) => {
   const { name, price, description, categories, countInStock, image } = req.body;
   const productExist = await Product.findOne({ name });
   if (productExist) {
     res.status(400);
     throw new Error("Product name already exist");
   } else {
-    if(image){
-      const uploadResponse = await cloudinary.uploader.upload(image,{
-        upload_preset: 'products'
-      });
-    if(uploadResponse){
+   
     const product = new Product({
       name,
       price,
       description,
       categories,
-      image: uploadResponse,
+      image,
       countInStock,
-      user: req.user._id,
+      //user: req.user._id,
     });
 
     if (product) {
       const createdproduct = await product.save();
       res.status(201).json(createdproduct);
-         }
-      }
+       
     } else {
       res.status(400);
       throw new Error("Invalid product data");
