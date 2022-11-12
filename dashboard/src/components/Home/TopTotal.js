@@ -8,6 +8,7 @@ const TopTotal = (props) => {
       order.isPaid === true ? (totalSale = totalSale + order.totalPrice) : null
     );
   }
+  console.log(totalSale.toFixed)
   return (
     <div className="row">
       <div className="col-lg-4">
