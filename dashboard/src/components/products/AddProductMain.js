@@ -7,6 +7,7 @@ import { createProduct, getAllCategory } from "./../../Redux/Actions/ProductActi
 import Toast from "../LoadingError/Toast";
 import Message from "../LoadingError/Error";
 import Loading from "../LoadingError/Loading";
+import Cloudinary from "../../screens/Cloudinary";
 
 const ToastObjects = {
   pauseOnFocusLoss: false,
@@ -149,16 +150,16 @@ const AddProductMain = () => {
                       onChange={(e) => setDescription(e.target.value)}
                     ></textarea>
                   </div>
-                  <div className="mb-4">
-                    <label className="form-label">Images</label>
-                    <input
-                      className="form-control"
-                      type="text"
-                      placeholder="Enter Image URL"
-                      value={image}
-                      required
-                      onChange={(e) => setImage(e.target.value)}
-                    />
+                  <div>
+                    {image === 0 ? (
+                      <>
+                       <img src={image} alt="img" />
+                      </>
+                       ):(
+                      <>
+                        <Cloudinary setCloudinary={setImage}/>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>

@@ -123,6 +123,7 @@ productRoute.delete("/:id", protect, admin, asyncHandler(async (req, res) => {
 })
 );
 
+
 // CREATE PRODUCT 
 productRoute.post("/", protect, admin, asyncHandler(async (req, res) => {
     const { name, price, description, categories, image, countInStock } = req.body;//categories= array de id's de categorias
@@ -135,7 +136,7 @@ productRoute.post("/", protect, admin, asyncHandler(async (req, res) => {
         name,
         price,
         description,
-        image: uploadResponse,
+        image,
         countInStock,
         user: req.user._id,
       });
@@ -154,6 +155,7 @@ productRoute.post("/", protect, admin, asyncHandler(async (req, res) => {
     }
   })
 );
+
 
 // UPDATE PRODUCT
 productRoute.put("/:id", protect, admin, asyncHandler(async (req, res) => {

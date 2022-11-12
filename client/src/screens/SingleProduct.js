@@ -155,7 +155,7 @@ const SingleProduct = ({ history, match }) => {
                       {errorCreateReview}
                     </Message>
                   )}
-                </div>
+                  </div>
                 {userInfo ? (
                   <form onSubmit={submitHandler}>
                     <div className="my-4">
