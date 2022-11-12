@@ -129,10 +129,11 @@ const AddProductMain = () => {
                       </option>
                       {
                           categories.map(e =>
-                          <option value={e._id}>{e.name}</option>
+                          <option value={e.name}>{e.name}</option>
                         )
                       }
                     </select>
+                    <h3>{categorias.join(" ")}.</h3>
                   </div>
                   <div className="mb-4">
                     <label className="form-label">Description</label>

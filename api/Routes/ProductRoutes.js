@@ -142,7 +142,7 @@ productRoute.post("/", protect, admin, asyncHandler(async (req, res) => {
       });
       if (product) {
         for(var i = 0; i < categories.length; i++){
-          let adding = await Category.findById(categories[i])
+          let adding = await Category.findOne({name: categories[i]})
           product.categories = [...product.categories, adding]
         }
         const createdproduct = await product.save();
