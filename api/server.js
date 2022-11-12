@@ -10,6 +10,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import passport from "passport"
 import googleRouter from "./Routes/authGoogle.js"
+import categoryRoute from "./Routes/CategoryRoute.js";
 import session from "express-session"
 import MongoStore from "connect-mongo"
 import cookieSession from "cookie-session"
@@ -79,6 +80,7 @@ app.use("/api/products", productRoute);
 app.use("/api/users", userRouter);
 app.use("/api/orders", orderRouter);
 app.use("/auth", googleRouter);
+app.use("/api/categories", categoryRoute)
 
 app.get("/api/config/paypal", (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID);

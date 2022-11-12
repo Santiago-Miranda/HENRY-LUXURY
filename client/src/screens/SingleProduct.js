@@ -94,7 +94,12 @@ const SingleProduct = ({ history, match }) => {
                         value={product.rating}
                         text={`${product.numReviews} reviews`}
                       />
-                    </div>*
+                    </div>  <button
+                          onClick={AddToCartHandle}
+                          className="round-black-btn"
+                        >
+                          Add To Cart
+                        </button>
                     {product.countInStock > 0 ? (
                       <>
                         <div className="flex-box d-flex justify-content-between align-items-center">

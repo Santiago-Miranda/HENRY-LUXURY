@@ -1,9 +1,11 @@
 import express from "express";
 import asyncHandler from "express-async-handler";
 import Product from "./../Models/ProductModel.js";
+import Category from "../Models/Category.js";
 import { admin, protect } from "./../Middleware/AuthMiddleware.js";
-import { sendConfirmationEmail } from "../config/nodemailer.js";
-import cloudinary from '../config/Cloudinary.js'
+//import { sendConfirmationEmail } from "../config/nodemailer.js";
+//import cloudinary from '../config/Cloudinary.js'
+
 
 const productRoute = express.Router();
 
@@ -120,36 +122,36 @@ productRoute.delete("/:id", protect, admin, asyncHandler(async (req, res) => {
 })
 );
 
-// CREATE PRODUCT
-productRoute.post("/", asyncHandler(async (req, res) => {
-  const { name, price, description, categories, countInStock, image } = req.body;
-  const productExist = await Product.findOne({ name });
-  if (productExist) {
-    res.status(400);
-    throw new Error("Product name already exist");
-  } else {
-   
-    const product = new Product({
-      name,
-      price,
-      description,
-      categories,
-      image,
-      countInStock,
-      //user: req.user._id,
-    });
-
-    if (product) {
-      const createdproduct = await product.save();
-      res.status(201).json(createdproduct);
-       
-    } else {
+// CREATE PRODUCT 
+productRoute.post("/", protect, admin, asyncHandler(async (req, res) => {
+    const { name, price, description, categories, image, countInStock } = req.body;//categories= array de id's de categorias
+    const productExist = await Product.findOne({ name });
+    if (productExist) {
       res.status(400);
-      throw new Error("Invalid product data");
-    }
-  }
-})
-);
+      throw new Error("Product name already exist");
+    } else {
+      const product = new Product({
+        name,
+        price,
+        description,
+        image,
+        countInStock,
+        user: req.user._id,
+      });
+      if (product) {
+        for(var i = 0; i < categories.length; i++){
+          let adding = await Category.findById(categories[i])
+          product.categories = [...product.categories, adding]
+        }
+        const createdproduct = await product.save();
+        res.status(201).json(createdproduct);
+      } else {
+        res.status(400);
+        throw new Error("Invalid product data");
+      
+      }
+    } 
+  }));
 
 // UPDATE PRODUCT
 productRoute.put("/:id", protect, admin, asyncHandler(async (req, res) => {

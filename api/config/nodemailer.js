@@ -83,4 +83,18 @@ const orderDelivered = (name, email, orderId) => {
         <p>We expect it to arrive within 4 working days</p>`
     }).catch(err=>console.log)
 }
-export {sendConfirmationEmail, sendOrderEmail, sendBanEmail, sendUnbanEmail, orderPaidEmail, orderDelivered}
+
+const PaswordTokenEmail = (name, email, passtoken) => {
+    transport.sendMail({
+        from: user, 
+        to: email,
+        subject: "JJMS Luxury - Reset your password",
+        html:`<h1>Use the code below to reset your password</h1>
+        <h2>Hello ${name}!</h2>
+        <p>It looks like you forgot your password. Dont worry, you can reset it.</p><br/>
+        <p>Your password-reset code its ${passtoken}.</p>
+        <p><a>Click here</a> to reset your password.</p>`
+    }).catch(err=>console.log)
+}
+
+export {sendConfirmationEmail, sendOrderEmail, sendBanEmail, sendUnbanEmail, orderPaidEmail, orderDelivered, PaswordTokenEmail}

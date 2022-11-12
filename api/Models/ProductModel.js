@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+const { Schema } = mongoose;
 
 const reviewSchema = mongoose.Schema(
   {
@@ -37,11 +38,9 @@ const productSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    categories:{
-      type: String,
-      enum: ["Watches", "Brand clothing", "Jewerly", "Shoes", "Clothes", "Vehicle", "Motorbike", "Collectable", "Antique", "Phone"],
-      required: true,
-    },
+
+    categories:[{type: Schema.Types.ObjectId, ref: "Category", unique:true}],
+
     reviews: [reviewSchema],
     rating: {
       type: Number,
@@ -69,6 +68,6 @@ const productSchema = mongoose.Schema(
   }
 );
 
-const Product = mongoose.model("Product", productSchema);
 
+const Product = mongoose.models.Product || mongoose.model("Product", productSchema);
 export default Product;
