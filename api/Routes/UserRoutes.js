@@ -167,7 +167,7 @@ userRouter.put('/PassCode', asyncHandler(async (req, res) => {
 
   if(user){
     for(var i = 0; i < 6; i++) {
-      token += characters[Math.floor(Math.random() * characters.length )];
+      token += numbers[Math.floor(Math.random() * numbers.length )];
     }
     user.confirmationCode = token;
     user.save()
