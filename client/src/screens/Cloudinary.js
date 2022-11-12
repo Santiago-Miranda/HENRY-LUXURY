@@ -18,17 +18,22 @@ function Cloudinary({ setCloudinary }) {
         method: "POST",
         body: data,
       }
+     
     );
     const file = await res.json();
     console.log(res);
-    setImage(file.secure_url);
+    setImage(file.url);
     console.log(file.public_id);
     console.log(file.secure_url);
     setLoading(false);
     const cloudinary = { public_id: file.public_id, url: file.secure_url };
-    //setCloudinary(cloudinary);
+    setCloudinary(cloudinary);
     console.log(cloudinary.url)
   };
+
+  
+
+
 
   return (
     <div>
@@ -43,6 +48,7 @@ function Cloudinary({ setCloudinary }) {
           style={{ cursor: "pointer" }}
           onChange={uploadImage}
         />
+        {loading ? (<h3>Cargando Imagenes</h3>) : (<img src={image} style={{width:"300px"}}/>)}
       </label>
       </div>
       <div>

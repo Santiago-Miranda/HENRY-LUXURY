@@ -25,6 +25,7 @@ const ProfileScreen = () => {
   }, [dispatch]);
 
   const [cloudinary, setCloudinary] = useState({})
+
   return (
     <>
       <Header />
@@ -35,9 +36,15 @@ const ProfileScreen = () => {
               <div className="author-card-cover"></div>
               <div className="author-card-profile row">
                 <div className="author-card-avatar col-md-5">
-                  <img src={userInfo.image} alt="userprofileimage" />
-                  <Cloudinary setCloudinary={setCloudinary}/>
+
+                <img src="./images/user.png" alt="userprofileimage" />
+                      {/* <img src={setCloudinary} alt="userprofileimage" />*/}
+                 
+
                 </div>
+
+
+
                 <div className="author-card-details col-md-7">
                   <h5 className="author-card-name mb-2">
                     <strong>{userInfo.name}</strong>

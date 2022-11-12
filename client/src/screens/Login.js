@@ -13,11 +13,12 @@ const Login = ({ location, history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { loginWithGoogle} = useAuth();
+  const { loginWithGoogle,user } = useAuth();
+  console.log(loginWithGoogle ,user)
 
   const dispatch = useDispatch();
-  const redirect = location.search ? location.search.split("=")[1] : "/";
-
+  const redirect = location.search ? location.search.split("=")[1] :"/";
+console.log(redirect)
   const userLogin = useSelector((state) => state.userLogin);
   const { error, loading, userInfo } = userLogin;
 
@@ -33,7 +34,12 @@ const Login = ({ location, history }) => {
     dispatch(login(email, password));
   };
 
-  
+ /* useEffect(() => {
+    if (user) {
+      history.push(redirect);
+
+    }
+  }, [user, history, redirect,]);*/
   
 
   /*const google = () => {

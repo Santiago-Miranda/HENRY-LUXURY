@@ -16,6 +16,8 @@ import OrderScreen from "./screens/OrderScreen";
 import NotFound from "./screens/NotFound";
 import PrivateRouter from "./PrivateRouter";
 import { AuthProvider} from './context/AuthContext.js'
+//import CartFavorite from "./screens/CartFavorite"
+//<PrivateRouter path="/favorite" component={CartFavorite} />
 
 const App = () => {
   return (

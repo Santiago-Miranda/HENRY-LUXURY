@@ -94,7 +94,7 @@ const SingleProduct = ({ history, match }) => {
                         value={product.rating}
                         text={`${product.numReviews} reviews`}
                       />
-                    </div>
+                    </div>*
                     {product.countInStock > 0 ? (
                       <>
                         <div className="flex-box d-flex justify-content-between align-items-center">
@@ -155,7 +155,7 @@ const SingleProduct = ({ history, match }) => {
                       {errorCreateReview}
                     </Message>
                   )}
-                </div>
+                  </div>
                 {userInfo ? (
                   <form onSubmit={submitHandler}>
                     <div className="my-4">
