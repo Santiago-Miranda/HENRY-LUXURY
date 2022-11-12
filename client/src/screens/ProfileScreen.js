@@ -23,12 +23,15 @@ const ProfileScreen = () => {
 
   let userLocal = window.localStorage.getItem("user");
 
+
+ 
+
   useEffect(() => {
     dispatch(listMyOrders());
     dispatch(getUserDetails("profile"));
   }, [dispatch]);
 
-  const [cloudinary, setCloudinary] = useState({userLocal})
+
 
   return (
     <>
@@ -41,13 +44,9 @@ const ProfileScreen = () => {
               <div className="author-card-profile row">
                 <div className="author-card-avatar col-md-5">
 
-                {/*<img src="./images/user.png" alt="userprofileimage" />*/}
+                <img src={ImageDefault} alt="userprofileimage" />
                       {/* <img src={setCloudinary} alt="userprofileimage" />*/}
-                      <img
-                alt="Photo by aldi sigun on Unsplash"
-                src={userInfo.image ? setCloudinary : ImageDefault }
-                className="mx-auto object-cover rounded-full h-40 w-40 bg-white p-1"
-              />
+                
 
                 </div>
 

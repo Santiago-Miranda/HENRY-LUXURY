@@ -3,8 +3,9 @@ import asyncHandler from "express-async-handler";
 import Product from "./../Models/ProductModel.js";
 import Category from "../Models/Category.js";
 import { admin, protect } from "./../Middleware/AuthMiddleware.js";
-//import { sendConfirmationEmail } from "../config/nodemailer.js";
-//import cloudinary from '../config/Cloudinary.js'
+import { sendConfirmationEmail } from "../config/nodemailer.js";
+
+
 
 
 const productRoute = express.Router();
@@ -122,6 +123,7 @@ productRoute.delete("/:id", protect, admin, asyncHandler(async (req, res) => {
 })
 );
 
+
 // CREATE PRODUCT 
 productRoute.post("/", protect, admin, asyncHandler(async (req, res) => {
     const { name, price, description, categories, image, countInStock } = req.body;//categories= array de id's de categorias
@@ -150,8 +152,10 @@ productRoute.post("/", protect, admin, asyncHandler(async (req, res) => {
         throw new Error("Invalid product data");
       
       }
-    } 
-  }));
+    }
+  })
+);
+
 
 // UPDATE PRODUCT
 productRoute.put("/:id", protect, admin, asyncHandler(async (req, res) => {

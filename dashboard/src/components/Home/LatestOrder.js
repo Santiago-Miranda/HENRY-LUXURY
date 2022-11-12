@@ -5,7 +5,7 @@ import Message from "../LoadingError/Error";
 import Loading from "../LoadingError/Loading";
 
 const LatestOrder = (props) => {
-  const { loading, error, orders } = props;
+  const { loading, error, order } = props;
   return (
     <div className="card-body">
       <h4 className="card-title">New orders</h4>
@@ -17,16 +17,16 @@ const LatestOrder = (props) => {
         <div className="table-responsive">
           <table className="table">
             <tbody>
-                <tr key={orders._id}>
+                <tr key={order._id}>
                     <td>
-                      <b>{orders.user.name}</b>
+                      <b>{order.user.name}</b>
                     </td>
-                    <td>{orders.user.email}</td>
-                    <td>${orders.totalPrice}</td>
+                    <td>{order.user.email}</td>
+                    <td>${order.totalPrice}</td>
                     <td>
-                      {orders.isPaid ? (
+                      {order.isPaid ? (
                         <span className="badge rounded-pill alert-success">
-                          Paid At {moment(orders.paidAt).format("MMM Do YY")}
+                          Paid At {moment(order.paidAt).format("MMM Do YY")}
                         </span>
                       ) : (
                         <span className="badge rounded-pill alert-danger">
@@ -34,9 +34,9 @@ const LatestOrder = (props) => {
                         </span>
                       )}
                     </td>
-                    <td>{moment(orders.createdAt).calendar()}</td>
+                    <td>{moment(order.createdAt).calendar()}</td>
                     <td className="d-flex justify-content-end align-item-center">
-                      <Link to={`/order/${orders._id}`} className="text-success">
+                      <Link to={`/order/${order._id}`} className="text-success">
                         <i className="fas fa-eye"></i>
                       </Link>
                     </td>
