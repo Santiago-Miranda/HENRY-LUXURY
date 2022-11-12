@@ -60,19 +60,18 @@ const ProfileTabs = () => {
       {updateLoading && <Loading />}
       <form className="row  form-container" onSubmit={submitHandler}>
 
-<div>
-      {user.image === 0 ? (
-                    <>
-                       <img src={user.image} alt="userprofileimage" />
-                    </>
-                  ):(
-                
-                    <>
-                   
-                  <Cloudinary setCloudinary={setImage}/>
-                    </>
-                  )}
-                </div>
+        <div>
+          {user.image === 0 ? (
+            <>
+              <img src={user.image} alt="userprofileimage" />
+            </>
+              ):(
+            <>
+              <Cloudinary setCloudinary={setImage}/>
+            </>
+          )}
+        </div>
+
         <div className="col-md-6">
           <div className="form">
             <label for="account-fn">UserName</label>

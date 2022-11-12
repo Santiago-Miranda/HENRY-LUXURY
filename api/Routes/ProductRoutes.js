@@ -4,7 +4,8 @@ import Product from "./../Models/ProductModel.js";
 import Category from "../Models/Category.js";
 import { admin, protect } from "./../Middleware/AuthMiddleware.js";
 import { sendConfirmationEmail } from "../config/nodemailer.js";
-import cloudinary from '../config/Cloudinary.js'
+
+
 
 
 const productRoute = express.Router();
@@ -135,7 +136,7 @@ productRoute.post("/", protect, admin, asyncHandler(async (req, res) => {
         name,
         price,
         description,
-        image: uploadResponse,
+        image,
         countInStock,
         user: req.user._id,
       });
@@ -151,8 +152,9 @@ productRoute.post("/", protect, admin, asyncHandler(async (req, res) => {
         throw new Error("Invalid product data");
 
       }
-    } 
-  }));
+    }
+  })
+);
 
 
 // UPDATE PRODUCT
