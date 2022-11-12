@@ -21,12 +21,12 @@ import {
 import { logout } from "./userActions";
 
 // PRODUCT LIST
-export const listProduct = (order = "", keyword = " ", pageNumber = " ",min = 0,max = 0,stock = 0,) =>
+export const listProduct = (category="", order = "", keyword = " ", pageNumber = " ",min = 0,max = 0,stock = 0,) =>
   async (dispatch) => {
     try {
       dispatch({ type: PRODUCT_LIST_REQUEST });
       const { data } = await axios.get(
-        `/api/products?keyword=${keyword}&pageNumber=${pageNumber}&min=${min}&max=${max}&stock=${stock}&order=${order}`
+        `/api/products?category=${category}&keyword=${keyword}&pageNumber=${pageNumber}&min=${min}&max=${max}&stock=${stock}&order=${order}`
       );
       console.log(data)
       console.log(min)
