@@ -13,8 +13,9 @@ const userSchema = mongoose.Schema(
       unique: true,
     },
     image:{
-      public_id: String,
-      url: String,
+      type: String,
+      //public_id: String,
+      //url: String,
     },
     password: {
       type: String,

@@ -21,3 +21,4 @@ const firebaseConfig = {
 
 export const auth = getAuth(app);
 
+

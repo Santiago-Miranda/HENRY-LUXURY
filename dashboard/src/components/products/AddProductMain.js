@@ -4,9 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { PRODUCT_CREATE_RESET } from "../../Redux/Constants/ProductConstants";
 import { createProduct } from "./../../Redux/Actions/ProductActions";
+import { getCategories } from "../../Redux/Actions/CategoriesActions";
 import Toast from "../LoadingError/Toast";
 import Message from "../LoadingError/Error";
 import Loading from "../LoadingError/Loading";
+import Cloudinary from "../../screens/Cloudinary";
 
 const ToastObjects = {
   pauseOnFocusLoss: false,
@@ -18,15 +20,14 @@ const AddProductMain = () => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [image, setImage] = useState("");
-  const [categories, setCategories] = useState("");
+  const [categorias, setCategorias] = useState([]);
   const [countInStock, setCountInStock] = useState(0);
   const [description, setDescription] = useState("");
-
   const dispatch = useDispatch();
-
+  const category = useSelector(state => state.allCategories);
+  const { categories } = category
   const productCreate = useSelector((state) => state.productCreate);
   const { loading, error, product } = productCreate;
-
   useEffect(() => {
     if (product) {
       toast.success("Product Added", ToastObjects);
@@ -35,16 +36,24 @@ const AddProductMain = () => {
       setDescription("");
       setCountInStock(0);
       setImage("");
-      setCategories("");
+      setCategorias([]);
       setPrice(0);
     }
   }, [product, dispatch]);
 
+  useEffect(() => {
+    dispatch(getCategories());
+  }, [dispatch]);
+
+  function handleSelect(e) {
+    setCategorias([...categorias, e]);
+  }
+
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(createProduct(name,  price, description, image, countInStock, categories));
+    dispatch(createProduct(name, price, description, image.url, countInStock, categorias));
   };
-
+  
   return (
     <>
       <Toast />
@@ -112,24 +121,18 @@ const AddProductMain = () => {
                   </div>
                   <div className="mb-4">
 
-                  <label className="form-label">Category</label>
-                  <select 
-                      onChange={(e) => setCategories(e.target.value)} class="block form-control appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                    <option disabled selected defaultValue>
-                      Category
-                    </option>
-                    <option value="tipos">all</option>
-                    <option value="Jewerly">Jewerly</option>
-                    <option value="Shoes">Shoes</option>
-                    <option value="Phone">Phone</option>
-                    <option value="Brand clothing">Brand clothing</option>
-                    <option value="Watches">Watches</option>
-                    <option value="Clothes">Clothes</option>
-                    <option value="Antique">Antique</option>
-                    <option value="Motorbike">Motorbike</option>
-                    <option value="Vehicle">Vehicle</option>
-
-                  </select>
+                    <label className="form-label">Category</label>
+                    <select
+                      onChange={(e) => handleSelect(e.target.value)} class="block form-control appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                      <option disabled selected defaultValue>
+                        Category
+                      </option>
+                      {
+                          categories.map(e =>
+                          <option value={e._id}>{e.name}</option>
+                        )
+                      }
+                    </select>
                   </div>
                   <div className="mb-4">
                     <label className="form-label">Description</label>
@@ -142,16 +145,16 @@ const AddProductMain = () => {
                       onChange={(e) => setDescription(e.target.value)}
                     ></textarea>
                   </div>
-                  <div className="mb-4">
-                    <label className="form-label">Images</label>
-                    <input
-                      className="form-control"
-                      type="text"
-                      placeholder="Enter Image URL"
-                      value={image}
-                      required
-                      onChange={(e) => setImage(e.target.value)}
-                    />
+                  <div>
+                    {image === 0 ? (
+                      <>
+                       <img src= {image} alt="img"  />
+                      </>
+                       ):(
+                      <>
+                        <Cloudinary setCloudinary={setImage}/>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>

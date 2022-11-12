@@ -1,7 +1,7 @@
 import e from "express";
 import express from "express";
 import asyncHandler from "express-async-handler";
-import {sendConfirmationEmail, sendBanEmail, sendUnbanEmail} from "../config/nodemailer.js";
+import {sendConfirmationEmail, sendBanEmail, sendUnbanEmail, PaswordTokenEmail} from "../config/nodemailer.js";
 import { protect, admin } from "../Middleware/AuthMiddleware.js";
 import generateToken from "../utils/generateToken.js";
 import User from "./../Models/UserModel.js";
@@ -156,6 +156,45 @@ userRouter.put("/ban", protect, asyncHandler(async(req, res) => {
     } else {res.status(404);
     throw new Error('User not found')}
 }))
+
+//FORGOT PASSWORD EMAIL
+userRouter.put('/PassCode', asyncHandler(async (req, res) => {
+  const { email } = req.body;
+  const user = await User.findOne({email: email})
+  const numbers = "1234567890"
+  let token=""
+
+
+  if(user){
+    for(var i = 0; i < 6; i++) {
+      token += numbers[Math.floor(Math.random() * numbers.length )];
+    }
+    user.confirmationCode = token;
+    user.save()
+    PaswordTokenEmail(email, user.name, token)
+    res.status(200).send("Email sent correctly. check your email to reset your password.")
+  } else {
+    res.status(404).send("User not found.")
+  }
+
+}
+));
+
+
+//RESET PASSWORD
+userRouter.put("/resetPass", asyncHandler(async(req, res) => {
+  const {email, token, password} = req.body
+  const user = await User.findOne({email: email})
+
+  if(user && user.confirmationCode === token){
+    user.password = password
+    user.save()
+    res.status(200).send("Password changed succesfully")
+  } else if (user && user.confirmationCode !== token) {
+    res.status(200).send("Wrong code, try again or ask for a new one.")
+  } else {res.status(404).send("user not found")}
+}));
+
 
 // GET ALL USER ADMIN
 userRouter.get("/", protect, admin, asyncHandler(async (req, res) => {

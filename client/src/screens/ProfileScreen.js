@@ -6,25 +6,27 @@ import { getUserDetails } from "../Redux/Actions/userActions";
 import Orders from "./../components/profileComponents/Orders";
 import moment from "moment";
 import { listMyOrders } from "../Redux/Actions/OrderActions";
-import Cloudinary from "./Cloudinary";
 
 
 const ProfileScreen = () => {
   window.scrollTo(0, 0);
 
   const dispatch = useDispatch();
-
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
   const orderListMy = useSelector((state) => state.orderListMy);
   const { loading, error, orders } = orderListMy;
+
+
+ 
 
   useEffect(() => {
     dispatch(listMyOrders());
     dispatch(getUserDetails("profile"));
   }, [dispatch]);
 
-  const [cloudinary, setCloudinary] = useState({})
+
+
   return (
     <>
       <Header />
@@ -35,9 +37,15 @@ const ProfileScreen = () => {
               <div className="author-card-cover"></div>
               <div className="author-card-profile row">
                 <div className="author-card-avatar col-md-5">
-                  <img src={userInfo.image} alt="userprofileimage" />
-                  <Cloudinary setCloudinary={setCloudinary}/>
+
+                <img src={userInfo.image} alt="userprofileimage" />
+                      {/* <img src={setCloudinary} alt="userprofileimage" />*/}
+                 
+
                 </div>
+
+
+
                 <div className="author-card-details col-md-7">
                   <h5 className="author-card-name mb-2">
                     <strong>{userInfo.name}</strong>
