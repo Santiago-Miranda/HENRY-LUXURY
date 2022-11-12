@@ -14,11 +14,11 @@ const ShopSection = (props) => {
     <>
       <div className="container">
         <div className="section">
-          <div className="row">
-            <div className="col-lg-12 col-md-12 article">
+          <div className="row mt-20">
+            <div className="col-lg-22 col-md-12 article">
               <div className="shopcontainer row">
                 {loading ? (
-                  <div className="mb-5">
+                  <div className="">
                     <Loading />
                   </div>
                 ) : error ? (
@@ -27,10 +27,10 @@ const ShopSection = (props) => {
                   <>
                     {products.map((product) => (
                       <div
-                        className="shop col-lg-4 col-md-6 col-sm-6"
+                        className="shop col-lg-4 col-md-16  col-sm-16"
                         key={product._id}
                       >
-                        <div className="shadow p-3 mb-5 bg-white rounded">
+                        <div className="shadow p-3 bg-white rounded">
                           <Link to={`/products/${product._id}`}>
                             <div className="shopBack">
                               <img src={product.image} alt={product.name} />

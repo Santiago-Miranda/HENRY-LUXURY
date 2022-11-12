@@ -15,7 +15,7 @@ const CreateCategory = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    dispatch(postCategories({name:name}))
+    dispatch(postCategories(name))
     setName("")
   }
 
