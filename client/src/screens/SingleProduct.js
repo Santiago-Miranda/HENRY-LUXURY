@@ -72,8 +72,17 @@ const SingleProduct = ({ history, match }) => {
                   <div className="product-info">
                     <div className="product-name">{product.name}</div>
                   </div>
-                  <p>Categories: {product.categories}</p>
+
+
+
+
+                  
+
+
+
+
                   <p>{product.description}</p>
+
 
                   <div className="product-count col-lg-7 ">
                     <div className="flex-box d-flex justify-content-between align-items-center">

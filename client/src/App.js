@@ -16,6 +16,8 @@ import OrderScreen from "./screens/OrderScreen";
 import NotFound from "./screens/NotFound";
 import PrivateRouter from "./PrivateRouter";
 import { AuthProvider} from './context/AuthContext.js'
+import Landing from './components/ExtrasComponents/Landing'
+import About from './components/ExtrasComponents/About'
 //import CartFavorite from "./screens/CartFavorite"
 //<PrivateRouter path="/favorite" component={CartFavorite} />
 
@@ -32,6 +34,8 @@ const App = () => {
           component={HomeScreen}
           exact
         />
+         <Route path="/landing" component={Landing} exact />
+         <Route path="/about" component={About} exact />
         <Route path="/products/:id" component={SingleProduct} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />

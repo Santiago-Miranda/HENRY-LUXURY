@@ -8,6 +8,18 @@ import { login } from "./../Redux/Actions/userActions";
 import { useAuth } from "../context/AuthContext";
 
 
+import { GoogleOAuthProvider } from '@react-oauth/google';
+
+//mport Google from './Google.jsx';<GoogleOAuthProvider>
+       
+         // <Google onClick={handleGoogleSignin} />
+         // </GoogleOAuthProvider>
+    
+//import google from "../components/images/google"
+
+
+
+
 const Login = ({ location, history }) => {
   window.scrollTo(0, 0);
   const [email, setEmail] = useState("");
@@ -34,17 +46,17 @@ console.log(redirect)
     dispatch(login(email, password));
   };
 
- /* useEffect(() => {
+  useEffect(() => {
     if (user) {
       history.push(redirect);
 
     }
-  }, [user, history, redirect,]);*/
+  }, [user, history, redirect,]);
   
 
-  /*const google = () => {
+  const google = () => {
     window.open("http://localhost:3001/auth/google", "_self");
-  }; */
+  }; 
  
   const handleGoogleSignin = async () => {
     try {
@@ -79,7 +91,11 @@ console.log(redirect)
             onChange={(e) => setPassword(e.target.value)}
           />
           <button type="submit">Login</button>
-          <button onClick={handleGoogleSignin}>Continue with Google</button>
+         {/* */}
+         <button onClick={handleGoogleSignin}>Continue with Google</button>
+         {/*<img src={google} className="App-logo" alt="logo" />*/}
+       
+
        
           <p>
             <Link

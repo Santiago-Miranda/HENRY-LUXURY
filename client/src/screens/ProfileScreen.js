@@ -6,16 +6,22 @@ import { getUserDetails } from "../Redux/Actions/userActions";
 import Orders from "./../components/profileComponents/Orders";
 import moment from "moment";
 import { listMyOrders } from "../Redux/Actions/OrderActions";
+import Cloudinary from "./Cloudinary";
+import ImageDefault from "../components/images/ImageDefault.png"
 
 
 const ProfileScreen = () => {
   window.scrollTo(0, 0);
 
   const dispatch = useDispatch();
+
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
   const orderListMy = useSelector((state) => state.orderListMy);
   const { loading, error, orders } = orderListMy;
+
+
+  let userLocal = window.localStorage.getItem("user");
 
 
  
@@ -38,9 +44,9 @@ const ProfileScreen = () => {
               <div className="author-card-profile row">
                 <div className="author-card-avatar col-md-5">
 
-                <img src={userInfo.image} alt="userprofileimage" />
+                <img src={ImageDefault} alt="userprofileimage" />
                       {/* <img src={setCloudinary} alt="userprofileimage" />*/}
-                 
+                
 
                 </div>
 
