@@ -125,7 +125,7 @@ productRoute.delete("/:id", protect, admin, asyncHandler(async (req, res) => {
 
 
 // CREATE PRODUCT 
-productRoute.post("/", protect, admin, asyncHandler(async (req, res) => {
+productRoute.post("/",  asyncHandler(async (req, res) => {
     const { name, price, description, categories, image, countInStock } = req.body;//categories= array de id's de categorias
     const productExist = await Product.findOne({ name });
     if (productExist) {
@@ -138,7 +138,7 @@ productRoute.post("/", protect, admin, asyncHandler(async (req, res) => {
         description,
         image,
         countInStock,
-        user: req.user._id,
+       // user: req.user._id,
       });
       if (product) {
         for(var i = 0; i < categories.length; i++){

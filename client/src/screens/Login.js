@@ -9,7 +9,12 @@ import { useAuth } from "../context/AuthContext";
 
 
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import Google from './Google.jsx';
+
+//mport Google from './Google.jsx';<GoogleOAuthProvider>
+       
+         // <Google onClick={handleGoogleSignin} />
+         // </GoogleOAuthProvider>
+    
 //import google from "../components/images/google"
 
 
@@ -89,11 +94,7 @@ console.log(redirect)
          {/* */}
          <button onClick={handleGoogleSignin}>Continue with Google</button>
          {/*<img src={google} className="App-logo" alt="logo" />*/}
-       <GoogleOAuthProvider>
        
-          <Google onClick={handleGoogleSignin} />
-      </GoogleOAuthProvider>
-
 
        
           <p>

@@ -54,11 +54,14 @@ const Header = () => {
    
 
           <div className="row">
-         
-            <div className="col-md-6 d-flex align-items-center display-none">
-              <p>+123 123 123 123</p>
+             <div className="col-md-6 d-flex align-items-center display-none">
+             <Link to="/landing"><p>Landing</p></Link>
+             <Link to="/about"><p>About</p></Link>
+            
               <p>info@luxury.com</p>
+              
             </div>
+            
             <div className=" col-12 col-lg-6 justify-content-center justify-content-lg-end d-flex align-items-center">
               <Link to="">
                 <i className="fab fa-facebook-f"></i>

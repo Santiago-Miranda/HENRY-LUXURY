@@ -1,0 +1,88 @@
+.team-member {
+  background-color: #f9f9f9;
+  padding: 80px 40px;
+  font-family: "Ubuntu", sans-serif;
+}
+.team-member .teamro .our-team {
+  padding: 0px;
+  background: #fff;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 2px 3px 0 rgba(218, 218, 253, 0.35), 0 0px 3px 0 rgba(206, 206, 238, 0.35);
+  padding-bottom: 20px;
+}
+.team-member .teamro .our-team .pic {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  padding: 10px;
+  margin-bottom: 25px;
+  transition: all 0.5s ease 0s;
+}
+.team-member .teamro .our-team:hover .pic {
+  background:  #93938e;
+  border-radius: 5%;
+}
+.team-member .teamro .pic img {
+  width: 100%;
+  height: auto;
+  border-radius: 5%;
+}
+.team-member .teamro .our-team .title {
+  display: block;
+  font-size: 20px;
+  font-weight: 600;
+  color: #2e282a;
+  text-transform: uppercase;
+  margin: 0 0 7px 0;
+}
+.team-member .teamro .our-team .post {
+  display: block;
+  font-size: 15px;
+  color: rgb(36, 36, 33);
+  text-transform: capitalize;
+  margin-bottom: 15px;
+}
+.team-member .teamro .our-team .social {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.team-member .teamro .our-team .social li {
+  display: inline-block;
+  margin-right: 5px;
+}
+.team-member .teamro .our-team .social li a {
+  display: block;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 50%;
+  font-size: 15px;
+  color: #17bebb;
+  border: 1px solid #17bebb;
+  transition: all 0.5s ease 0s;
+}
+.team-member .teamro .our-team:hover .social li a {
+  background: #17bebb;
+  color: #fff;
+}
+@media only screen and (max-width: 990px) {
+  .team-member .teamro .our-team {
+    margin-bottom: 30px;
+  }
+}
+
+.session-title {
+  padding: 30px;
+  margin: 0px;
+}
+.session-title h2 {
+  width: 100%;
+  text-align: center;
+}
+.session-title p {
+  width: 100%;
+  text-align: center;
+}
