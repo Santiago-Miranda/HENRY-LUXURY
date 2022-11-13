@@ -3,7 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../Redux/Actions/userActions";
 import logo from "./images/logo.jpg";
-import { useAuth } from "../context/AuthContext";
+
 
 
 
@@ -17,19 +17,10 @@ const Header = () => {
   const { cartItems } = cart;
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-
-  const { nologin,user} = useAuth();
-
-  console.log(user)
+  
+  
 
   
-  const handleLogout = async () => {
-    try {
-      await nologin();
-    } catch (error) {
-      console.log(error);
-    }
-  };
   
 
 
@@ -117,31 +108,7 @@ const Header = () => {
                         </Link>
                       </div>
                     </div>
-                  ) :user?(
-                    <div className="btn-group">
-                      <button
-                        type="button"
-                        className="name-button dropdown-toggle"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                      >
-                        <i class="fas fa-user"></i>
-                      </button>
-                      <div className="dropdown-menu">
-                        <Link className="dropdown-item" to="/profile">
-                          Profile
-                        </Link>
-
-                        <Link
-                          className="dropdown-item"
-                          to="#"
-                          onClick={handleLogout}
-                        >
-                          Logout
-                        </Link>
-                      </div>
-                    </div>
+                  
                   ): (
                     <div className="btn-group">
                       <button
@@ -234,32 +201,7 @@ const Header = () => {
                       </Link>
                     </div>
                   </div>
-                ) : user?(
-                  <div className="btn-group">
-                    <button
-                      type="button"
-                      className="name-button dropdown-toggle"
-                      data-toggle="dropdown"
-                      aria-haspopup="true"
-                      aria-expanded="false"
-                    >
-                      Hi, {user.displayName} 
-                    </button>
-                    <div className="dropdown-menu">
-                      <Link className="dropdown-item" to="/profile">
-                        Profile
-                      </Link>
-
-                      <Link
-                        className="dropdown-item"
-                        to="#"
-                        onClick={handleLogout}
-                      >
-                        Logout
-                      </Link>
-                    </div>
-                  </div>
-                ) : (
+                )  : (
                   <>
                     <Link to="/register">Register</Link>
                     <Link to="/login">Login</Link>

@@ -13,6 +13,10 @@ import {
   USER_UPDATE_PROFILE_FAIL,
   USER_UPDATE_PROFILE_REQUEST,
   USER_UPDATE_PROFILE_SUCCESS,
+  USER_GOOGLE_LOGIN_REQUEST,
+  USER_GOOGLE_LOGIN_SUCCESS,
+  USER_GOOGLE_LOGOUT,
+  USER_GOOGLE_LOGIN_FAIL,
 } from "../Constants/UserContants";
 
 // LOGIN
@@ -70,6 +74,24 @@ export const userUpdateProfileReducer = (state = {}, action) => {
       return { loading: false, success: true, userInfo: action.payload };
     case USER_UPDATE_PROFILE_FAIL:
       return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+//LOGIN WITH GOOGLE
+
+
+export const userGoogleLoginReducer = (state = {}, action) => {
+  switch (action.type) {
+    /* case USER_GOOGLE_LOGIN_REQUEST:
+      return { loading: true }; */
+    case USER_GOOGLE_LOGIN_SUCCESS:
+      return {  userGoogleInfo: action.payload };
+    /*c ase USER_GOOGLE_LOGIN_FAIL:
+      return { loading: false, error: action.payload }; */
+    /* case USER_GOOGLE_LOGOUT:
+      return {}; */
     default:
       return state;
   }

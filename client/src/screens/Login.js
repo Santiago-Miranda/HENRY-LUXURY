@@ -5,22 +5,32 @@ import Message from "../components/LoadingError/Error";
 import Loading from "../components/LoadingError/Loading";
 import Header from "./../components/Header";
 import { login } from "./../Redux/Actions/userActions";
-import { useAuth } from "../context/AuthContext";
+import { Googlelogin } from "./../Redux/Actions/userActions";
+import jwt_decode from "jwt-decode"
+import GoogleLogin from "./GoogleLogin";
+
+
+
 
 
 const Login = ({ location, history }) => {
   window.scrollTo(0, 0);
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { loginWithGoogle} = useAuth();
+  
 
+
+  
   const dispatch = useDispatch();
   const redirect = location.search ? location.search.split("=")[1] : "/";
 
   const userLogin = useSelector((state) => state.userLogin);
   const { error, loading, userInfo } = userLogin;
-
+  
+  
+  
   useEffect(() => {
     if (userInfo) {
       history.push(redirect);
@@ -33,22 +43,30 @@ const Login = ({ location, history }) => {
     dispatch(login(email, password));
   };
 
-  
-  
+ /* function handleGoogleLoginSuccess(tokenResponse) {
 
-  /*const google = () => {
-    window.open("http://localhost:3001/auth/google", "_self");
-  }; */
+    const accessToken = tokenResponse.access_token;
+
+    dispatch(signinGoogle(accessToken,history))
+}
+
+const login = useGoogleLogin({onSuccess: handleGoogleLoginSuccess}); */
+
+/* function handleCallbackResponse(response) {
+  console.log("ENCODED JWT ID TOKEN" + response.credential);
+  var userObject = jwt_decode(response.credential);
+  setGoogleUser(userObject)
+  const email= userObject.email
+    const image = userObject.picture
+    const name = userObject.name
+  console.log(userObject)
+}  */
+
  
-  const handleGoogleSignin = async () => {
-    try {
-      await loginWithGoogle();
-      history.push("/");
-    } catch (error) {
-    console.log(error)
-    }
-  };
   
+    
+
+
 
   return (
     <>
@@ -73,7 +91,10 @@ const Login = ({ location, history }) => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <button type="submit">Login</button>
-          <button onClick={handleGoogleSignin}>Continue with Google</button>
+           
+                
+                  <GoogleLogin/>
+                
        
           <p>
             <Link

@@ -15,11 +15,16 @@ import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import OrderScreen from "./screens/OrderScreen";
 import NotFound from "./screens/NotFound";
 import PrivateRouter from "./PrivateRouter";
-import { AuthProvider} from './context/AuthContext.js'
+
+
+
+
 
 const App = () => {
+
+
   return (
-    <AuthProvider>
+   
     <Router>
       <Switch>
         <Route path="/" component={HomeScreen} exact />
@@ -33,16 +38,18 @@ const App = () => {
         <Route path="/products/:id" component={SingleProduct} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
+        <Route path="/cart/:id?" component={CartScreen} />      
         <PrivateRouter path="/profile" component={ProfileScreen} />
-        <Route path="/cart/:id?" component={CartScreen} />
+        <PrivateRouter path="/profile" component={ProfileScreen} /> 
         <PrivateRouter path="/shipping" component={ShippingScreen} />
         <PrivateRouter path="/payment" component={PaymentScreen} />
         <PrivateRouter path="/placeorder" component={PlaceOrderScreen} />
         <PrivateRouter path="/order/:id" component={OrderScreen} />
-        <Route path="*" component={NotFound} />
+        <Route path="*" component={NotFound} />    
       </Switch>
     </Router>
-    </AuthProvider>
+    
+  
   );
 };
 

@@ -7,6 +7,9 @@ import Orders from "./../components/profileComponents/Orders";
 import moment from "moment";
 import { listMyOrders } from "../Redux/Actions/OrderActions";
 
+
+
+
 const ProfileScreen = () => {
   window.scrollTo(0, 0);
 
@@ -16,12 +19,17 @@ const ProfileScreen = () => {
   const { userInfo } = userLogin;
   const orderListMy = useSelector((state) => state.orderListMy);
   const { loading, error, orders } = orderListMy;
+  
+  
+
+  
 
   useEffect(() => {
     dispatch(listMyOrders());
     dispatch(getUserDetails("profile"));
   }, [dispatch]);
 
+  if(userInfo){
   return (
     <>
       <Header />
@@ -108,6 +116,7 @@ const ProfileScreen = () => {
       </div>
     </>
   );
-};
 
+}
+};
 export default ProfileScreen;
