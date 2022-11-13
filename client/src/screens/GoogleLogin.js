@@ -1,15 +1,16 @@
 
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import useLocalStorage from "../hooks/useLocalStorage";
+import jwt_decode from "jwt-decode"
 
-const GoogleLogin = ({location,history}) => {
+import useLocalStorage from "../hooks/useLocalStorage";
+const GoogleLogin = () => {
     const dispatch = useDispatch();
     
   
         
   
-    const [googleUser, setGoogleUser] = useLocalStorage("googleUser","")
+  const [googleUser, setGoogleUser] = useLocalStorage("googleUser","")
   
       function handleCallbackResponse(response) {
           console.log("ENCODED JWT ID TOKEN" + response.credential);
@@ -40,9 +41,11 @@ const GoogleLogin = ({location,history}) => {
         
              
                   
-                    <div onClick={GooglesubmitHandler} id="signInDiv"></div>
+                    <div  id="signInDiv"></div>
                   
       
       </>
     );
   }
+
+  export default GoogleLogin
