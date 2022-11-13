@@ -1,23 +1,17 @@
 import React from "react";
 import Footer from "../Footer";
 import Header from "../Header";
-import Carrousel from "./Carrousel";
 
-const Landing = () => {
+
+const Maps = () => {
   return (
-    <>
+    <div>
       <Header />
       <br />
       <br />
-      <Carrousel />
-
       <br />
-      <br />
-      <br />
-
       <Footer />
-    </>
+    </div>
   );
 };
-
-export default Landing;
+export default Maps;
