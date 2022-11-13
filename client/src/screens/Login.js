@@ -5,10 +5,8 @@ import Message from "../components/LoadingError/Error";
 import Loading from "../components/LoadingError/Loading";
 import Header from "./../components/Header";
 import { login } from "./../Redux/Actions/userActions";
-import { useAuth } from "../context/AuthContext";
+import GoogleLogin from "./GoogleLogin";
 
-
-import { GoogleOAuthProvider } from '@react-oauth/google';
 
 //mport Google from './Google.jsx';<GoogleOAuthProvider>
        
@@ -25,8 +23,7 @@ const Login = ({ location, history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { loginWithGoogle,user } = useAuth();
-  console.log(loginWithGoogle ,user)
+  
 
   const dispatch = useDispatch();
   const redirect = location.search ? location.search.split("=")[1] :"/";
@@ -46,26 +43,12 @@ console.log(redirect)
     dispatch(login(email, password));
   };
 
-  useEffect(() => {
-    if (user) {
-      history.push(redirect);
-
-    }
-  }, [user, history, redirect,]);
   
 
   const google = () => {
     window.open("http://localhost:3001/auth/google", "_self");
   }; 
  
-  const handleGoogleSignin = async () => {
-    try {
-      await loginWithGoogle();
-      history.push("/");
-    } catch (error) {
-    console.log(error)
-    }
-  };
   
 
   return (
@@ -92,10 +75,10 @@ console.log(redirect)
           />
           <button type="submit">Login</button>
          {/* */}
-         <button onClick={handleGoogleSignin}>Continue with Google</button>
+       
          {/*<img src={google} className="App-logo" alt="logo" />*/}
        
-
+           <GoogleLogin/>
        
           <p>
             <Link
