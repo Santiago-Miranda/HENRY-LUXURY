@@ -1,4 +1,4 @@
-import e from "express";
+
 import express from "express";
 import asyncHandler from "express-async-handler";
 import sendConfirmationEmail from "../config/nodemailer.js";
@@ -8,7 +8,9 @@ import generateToken from "../utils/generateToken.js";
 import User from "./../Models/UserModel.js";
 import nodemailer from "nodemailer"
 import passport from "passport"
-
+import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs"
+import axios from "axios"
 
 const userRouter = express.Router();
 
@@ -36,7 +38,35 @@ userRouter.post("/login", asyncHandler(async (req, res) => {
     }
   })
 );
+//LOGIN WITH GOOGLE
+userRouter.post("/loginGoogle", async(req, res) => {
+  const {email,name} = req.body
+ console.log(req.body)
+     const findUser = await User.findOne({ email });
+    
+      if (!findUser) {
+          const newUser = {
+              name: name,           
+              email: email,        
+          }
+          const addUser = await User.create(newUser)
+          const token = generateToken(addUser._id)
+          const userId = addUser._id
+          const userName = addUser.name
+          const userMail = addUser.email
+          res.status(200).send({ token, userId, userMail, userName })
+        }else{
+        const token = generateToken(findUser._id)
+        const userId = findUser._id
+        const userMail = findUser.email
+        const userName = findUser.name
 
+       return res.status(400).send({ token, userId,  userMail, userName,  })
+        }
+        
+      });
+       
+                
 // REGISTER
 userRouter.post("/", asyncHandler(async (req, res) => {
     const { name, email, password } = req.body;
