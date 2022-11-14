@@ -18,8 +18,8 @@ import PrivateRouter from "./PrivateRouter";
 import Landing from './components/ExtrasComponents/Landing'
 import About from './components/ExtrasComponents/About'
 import Maps from "./components/ExtrasComponents/Maps";
-//import CartFavorite from "./screens/CartFavorite"
-//<PrivateRouter path="/favorite" component={CartFavorite} />
+import CartFavorite from "./screens/CartFavorite"
+
 
 const App = () => {
   return (
@@ -42,6 +42,7 @@ const App = () => {
         <Route path="/register" component={Register} />
         <PrivateRouter path="/profile" component={ProfileScreen} />
         <Route path="/cart/:id?" component={CartScreen} />
+        <PrivateRouter path="/favorite" component={CartFavorite} />
         <PrivateRouter path="/shipping" component={ShippingScreen} />
         <PrivateRouter path="/payment" component={PaymentScreen} />
         <PrivateRouter path="/placeorder" component={PlaceOrderScreen} />

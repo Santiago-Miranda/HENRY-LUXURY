@@ -25,9 +25,10 @@ export const listProduct = (category="", order = "", keyword = " ", pageNumber =
   async (dispatch) => {
     try {
       dispatch({ type: PRODUCT_LIST_REQUEST });
-      const { data } = await axios.get(
-        `/api/products?category=${category}&keyword=${keyword}&pageNumber=${pageNumber}&min=${min}&max=${max}&stock=${stock}&order=${order}`
+      const { data } = await axios.get("/api/products/"
+        //`/api/products?category=${category}&keyword=${keyword}&pageNumber=${pageNumber}&min=${min}&max=${max}&stock=${stock}&order=${order}`
       );
+      console.log(data)
       console.log(data)
       console.log(min)
       console.log(max)
