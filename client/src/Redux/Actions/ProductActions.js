@@ -28,9 +28,6 @@ export const listProduct = (category="", order = "", keyword = " ", pageNumber =
       const { data } = await axios.get(
         `/api/products?category=${category}&keyword=${keyword}&pageNumber=${pageNumber}&min=${min}&max=${max}&stock=${stock}&order=${order}`
       );
-      console.log(data)
-      console.log(min)
-      console.log(max)
       dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
     } catch (error) {
       dispatch({
