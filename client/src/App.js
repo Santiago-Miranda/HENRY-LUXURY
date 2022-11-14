@@ -15,13 +15,15 @@ import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import OrderScreen from "./screens/OrderScreen";
 import NotFound from "./screens/NotFound";
 import PrivateRouter from "./PrivateRouter";
-import { AuthProvider} from './context/AuthContext.js'
+import Landing from './components/ExtrasComponents/Landing'
+import About from './components/ExtrasComponents/About'
+import Maps from "./components/ExtrasComponents/Maps";
 //import CartFavorite from "./screens/CartFavorite"
 //<PrivateRouter path="/favorite" component={CartFavorite} />
 
 const App = () => {
   return (
-    <AuthProvider>
+    
     <Router>
       <Switch>
         <Route path="/" component={HomeScreen} exact />
@@ -32,6 +34,9 @@ const App = () => {
           component={HomeScreen}
           exact
         />
+         <Route path="/landing" component={Landing} exact />
+         <Route path="/about" component={About} exact />
+        <Route path="/maps" component={Maps} exact />
         <Route path="/products/:id" component={SingleProduct} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
@@ -44,7 +49,7 @@ const App = () => {
         <Route path="*" component={NotFound} />
       </Switch>
     </Router>
-    </AuthProvider>
+   
   );
 };
 

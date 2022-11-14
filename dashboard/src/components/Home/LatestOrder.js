@@ -41,7 +41,7 @@ const LatestOrder = (props) => {
                       </Link>
                     </td>
                   </tr>
-        
+              ))
             </tbody>
           </table>
         </div>
