@@ -46,7 +46,7 @@ productRoute.get("/", asyncHandler(async (req, res) => {
           ? { rating: -1 }
           : { _id: -1 };
   const count = await Product.countDocuments({ ...keyword, ...priceFilter, ...category, ...ratingFilter, ...stockFilter});
-  const products = await Product.find({ ...keyword, ...category, ...stock, ...priceFilter, ...ratingFilter, ...stockFilter })
+  const products = await Product.find({ ...keyword, ...category, ...stock, ...priceFilter, ...ratingFilter, ...stockFilter }).populate("categories")
     .limit(pageSize)
     .skip(pageSize * (page - 1))
     .sort(sortOrder);
@@ -54,16 +54,16 @@ productRoute.get("/", asyncHandler(async (req, res) => {
 })
 );
 
-// ADMIN GET ALL PRODUCT WITHOUT SEARCH AND PEGINATION
+// ADMIN GET ALL PRODUCT WITHOUT SEARCH AND PEGINATION 
 productRoute.get("/all", protect, admin, asyncHandler(async (req, res) => {
-  const products = await Product.find({}).sort({ _id: -1 });
+  const products = await Product.find({}).sort({ _id: -1 }).populate('categories');
   res.json(products);
 })
 );
 
 // GET SINGLE PRODUCT
 productRoute.get("/:id", asyncHandler(async (req, res) => {
-  const product = await Product.findById(req.params.id);
+  const product = await Product.findById(req.params.id).populate('categories');
   if (product) {
     res.json(product);
 
@@ -124,7 +124,7 @@ productRoute.delete("/:id", protect, admin, asyncHandler(async (req, res) => {
 
 
 // CREATE PRODUCT 
-productRoute.post("/",  asyncHandler(async (req, res) => {
+productRoute.post("/", protect, admin, asyncHandler(async (req, res) => {
     const { name, price, description, categories, image, countInStock } = req.body;//categories= array de id's de categorias
     const productExist = await Product.findOne({ name });
     if (productExist) {

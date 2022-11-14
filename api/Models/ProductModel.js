@@ -38,9 +38,7 @@ const productSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-
-    categories:[{type: Schema.Types.ObjectId, ref: "Category", unique:true}],
-
+    categories:[{type: Schema.Types.ObjectId, ref: "Category"}],
     reviews: [reviewSchema],
     rating: {
       type: Number,

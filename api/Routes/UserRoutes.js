@@ -137,8 +137,8 @@ userRouter.put("/authMail", asyncHandler(async(req, res) => {
   }
 }))
 
-//BORRADO LOGICO
-userRouter.put("/ban", protect, asyncHandler(async(req, res) => {
+//BORRADO LOGICO 
+userRouter.put("/ban", protect, admin, asyncHandler(async(req, res) => {
     const { email } = req.body;
     const user = await User.findOne({email: email})
     
@@ -170,7 +170,7 @@ userRouter.put('/PassCode', asyncHandler(async (req, res) => {
     }
     user.confirmationCode = token;
     user.save()
-    PaswordTokenEmail(email, user.name, token)
+    PaswordTokenEmail(user.name, user.email, token)
     res.status(200).send("Email sent correctly. check your email to reset your password.")
   } else {
     res.status(404).send("User not found.")
