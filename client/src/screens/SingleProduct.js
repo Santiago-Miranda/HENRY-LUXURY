@@ -27,7 +27,7 @@ const SingleProduct = ({ history, match }) => {
     error: errorCreateReview,
     success: successCreateReview,
   } = productReviewCreate;
-
+  console.log(productDetails)
   useEffect(() => {
     if (successCreateReview) {
       alert("Review Submitted");
@@ -74,16 +74,8 @@ const SingleProduct = ({ history, match }) => {
                   </div>
 
 
-
-
-                  
-
-
-
-
                   <p>{product.description}</p>
-
-
+                  <div>{productDetails.product.categories?productDetails.product.categories.map(e=>e.name): null}</div>
                   <div className="product-count col-lg-7 ">
                     <div className="flex-box d-flex justify-content-between align-items-center">
                       <h6>Price</h6>

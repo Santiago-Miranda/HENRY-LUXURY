@@ -73,7 +73,6 @@ const EditProductMain = (props) => {
     );
   };
 
-  console.log(categories)
 
   return (
     <>
