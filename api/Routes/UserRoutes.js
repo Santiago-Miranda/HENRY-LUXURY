@@ -1,4 +1,3 @@
-import e from "express";
 import express from "express";
 import asyncHandler from "express-async-handler";
 import {sendConfirmationEmail, sendBanEmail, sendUnbanEmail, PaswordTokenEmail} from "../config/nodemailer.js";
