@@ -47,6 +47,7 @@ orderRouter.get("/all", protect, admin, asyncHandler(async (req, res) => {
     res.json(orders);
   })
 );
+
 // USER LOGIN ORDERS
 orderRouter.get("/", protect, asyncHandler(async (req, res) => {
     const order = await Order.find({ user: req.user._id }).sort({ _id: -1 });
