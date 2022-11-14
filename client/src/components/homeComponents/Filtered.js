@@ -1,10 +1,7 @@
 import React from "react";
 import "./Filtered.scss"
 
-const Filtered = ({ setOrder, price, setPrice, setCategory, stock, setStock }) => {
-
-
-    console.log(price)
+const Filtered = ({onReset,categorias, setOrder, price, setPrice, setCategory, stock, setStock }) => {
 
     const onClick=()=>{
         if (stock === 1) {
@@ -13,8 +10,6 @@ const Filtered = ({ setOrder, price, setPrice, setCategory, stock, setStock }) =
             setStock(1)
         }
     }
-
-
     return (
         <div className="selectdiv">
             <label class="select">
@@ -31,16 +26,9 @@ const Filtered = ({ setOrder, price, setPrice, setCategory, stock, setStock }) =
             <label class="select" for="slct">
                 <select onChange={(e) => setCategory(e.target.value)} required="required">
                     <option value="" disabled="disabled" selected="selected">Category</option>
-                    <option value="Phone">Phone</option>
-                    <option value="Antique">Antique</option>
-                    <option value="Collectable">Collectable</option>
-                    <option value="Motorbike">Motorbike</option>
-                    <option value="Vehicle">Vehicle</option>
-                    <option value="Clothes">Clothes</option>
-                    <option value="Shoes">Shoes</option>
-                    <option value="Jewerly">Jewerly</option>
-                    <option value="Brand clothing">Brand clothing</option>
-                    <option value="Watches">Watches</option>
+                    {
+                        categorias.map(e=><option value={e._id}>{e.name}</option>)
+                    }
                 </select>
                 <svg>
                     <use ></use>
@@ -59,8 +47,9 @@ const Filtered = ({ setOrder, price, setPrice, setCategory, stock, setStock }) =
                     <use ></use>
                 </svg>
             </label>
+            <button class="btn-track" onClick={onReset}><div class="--text">Reset</div></button>
 
-            <button onClick={onClick} class="btn-track">
+            <button  onClick={onClick} class="btn-track">
                 {
                     stock === 0 ? <div class="--text">Available</div>:<div class="--text">Not available</div>
                 }

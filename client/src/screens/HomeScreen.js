@@ -9,6 +9,7 @@ import { listProduct } from "../Redux/Actions/ProductActions";
 import { useDispatch, useSelector } from "react-redux";
 import Modal from "react-modal";
 import CrearPrice from "../components/homeComponents/CrearPrice";
+import { getCategories } from "../Redux/Actions/CategoriesActions";
 
 
 Modal.setAppElement("#root");
@@ -20,7 +21,7 @@ const HomeScreen = ({ match }) => {
   const keyword = match.params.keyword;
   const pagenumber = match.params.pagenumber;
   const [order, setOrder] = useState()
-  //const [category, setCategory] = useState();
+  const [category, setCategory] = useState();
   const [min, setMin] = useState(0)
   const [max, setMax] = useState(20000)
   const [price, setPrice] = useState("");
@@ -31,12 +32,15 @@ const HomeScreen = ({ match }) => {
 
   const dispatch = useDispatch();
 
+  const categorys = useSelector(state => state.allCategories)
+  const { categories } = categorys
   const productList = useSelector((state) => state.productList);
   const { loading, error, products, page, pages } = productList;
 
   useEffect(() => {
-    dispatch(listProduct(order, keyword, pagenumber ,min, max,stock));
-  }, [dispatch, order, keyword, pagenumber, min, max,stock]);
+    dispatch(getCategories())
+    dispatch(listProduct(category,order, keyword, pagenumber ,min, max,stock));
+  }, [dispatch,category, order, keyword, pagenumber, min, max,stock]);
 
   useEffect(() => {
     if (price === "") {
@@ -58,17 +62,26 @@ const HomeScreen = ({ match }) => {
     if (price === "Crear") {
       setCreaPrice(true)
     }
-  }, [price])
+  }, [price]);
 
-
-  console.log(min, max)
+  const onReset = ()=>{
+    setCategory("");
+    setMax(1000000000)
+    setMin(0);
+    setStock("");
+    setStock(1)
+  }
 
 
   return (
     <div>
       <Header />
-      <Filtered setOrder={setOrder} stock={stock} setStock={setStock} price={price} setPrice={setPrice} setMin={setMin} setMax={setMax}  products={products} />
+      <div className="productosFilter">
+      <Filtered onReset={onReset} categorias={categories} setCategory={setCategory} setOrder={setOrder} stock={stock} setStock={setStock} price={price} setPrice={setPrice} setMin={setMin} setMax={setMax}  products={products} />
+      
       <ShopSection keyword={keyword} loading={loading} error={error} products={products} page={page} pages={pages} pagenumber={pagenumber} />
+
+      </div>
       <CalltoActionSection />
       <ContactInfo />
       <Footer />

@@ -1,4 +1,4 @@
-import { GET_ALL_CATEGORIES, POST_CATEGORIES } from "../Constants/CategoriesConstants";
+import { GET_ALL_CATEGORIES } from "../Constants/CategoriesConstants";
 import axios from "axios";
 
 export const getCategories = () => {
@@ -11,9 +11,18 @@ export const getCategories = () => {
     }
 }
 
-export const postCategories = (payload) => {
-    return async () => {
-        const post = await axios.post("/api/categories/", payload);
+export const postCategories = (name) => {
+    return async (dispatch, getState) => {
+        const {
+            userLogin: { userInfo },
+          } = getState();
+    
+          const config = {
+            headers: {
+              Authorization: `Bearer ${userInfo.token}`,
+            },
+          };
+        const post = await axios.post('/api/categories/', {name},config);
         return post;
     }
 }
