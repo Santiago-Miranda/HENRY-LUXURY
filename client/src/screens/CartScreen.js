@@ -3,6 +3,7 @@ import Header from "./../components/Header";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removefromcart } from "./../Redux/Actions/cartActions";
+//import ImageMagnifier from "../components/ExtrasComponents/ImageMagnifier.jsx"
 
 const CartScreen = ({ match, location, history }) => {
   window.scrollTo(0, 0);
@@ -60,8 +61,10 @@ const CartScreen = ({ match, location, history }) => {
                 >
                   <i className="fas fa-times"></i>
                 </div>
+               
                 <div className="cart-image col-md-3">
-                  <img src={item.image} alt={item.name} />
+                {/*<ImageMagnifier src={item.image} alt={item.name}/>*/}
+                                <img src={item.image} alt={item.name} />
                 </div>
                 <div className="cart-text col-md-5 d-flex align-items-center">
                   <Link to={`/products/${item.product}`}>

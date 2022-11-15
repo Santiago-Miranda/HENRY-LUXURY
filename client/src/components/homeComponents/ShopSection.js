@@ -9,6 +9,7 @@ import Message from "../LoadingError/Error";
 
 const ShopSection = (props) => {
   const { keyword,  loading, error, products, page, pages } = props;
+  console.log(props.product)
 
   return (
     <>

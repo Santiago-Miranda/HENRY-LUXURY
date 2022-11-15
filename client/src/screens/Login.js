@@ -29,6 +29,7 @@ const Login = ({ location, history }) => {
   const redirect = location.search ? location.search.split("=")[1] :"/";
 console.log(redirect)
   const userLogin = useSelector((state) => state.userLogin);
+  
   const { error, loading, userInfo } = userLogin;
 
   useEffect(() => {
@@ -88,6 +89,9 @@ console.log(redirect)
             </Link>
           </p>
         </form>
+        <br/>
+        <br/>
+        <h3><Link to ="/resspass">recover password</Link></h3>
       </div>
     </>
   );
