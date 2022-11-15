@@ -2,7 +2,7 @@ import {
   USER_DETAILS_FAIL, USER_DETAILS_REQUEST, USER_DETAILS_RESET, USER_DETAILS_SUCCESS,
   USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT, USER_REGISTER_FAIL,
   USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_UPDATE_PROFILE_FAIL, USER_UPDATE_PROFILE_REQUEST,
-   USER_UPDATE_PROFILE_SUCCESS,USER_RESET_PASSWORD,USER_CONFIRM_PASSWORD,USER_CONFIRM_PASSWORD_FAIL,USER_RESET_PASSWORD_FAIL } from "../Constants/UserContants";
+   USER_UPDATE_PROFILE_SUCCESS,USER_RESET_PASSWORD,USER_CONFIRM_PASSWORD,USER_CONFIRM_PASSWORD_FAIL,USER_RESET_PASSWORD_FAIL,USER_CONFIRM_MAIL,USER_CONFIRM_MAIL_FAIL } from "../Constants/UserContants";
 import axios from "axios";
 import { ORDER_LIST_MY_RESET } from "../Constants/OrderConstants";
 
@@ -176,11 +176,7 @@ export const userResetPassword = (email) => async (dispatch) => {
   }
 };
 
-
-
-
 //*Confirmar Contraseña "/resetPass"
-
 
 export const userConfirmPassword = (email, token, password) => async (dispatch) => {
   try {
@@ -214,10 +210,41 @@ export const userConfirmPassword = (email, token, password) => async (dispatch) 
   }
 };
 
+//*Confirmar Mail por codigo "/api/users/authMail"
 
 
 
+export const userConfirmMail = (email, confirmationCode) => async (dispatch) => {
+  try {
+    dispatch({ type: USER_CONFIRM_MAIL });
 
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const { data } = await axios.put(
+      `/api/users/authMail`,
+      {email, confirmationCode},
+      config
+    );
+    console.log(data)
+    dispatch({ type: USER_CONFIRM_PASSWORD, payload: data });
+
+    
+
+    localStorage.setItem("userInfo", JSON.stringify(data));
+  } catch (error) {
+    dispatch({
+      type: USER_CONFIRM_MAIL_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
 
 
 
