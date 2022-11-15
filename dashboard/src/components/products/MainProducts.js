@@ -403,7 +403,7 @@ const MainProducts = () => {
                     {
                       disableCategory === false ? <div class="product-cell category">
                         <span class="cell-label">Category:</span>
-                        {e.categories}
+                        {e.categories.map(e=> e.name + " ")}
                       </div> : null
                     }
                     {

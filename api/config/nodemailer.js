@@ -32,7 +32,7 @@ const sendOrderEmail = (name, email, numProducts) => {
         html:`<h1>Order registered.</h1>
         <h2>Hello ${name}!</h2>
         <p>Thank you for buying ${numProducts} items, you can see the detail of your order in your profile.</p>`
-    }).catch(err=>console.log)
+    }).catch(err=>console.log(err))
 }
 
 const sendBanEmail = (name, email)=>{
@@ -44,7 +44,7 @@ const sendBanEmail = (name, email)=>{
         <h2>Hello ${name}!</h2>
         <p>We decided that you have done something wrong and not acceptable in our platform.</p><br/>
         <p>If you think we've made a mistake, feel free to contact us via mail explaning why.</p>`
-    }).catch(err=>console.log)
+    }).catch(err=>console.log(err))
 }
 
 
@@ -57,7 +57,7 @@ const sendUnbanEmail = (name, email)=>{
         <h2>Hello ${name}!</h2>
         <p>We have reviewed your case and believe we have made a mistake.</p><br/>
         <p>You can use our site again, but we recommend you to read our privacy and use policy.</p>`
-    }).catch(err=>console.log)
+    }).catch(err=>console.log(err))
 }
 
 const orderPaidEmail = (name, email, orderId) => {
@@ -69,7 +69,7 @@ const orderPaidEmail = (name, email, orderId) => {
         <h2>Hello ${name}!</h2>
         <p>The next step is to wait for the shipment to arrive.</p><br/>
         <p>Congratulations on the acquisition of your new products!</p>`
-    }).catch(err=>console.log)
+    }).catch(err=>console.log(err))
 }
 
 const orderDelivered = (name, email, orderId) => {
@@ -81,7 +81,7 @@ const orderDelivered = (name, email, orderId) => {
         <h2>Hello ${name}!</h2>
         <p>Your order is on its way home.</p><br/>
         <p>We expect it to arrive within 4 working days</p>`
-    }).catch(err=>console.log)
+    }).catch(err=>console.log(err))
 }
 
 const PaswordTokenEmail = (name, email, passtoken) => {
@@ -94,7 +94,7 @@ const PaswordTokenEmail = (name, email, passtoken) => {
         <p>It looks like you forgot your password. Dont worry, you can reset it.</p><br/>
         <p>Your password-reset code its ${passtoken}.</p>
         <p><a>Click here</a> to reset your password.</p>`
-    }).catch(err=>console.log)
+    }).catch(err=>console.log(err))
 }
 
 export {sendConfirmationEmail, sendOrderEmail, sendBanEmail, sendUnbanEmail, orderPaidEmail, orderDelivered, PaswordTokenEmail}
