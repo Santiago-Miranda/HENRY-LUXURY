@@ -46,6 +46,7 @@ function Cloudinary({ setCloudinary }) {
           name="file"
           id="upload"
           style={{ cursor: "pointer" }}
+          multiple
           onChange={uploadImage}
         />
         {loading ? (<h3>Cargando Imagenes</h3>) : (<img src={image} style={{width:"300px"}} alt="img"/>)}

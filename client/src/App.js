@@ -17,6 +17,7 @@ import NotFound from "./screens/NotFound";
 import PrivateRouter from "./PrivateRouter";
 import Landing from './components/ExtrasComponents/Landing'
 import About from './components/ExtrasComponents/About'
+import Maps from "./components/ExtrasComponents/Maps";
 //import CartFavorite from "./screens/CartFavorite"
 //<PrivateRouter path="/favorite" component={CartFavorite} />
 
@@ -35,6 +36,7 @@ const App = () => {
         />
          <Route path="/landing" component={Landing} exact />
          <Route path="/about" component={About} exact />
+        <Route path="/maps" component={Maps} exact />
         <Route path="/products/:id" component={SingleProduct} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
