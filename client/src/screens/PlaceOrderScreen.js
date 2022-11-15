@@ -37,7 +37,7 @@ const PlaceOrderScreen = ({ history }) => {
     if (success) {
       history.push(`/order/${order._id}`);
       dispatch({ type: ORDER_CREATE_RESET });
-    }
+      }
   }, [history, dispatch, success, order]);
 
   const placeOrderHandler = () => {
@@ -56,7 +56,7 @@ const PlaceOrderScreen = ({ history }) => {
 
   const User = useSelector((state) => state.userGoogle);
   const {userGoogle} = User;
-  console.log(User)
+  console.log(userGoogle)
 
 
 

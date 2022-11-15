@@ -15,8 +15,8 @@ const GoogleLogin = () => {
   const { error, loading, userGoogle} = User;
 
 
-
-  const [googleUser, setGoogleUser] = useLocalStorage("userGoogle","")
+  const [googleUser, setGoogleUser] = window.localStorage.getItem("userGoogle");
+  //const [googleUser, setGoogleUser] = useLocalStorage("userGoogle","")
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   
