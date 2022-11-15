@@ -9,7 +9,7 @@ import logo from "./images/logo.jpg";
 
 
 const Header = () => {
-  const [keyword, setKeyword] = useState();
+  const [keyword, setKeyword] = useState("");
   const dispatch = useDispatch();
   let history = useHistory();
 
@@ -34,7 +34,7 @@ const Header = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (keyword.trim()) {
+    if (keyword) {
       history.push(`/search/${keyword}`);
     } else {
       history.push("/");

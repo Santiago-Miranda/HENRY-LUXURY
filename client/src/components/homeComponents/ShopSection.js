@@ -62,7 +62,7 @@ const ShopSection = (props) => {
                 <Pagination
                   pages={pages}
                   page={page}
-                  
+                  keyword={keyword}
                 />
               </div>
             </div>
