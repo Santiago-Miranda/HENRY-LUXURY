@@ -47,6 +47,7 @@ orderRouter.get("/all", protect, admin, asyncHandler(async (req, res) => {
     res.json(orders);
   })
 );
+
 // USER LOGIN ORDERS
 orderRouter.get("/", protect, asyncHandler(async (req, res) => {
     const order = await Order.find({ user: req.user._id }).sort({ _id: -1 });
@@ -60,7 +61,7 @@ orderRouter.get("/:id", protect, asyncHandler(async (req, res) => {
       "user",
       "name email"
     );
-
+      console.log(order)
     if (order) {
       res.json(order);
     } else {
@@ -72,10 +73,13 @@ orderRouter.get("/:id", protect, asyncHandler(async (req, res) => {
 
 // ORDER IS PAID
 orderRouter.put("/:id/pay", protect, asyncHandler(async (req, res) => {
-    const order = await Order.findById(req.params.id);
+    const order = await Order.findById(req.params.id).populate(
+      "user",
+      "name email"
+    );
 
     if (order) {
-      orderPaidEmail(req.user.name, req.user.email, order.id)
+      orderPaidEmail(order.user.name, order.user.email, order.id)
       order.isPaid = true;
       order.paidAt = Date.now();
       order.paymentResult = {
@@ -96,11 +100,14 @@ orderRouter.put("/:id/pay", protect, asyncHandler(async (req, res) => {
 
 // ORDER IS DELIVERED
 orderRouter.put("/:id/delivered", protect, asyncHandler(async (req, res) => {
-    const order = await Order.findById(req.params.id);
+    const order = await Order.findById(req.params.id).populate(
+      "user",
+      "name email"
+    );;
 
     if (order) {
       order.isDelivered = true;
-      orderDelivered(req.user.name, req.user.email, order.id)
+      orderDelivered(order.user.name, order.user.email, order.id)
       order.deliveredAt = Date.now();
 
       const updatedOrder = await order.save();
