@@ -158,11 +158,6 @@ export const productListReducer = (state = { products: [] ,allProduct:[] ,favori
               favorites: state.favorites.filter((products) => products.id !== action.payload
               ),
             };
-
-
-
-
-
         default:
       return state;
   }

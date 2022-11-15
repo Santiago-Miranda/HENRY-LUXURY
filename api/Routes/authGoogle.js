@@ -1,12 +1,12 @@
 import express from "express";
 import GoogleUser from "../Models/GoogleUserModel.js";
 import generateToken from "../utils/generateToken.js";
-
+import { protect} from "../Middleware/AuthMiddleware.js";
 
 
 const googleRouter = express.Router();
 
-googleRouter.post("/loginGoogle", async(req, res) => {
+googleRouter.post("/loginGoogle", protect, async(req, res) => {
 	const { email, name } = req.body
     const findUser = await GoogleUser.findOne({ email })
 	try {

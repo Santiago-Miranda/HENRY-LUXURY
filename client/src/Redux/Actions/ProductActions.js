@@ -19,6 +19,7 @@ import {
   REMOVE_FAVORITES,
 } from "../Constants/ProductConstants";
 import { logout } from "./userActions";
+import { userInfo, userGoogle } from "os";
 
 // PRODUCT LIST
 export const listProduct = (category="", order = "", keyword = " ", pageNumber = " ",min = 0,max = 0,stock = 0,) =>
@@ -65,19 +66,38 @@ export const createProductReview =
     try {
       dispatch({ type: PRODUCT_CREATE_REVIEW_REQUEST });
 
+    
       const {
         userLogin: { userInfo },
       } = getState();
+      
+      const {
+        userGoogle: { userGoogle },
+      } = getState();
 
+    if(userInfo){
       const config = {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${userInfo.token}`,
         },
       };
+    
 
       await axios.post(`/api/products/${productId}/review`, review, config);
       dispatch({ type: PRODUCT_CREATE_REVIEW_SUCCESS });
+      }else if(userGoogle){
+        const config = {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${userGoogle.token}`,
+          },
+        };
+      
+  
+        await axios.post(`/api/products/${productId}/review`, review, config);
+        dispatch({ type: PRODUCT_CREATE_REVIEW_SUCCESS });
+      }
     } catch (error) {
       const message =
         error.response && error.response.data.message

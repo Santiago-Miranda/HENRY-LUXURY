@@ -6,8 +6,7 @@ import { getUserDetails } from "../Redux/Actions/userActions";
 import Orders from "./../components/profileComponents/Orders";
 import moment from "moment";
 import { listMyOrders } from "../Redux/Actions/OrderActions";
-import Cloudinary from "./Cloudinary";
-import ImageDefault from "../components/images/ImageDefault.png"
+import ImageDefault from "../components/images/ImageDefault.png";
 
 
 const ProfileScreen = () => {
@@ -142,10 +141,10 @@ const ProfileScreen = () => {
                   </div>
                   <div className="author-card-details col-md-7">
                     <h5 className="author-card-name mb-2">
-                      <strong>{User.userGoogle.name}</strong>
+                      <strong>{userGoogle.userName}</strong>
                     </h5>
                     <span className="author-card-position">
-                      <>Joined {moment(User.userGoogle.createdAt).format("LL")}</>
+                      <>Joined {moment(userGoogle.createdAt).format("LL")}</>
                     </span>
                   </div>
                 </div>
