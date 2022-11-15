@@ -13,6 +13,7 @@ import {
   userLoginReducer,
   userRegisterReducer,
   userUpdateProfileReducer,
+  googleLoginReducer
 } from "./Reducers/userReducers";
 import {
   orderCreateReducer,
@@ -37,6 +38,7 @@ const reducer = combineReducers({
   orderPay: orderPayReducer,
   orderListMy: orderListMyReducer,
   allCategories: categoriesListReducer,
+  userGoogle: googleLoginReducer,
 });
 
 const cartItemsFromLocalStorage = localStorage.getItem("cartItems")
@@ -47,7 +49,10 @@ const cartItemsFromLocalStorage = localStorage.getItem("cartItems")
 const userInfoFromLocalStorage = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo"))
   : null;
-
+//google
+const userGoogleFromLocalStorage = localStorage.getItem("userGoogle")
+  ? JSON.parse(localStorage.getItem("userGoogle"))
+  : null;
 // shippingAddress
 const shippingAddressFromLocalStorage = localStorage.getItem("shippingAddress")
   ? JSON.parse(localStorage.getItem("shippingAddress"))
@@ -59,6 +64,8 @@ const initialState = {
     shippingAddress: shippingAddressFromLocalStorage,
   },
   userLogin: { userInfo: userInfoFromLocalStorage },
+  //google
+  userGoogle: { userGoogle: userGoogleFromLocalStorage },
 };
 
 const middleware = [thunk];

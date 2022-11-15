@@ -18,13 +18,9 @@ const Header = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
- 
 
-
-
-  
-  
-  
+ const User = useSelector((state) => state.userGoogle);
+ const {userGoogle} = User;
 
 
 
@@ -40,6 +36,8 @@ const Header = () => {
       history.push("/");
     }
   };
+
+
   return (
     <div>
       {/* Top Header */}
@@ -191,6 +189,31 @@ const Header = () => {
                       aria-expanded="false"
                     >
                       Hi, {userInfo.name} 
+                    </button>
+                    <div className="dropdown-menu">
+                      <Link className="dropdown-item" to="/profile">
+                        Profile
+                      </Link>
+
+                      <Link
+                        className="dropdown-item"
+                        to="#"
+                        onClick={logoutHandler}
+                      >
+                        Logout
+                      </Link>
+                    </div>
+                  </div>
+                ) : User?(
+                  <div className="btn-group">
+                    <button
+                      type="button"
+                      className="name-button dropdown-toggle"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      Hi, {User.userGoogle.userName} 
                     </button>
                     <div className="dropdown-menu">
                       <Link className="dropdown-item" to="/profile">
