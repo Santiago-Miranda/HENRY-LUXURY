@@ -26,7 +26,7 @@ const Filtered = ({onReset,categorias, setOrder, order, price, setPrice, setCate
                 <select value={category} onChange={(e) => setCategory(e.target.value)} required="required">
                     <option value="" disabled="disabled" selected="selected">Category</option>
                     {
-                        categorias.map(e=><option value={e._id}>{e.name}</option>)
+                        categorias.map(e=><option value={e.name}>{e.name}</option>)
                     }
                 </select>
                 <svg>
