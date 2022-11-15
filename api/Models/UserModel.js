@@ -36,6 +36,11 @@ const userSchema = mongoose.Schema(
       enum: ['Pending', 'Active'],
       default: 'Pending'
     },
+    isOwner: {
+      type: Boolean,
+      required: true,
+      default: false
+    },
     confirmationCode: { 
       type: String, 
       unique: true }

@@ -44,8 +44,6 @@ const ShopSection = (props) => {
                                 {product.name}
                               </Link>
                             </p>
-
-                          <p>categories:{product.categories.name}</p>
                             <Rating
                               value={product.rating}
                               text={`${product.numReviews} reviews`}

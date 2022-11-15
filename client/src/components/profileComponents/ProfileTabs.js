@@ -105,6 +105,7 @@ const ProfileTabs = () => {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              placeholder="New password"
             />
           </div>
         </div>
@@ -116,6 +117,7 @@ const ProfileTabs = () => {
               type="password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
+              placeholder="Confirm new password"
             />
           </div>
         </div>

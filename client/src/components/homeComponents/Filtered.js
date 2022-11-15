@@ -38,7 +38,7 @@ const Filtered = ({onReset,categorias, setOrder, order, price, setPrice, setCate
                     <option value={"default"} disabled="disabled" selected="selected">Price</option>
                     <option value={"Bajo"}>To $500</option>
                     <option value={"Medio"}>$500 To $1000</option>
-                    <option value={"Alto"}>More of $1000</option>
+                    <option value={"Alto"}>More than $1000</option>
                     <option value={"Crear"}>Custom price</option>
 
                 </select>
