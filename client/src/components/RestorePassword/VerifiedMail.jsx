@@ -17,8 +17,6 @@ const VerifiedMail = () => {
         dispatch(userConfirmMail(email,confirmationCode));
       };
     
-
-
   return (
     <div>
          
@@ -34,14 +32,14 @@ const VerifiedMail = () => {
      onChange={(e) => setEmail(e.target.value)}
     
     />
-    <input type="confirmationCode" placeholder="confirmationCode" 
+    <input type="confirmationCode" placeholder="confirmation Code" 
     
     value={confirmationCode.toString()}
     onChange={(e) => setconfirmationCode(e.target.value)}
     />
   
   
-    <button type="submit">Confirm Mail</button>
+  <button type="submit">Confirm Mail</button>
   </form>
 </div>
 </div> 
