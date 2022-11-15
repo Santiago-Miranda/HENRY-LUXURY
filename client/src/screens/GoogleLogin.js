@@ -1,16 +1,24 @@
-
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import jwt_decode from "jwt-decode"
-
+import { Google } from "../Redux/Actions/userActions";
 import useLocalStorage from "../hooks/useLocalStorage";
+import { useHistory } from "react-router-dom"
+
+
 const GoogleLogin = () => {
     const dispatch = useDispatch();
     
   
-        
   
-  const [googleUser, setGoogleUser] = useLocalStorage("googleUser","")
+  const User = useSelector((state) => state.userGoogle)
+  const { error, loading, userGoogle} = User;
+
+
+
+  const [googleUser, setGoogleUser] = useLocalStorage("userGoogle","")
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   
       function handleCallbackResponse(response) {
           console.log("ENCODED JWT ID TOKEN" + response.credential);
@@ -20,8 +28,10 @@ const GoogleLogin = () => {
           const image = userObject.picture
           const name = userObject.name
           console.log(userObject)
+          dispatch(Google(email, name));
+          history.push("/");
         } 
-        
+        const history = useHistory()
         useEffect(() => { 
             google.accounts.id.initialize({
               /* global google */
@@ -33,17 +43,20 @@ const GoogleLogin = () => {
             {  theme: "outline",size:"large"}
             );
             },[])
-  
-          
+            
+           
+             
+            
+           
+           
+
         
   return (
       <>
-        
-             
-                  
-                    <div  id="signInDiv"></div>
-                  
-      
+
+                    <div id="signInDiv">
+                    </div>
+
       </>
     );
   }

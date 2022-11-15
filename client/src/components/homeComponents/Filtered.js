@@ -51,7 +51,7 @@ const Filtered = ({onReset,categorias, setOrder, price, setPrice, setCategory, s
 
             <button  onClick={onClick} class="btn-track">
                 {
-                    stock === 0 ? <div class="--text">Available</div>:<div class="--text">Not available</div>
+                    stock === 0 ? <div class="--text">Stock</div>:<div class="--text">Not stock</div>
                 }
                 
             </button>
