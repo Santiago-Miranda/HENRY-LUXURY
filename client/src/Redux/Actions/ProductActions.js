@@ -23,6 +23,7 @@ import { logout } from "./userActions";
 // PRODUCT LIST
 export const listProduct = (category="", order = "", keyword = " ", pageNumber = " ",min = 0,max = 0,stock = 0,) =>
   async (dispatch) => {
+    //?category=${category}&keyword=${keyword}&pageNumber=${pageNumber}&min=${min}&max=${max}&stock=${stock}&order=${order}
     try {
       dispatch({ type: PRODUCT_LIST_REQUEST });
       const { data } = await axios.get("/api/products/"
@@ -133,7 +134,6 @@ export function orderCountinStock(payload){
 export function getAllCategory(){
   return async function(dispatch){
       const resul = await axios.get("http://localhost:3001/api/category")
-      console.log(resul)
       dispatch({
           type:GET_ALL_CATEGORY,
       payload:resul.data

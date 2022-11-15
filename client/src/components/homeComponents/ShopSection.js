@@ -45,7 +45,7 @@ const ShopSection = (props) => {
                               </Link>
                             </p>
 
-                           <p>categories:{product.categories.name}</p>
+                          <p>categories:{product.categories.name}</p>
                             <Rating
                               value={product.rating}
                               text={`${product.numReviews} reviews`}

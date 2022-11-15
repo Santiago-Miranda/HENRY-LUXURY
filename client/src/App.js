@@ -19,6 +19,8 @@ import Landing from './components/ExtrasComponents/Landing'
 import About from './components/ExtrasComponents/About'
 import Maps from "./components/ExtrasComponents/Maps";
 import CartFavorite from "./screens/CartFavorite"
+import  ResPass  from "./components/RestorePassword/ResPass";
+import ResetPassLogin from "./components/RestorePassword/ResetPassLogin";
 
 
 const App = () => {
@@ -34,6 +36,8 @@ const App = () => {
           component={HomeScreen}
           exact
         />
+        <Route path="/resspass" component={ResPass} exact />
+        <Route path="/resetpasslogin" component={ResetPassLogin} exact />
          <Route path="/landing" component={Landing} exact />
          <Route path="/about" component={About} exact />
         <Route path="/maps" component={Maps} exact />
