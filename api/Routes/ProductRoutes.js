@@ -11,7 +11,7 @@ const productRoute = express.Router();
 
 // GET ALL PRODUCT
 productRoute.get("/", asyncHandler(async (req, res) => {
-  const pageSize = 12;
+  const pageSize = 6;
   const page = Number(req.query.pageNumber) || 1;
   const order = req.query.order || '';
   

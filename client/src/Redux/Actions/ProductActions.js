@@ -29,8 +29,7 @@ export const listProduct = (category="",  pageNumber = " ",min = 0,max = 0,stock
       const { data } = await axios.get("/api/products/",{
 
         params:{
-          category,
-          
+          category, 
           pageNumber,
           min,
           max,

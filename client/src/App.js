@@ -21,6 +21,7 @@ import Maps from "./components/ExtrasComponents/Maps";
 import CartFavorite from "./screens/CartFavorite"
 import  ResPass  from "./components/RestorePassword/ResPass";
 import ResetPassLogin from "./components/RestorePassword/ResetPassLogin";
+import VerifiedMail from "./components/RestorePassword/VerifiedMail";
 
 
 const App = () => {
@@ -38,6 +39,7 @@ const App = () => {
         />
         <Route path="/resspass" component={ResPass} exact />
         <Route path="/resetpasslogin" component={ResetPassLogin} exact />
+        <Route path="/verifiedmail" component={VerifiedMail} exact />
          <Route path="/landing" component={Landing} exact />
          <Route path="/about" component={About} exact />
         <Route path="/maps" component={Maps} exact />
