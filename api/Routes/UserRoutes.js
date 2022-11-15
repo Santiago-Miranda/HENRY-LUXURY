@@ -194,6 +194,19 @@ userRouter.put("/resetPass", asyncHandler(async(req, res) => {
   } else {res.status(404).send("user not found")}
 }));
 
+//CHANGE ADMIN STATUS  protect, admin,
+userRouter.put("/changeAdmin", asyncHandler(async(req, res) => {
+  const {email} = req.body;
+  const user = await User.findOne({email: email})
+  if(user && user.Supreme != undefined){
+    user.isAdmin = !user.isAdmin
+    user.save()
+    res.status(200).send("User status changed succesfully")
+  } else {
+    res.status(404).send("User not found.")
+  }
+}))
+
 
 // GET ALL USER ADMIN
 userRouter.get("/", protect, admin, asyncHandler(async (req, res) => {
@@ -201,6 +214,8 @@ userRouter.get("/", protect, admin, asyncHandler(async (req, res) => {
     res.json(users);
   })
 );
+
+
 
 
 export default userRouter;
