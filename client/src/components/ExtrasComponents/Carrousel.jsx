@@ -46,7 +46,7 @@ const Carrousel = () => {
         <img src="https://www.lamiradanorte.com/wp-content/uploads/2020/06/second-g-800x445.jpg" className="d-block w-100" alt="..." />
       </div>
       <div className="carousel-item">
-        <img src="https://c8.alamy.com/compes/2fykc0h/marcos-de-fotos-y-cuadros-vacios-en-oro-y-negro-en-una-pared-blanca-maqueta-para-tus-fotos-o-texto-espacio-de-copia-decoracion-de-lujo-de-diseno-moderno-2fykc0h.jpg" className="d-block w-100" alt="..." />
+        <img src="https://c8.alamy.com/compes/2fykc0h/marcos-de-fotos-y-cuadros-vacios-en-oro-y-negro-en-una-pared-blanca-maqueta-para-tus-fotos-o-texto-espacio-de-copia-decoracion-de-lujo-de-diseno-moderno-2fykc0h.jpg" className="d-block w-100" alt="50px" />
       </div>
     </div>
     <button

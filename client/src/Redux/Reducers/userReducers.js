@@ -17,6 +17,10 @@ import {
   USER_UPDATE_PROFILE_FAIL,
   USER_UPDATE_PROFILE_REQUEST,
   USER_UPDATE_PROFILE_SUCCESS,
+  USER_CONFIRM_MAIL,
+  USER_CONFIRM_MAIL_FAIL
+
+
 } from "../Constants/UserContants";
 
 // LOGIN
@@ -108,6 +112,18 @@ export const  userConfirmPasswordReducer = (state = {}, action) => {
   }
 };
 
+//* Confirm mail + codigode verificacion  userConfirmMail
+
+export const  userConfirmMailReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_CONFIRM_MAIL:
+      return { loading: true };
+     case  USER_CONFIRM_MAIL_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
 
 
 

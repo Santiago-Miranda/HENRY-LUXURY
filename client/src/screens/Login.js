@@ -91,7 +91,11 @@ console.log(redirect)
         </form>
         <br/>
         <br/>
-        <h3><Link to ="/resspass">recover password</Link></h3>
+        <h3><Link to ="/resspass">Recover Password</Link></h3>
+        <br/>
+        <br/>
+
+        <h3><Link to ="/verifiedmail">Verified Mail</Link></h3>
       </div>
     </>
   );
