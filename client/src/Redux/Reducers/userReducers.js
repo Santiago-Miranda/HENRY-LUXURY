@@ -126,17 +126,6 @@ export const  userConfirmMailReducer = (state = {}, action) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 //google
 export const googleLoginReducer = (state = {}, action) => {
   switch (action.type) {
