@@ -1,9 +1,8 @@
 import React, { useState ,useEffect} from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../Redux/Actions/userActions";
+import { logout, logoutGoogle } from "../Redux/Actions/userActions";
 import logo from "./images/logo.jpg";
-
 
 
 
@@ -18,15 +17,16 @@ const Header = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
- 
 
+ const User = useSelector((state) => state.userGoogle);
+ const {userGoogle} = User;
 
+ const [user, setUser] = useState({})
 
-  
-  
-  
-
-
+  const Google = () => {
+    dispatch(logoutGoogle());
+    setUser({})
+  }
 
   const logoutHandler =  () => {
     dispatch(logout());
@@ -37,18 +37,21 @@ const Header = () => {
     if (keyword) {
       history.push(`/search/${keyword}`);
     } else {
-      history.push("/");
+      history.push("/shipping");
     }
   };
+
+//google
+
+//google
+ if(userInfo){
   return (
     <div>
       {/* Top Header */}
       <div className="Announcement ">
         <div className="container"> 
-   
-
           <div className="row">
-             <div className="col-md-6 d-flex align-items-center display-none">
+            <div className="col-md-6 d-flex align-items-center display-none">
              <Link to="/landing"><p>Landing</p></Link>
              <Link to="/favorite"><p>Favourites</p></Link>
              <Link to="/about"><p>About</p></Link>
@@ -128,6 +131,7 @@ const Header = () => {
                         <i class="fas fa-user"></i>
                       </button>
                       <div className="dropdown-menu">
+                        
                         <Link className="dropdown-item" to="/login">
                           Login
                         </Link>
@@ -214,7 +218,6 @@ const Header = () => {
                     <Link to="/login">Login</Link>
                   </>
                 )}
-
                 <Link to="/cart">
                   <i className="fas fa-shopping-bag"></i>
                   <span className="badge">{cartItems.length}</span>
@@ -226,6 +229,295 @@ const Header = () => {
       </div>
     </div>
   );
+}else if(userGoogle){
+  return (
+    <div>
+      {/* Top Header */}
+      <div className="Announcement ">
+        <div className="container"> 
+          <div className="row">
+            <div className="col-md-6 d-flex align-items-center display-none">
+             <Link to="/landing"><p>Landing</p></Link>
+             <Link to="/about"><p>About</p></Link>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* Header */}
+      <div className="header">
+        <div className="container">
+          {/* MOBILE HEADER */}
+          <div className="mobile-header">
+            <div className="container ">
+              <div className="row ">
+                <div className="col-6 d-flex align-items-center">
+                  <Link className="navbar-brand" to="/">
+                    <img alt="logo" src={logo} />
+                  </Link>
+                </div>
+                <div className="col-6 d-flex align-items-center justify-content-end Login-Register">
+                  {userGoogle  ? (
+                    <div className="btn-group">
+                      <button
+                        type="button"
+                        className="name-button dropdown-toggle"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                      >
+                        <i class="fas fa-user"></i>
+                      </button>
+                      <div className="dropdown-menu">
+                        <Link className="dropdown-item" to="/profile">
+                          Profile
+                        </Link>
+
+                        <Link
+                          className="dropdown-item"
+                          to="#"
+                          onClick={Google}
+                        >
+                          Logout
+                        </Link>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="btn-group">
+                      <button
+                        type="button"
+                        className="name-button dropdown-toggle"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                      >
+                        <i class="fas fa-user"></i>
+                      </button>
+                      <div className="dropdown-menu">
+                        
+                        <Link className="dropdown-item" to="/login">
+                          Login
+                        </Link>
+
+                        <Link className="dropdown-item" to="/register">
+                          Register
+                        </Link>
+                      </div>
+                    </div>
+                  )}
+
+                  <Link to="/cart" className="cart-mobile-icon">
+                    <i className="fas fa-shopping-bag"></i>
+                    <span className="badge">{cartItems.length}</span>
+                  </Link>
+                </div>
+                <div className="col-12 d-flex align-items-center">
+                  <form onSubmit={submitHandler} className="input-group">
+                    <input
+                      type="search"
+                      className="form-control rounded search"
+                      placeholder="Search"
+                      onChange={(e) => setKeyword(e.target.value)}
+                    />
+                    <button type="submit" className="search-button">
+                      search
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* PC HEADER */}
+          <div className="pc-header">
+            <div className="row">
+              <div className="col-md-3 col-4 d-flex align-items-center">
+                <Link className="navbar-brand" to="/">
+                  <img alt="logo" src={logo} />
+                </Link>
+              </div>
+              <div className="col-md-6 col-8 d-flex align-items-center">
+                <form onSubmit={submitHandler} className="input-group">
+                  <input
+                    type="search"
+                    className="form-control rounded search"
+                    placeholder="Search"
+                    onChange={(e) => setKeyword(e.target.value)}
+                  />
+                  <button type="submit" className="search-button">
+                    search
+                  </button>
+                </form>
+              </div>
+              <div className="col-md-3 d-flex align-items-center justify-content-end Login-Register">
+               
+                  <div className="btn-group">
+                    <button
+                      type="button"
+                      className="name-button dropdown-toggle"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      Hi, {userGoogle.given_name} 
+                    </button>
+                    <div className="dropdown-menu">
+                      <Link className="dropdown-item" to="/profile">
+                        Profile
+                      </Link>
+
+                      <Link
+                        className="dropdown-item"
+                        to="#"
+                        onClick={Google}
+                      >
+                        Logout
+                      </Link>
+                    </div>
+                  </div>
+                <Link to="/cart">
+                  <i className="fas fa-shopping-bag"></i>
+                  <span className="badge">{cartItems.length}</span>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}else{
+  return(
+
+      <div>
+        {/* Top Header */}
+        <div className="Announcement ">
+          <div className="container"> 
+            <div className="row">
+              <div className="col-md-6 d-flex align-items-center display-none">
+               <Link to="/landing"><p>Landing</p></Link>
+               <Link to="/about"><p>About</p></Link>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* Header */}
+        <div className="header">
+          <div className="container">
+            {/* MOBILE HEADER */}
+            <div className="mobile-header">
+              <div className="container ">
+                <div className="row ">
+                  <div className="col-6 d-flex align-items-center">
+                    <Link className="navbar-brand" to="/">
+                      <img alt="logo" src={logo} />
+                    </Link>
+                  </div>
+                  <div className="col-6 d-flex align-items-center justify-content-end Login-Register">
+                   
+                      <div className="btn-group">
+                        <button
+                          type="button"
+                          className="name-button dropdown-toggle"
+                          data-toggle="dropdown"
+                          aria-haspopup="true"
+                          aria-expanded="false"
+                        >
+                          <i class="fas fa-user"></i>
+                        </button>
+                        <div className="dropdown-menu">
+                          
+                          <Link className="dropdown-item" to="/login">
+                            Login
+                          </Link>
+  
+                          <Link className="dropdown-item" to="/register">
+                            Register
+                          </Link>
+                        </div>
+                      </div>
+                    
+  
+                    <Link to="/cart" className="cart-mobile-icon">
+                      <i className="fas fa-shopping-bag"></i>
+                      <span className="badge">{cartItems.length}</span>
+                    </Link>
+                  </div>
+                  <div className="col-12 d-flex align-items-center">
+                    <form onSubmit={submitHandler} className="input-group">
+                      <input
+                        type="search"
+                        className="form-control rounded search"
+                        placeholder="Search"
+                        onChange={(e) => setKeyword(e.target.value)}
+                      />
+                      <button type="submit" className="search-button">
+                        search
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+            {/* PC HEADER */}
+            <div className="pc-header">
+              <div className="row">
+                <div className="col-md-3 col-4 d-flex align-items-center">
+                  <Link className="navbar-brand" to="/">
+                    <img alt="logo" src={logo} />
+                  </Link>
+                </div>
+                <div className="col-md-6 col-8 d-flex align-items-center">
+                  <form onSubmit={submitHandler} className="input-group">
+                    <input
+                      type="search"
+                      className="form-control rounded search"
+                      placeholder="Search"
+                      onChange={(e) => setKeyword(e.target.value)}
+                    />
+                    <button type="submit" className="search-button">
+                      search
+                    </button>
+                  </form>
+                </div>
+                <div className="col-md-3 d-flex align-items-center justify-content-end Login-Register">
+                 
+                    <div className="btn-group">
+                      
+                      <div className="btn-group">
+                        <button
+                          type="button"
+                          className="name-button dropdown-toggle"
+                          data-toggle="dropdown"
+                          aria-haspopup="true"
+                          aria-expanded="false"
+                        >
+                          <i class="fas fa-user"></i>
+                        </button>
+                        <div className="dropdown-menu">
+                          
+                          <Link className="dropdown-item" to="/login">
+                            Login
+                          </Link>
+  
+                          <Link className="dropdown-item" to="/register">
+                            Register
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  <Link to="/cart">
+                    <i className="fas fa-shopping-bag"></i>
+                    <span className="badge">{cartItems.length}</span>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+}
 };
 
 export default Header;

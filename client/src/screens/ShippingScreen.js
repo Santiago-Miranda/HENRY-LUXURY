@@ -21,6 +21,7 @@ const ShippingScreen = ({ history }) => {
     dispatch(saveShippingAddress({ address, city, postalCode, country }));
     history.push("/payment");
   };
+  
   return (
     <>
       <Header />

@@ -18,9 +18,11 @@ import {
   USER_UPDATE_PROFILE_REQUEST,
   USER_UPDATE_PROFILE_SUCCESS,
   USER_CONFIRM_MAIL,
-  USER_CONFIRM_MAIL_FAIL
-
-
+  USER_CONFIRM_MAIL_FAIL,
+  USER_LOGIN_GOOGLE_FAIL,
+  USER_LOGIN_GOOGLE_REQUEST,
+  USER_LOGIN_GOOGLE_SUCCESS,
+  USER_LOGOUT_GOOGLE
 } from "../Constants/UserContants";
 
 // LOGIN
@@ -137,3 +139,26 @@ export const  userConfirmMailReducer = (state = {}, action) => {
 
 
 
+
+//google
+export const googleLoginReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_LOGIN_GOOGLE_REQUEST:
+      return { loading: true };
+    case USER_LOGIN_GOOGLE_SUCCESS:
+      return { loading: false, userGoogle: action.payload };
+    case USER_LOGIN_GOOGLE_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const logoutReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_LOGOUT_GOOGLE:
+      return {};
+      default:
+      return state;
+  }
+}
