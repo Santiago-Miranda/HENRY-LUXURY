@@ -73,7 +73,7 @@ import Header from '../Header'
                         <div class="pic">
                              <img src="https://ca.slack-edge.com/TPRS7H4PN-U03DR4H5E03-c30b9f6f5199-512"/>
                         </div>
-                        <h3 class="title">Gonzalez Matias</h3>
+                        <h3 class="title">Matias Gonzalez</h3>
                         <span class="post">Web developer</span>
                     </div>
                 </div>

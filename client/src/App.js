@@ -18,8 +18,11 @@ import PrivateRouter from "./PrivateRouter";
 import Landing from './components/ExtrasComponents/Landing'
 import About from './components/ExtrasComponents/About'
 import Maps from "./components/ExtrasComponents/Maps";
-//import CartFavorite from "./screens/CartFavorite"
-//<PrivateRouter path="/favorite" component={CartFavorite} />
+import CartFavorite from "./screens/CartFavorite"
+import  ResPass  from "./components/RestorePassword/ResPass";
+import ResetPassLogin from "./components/RestorePassword/ResetPassLogin";
+import VerifiedMail from "./components/RestorePassword/VerifiedMail";
+
 
 const App = () => {
   return (
@@ -34,6 +37,9 @@ const App = () => {
           component={HomeScreen}
           exact
         />
+        <Route path="/resspass" component={ResPass} exact />
+        <Route path="/resetpasslogin" component={ResetPassLogin} exact />
+        <Route path="/verifiedmail" component={VerifiedMail} exact />
          <Route path="/landing" component={Landing} exact />
          <Route path="/about" component={About} exact />
         <Route path="/maps" component={Maps} exact />
@@ -42,6 +48,7 @@ const App = () => {
         <Route path="/register" component={Register} />
         <PrivateRouter path="/profile" component={ProfileScreen} />
         <Route path="/cart/:id?" component={CartScreen} />
+        <PrivateRouter path="/favorite" component={CartFavorite} />
         <PrivateRouter path="/shipping" component={ShippingScreen} />
         <PrivateRouter path="/payment" component={PaymentScreen} />
         <PrivateRouter path="/placeorder" component={PlaceOrderScreen} />

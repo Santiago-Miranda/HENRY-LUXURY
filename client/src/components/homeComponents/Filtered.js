@@ -1,7 +1,7 @@
 import React from "react";
 import "./Filtered.scss"
 
-const Filtered = ({onReset,categorias, setOrder, price, setPrice, setCategory, stock, setStock }) => {
+const Filtered = ({onReset,categorias, setOrder, order, price, setPrice, setCategory, category, stock, setStock }) => {
 
     const onClick=()=>{
         if (stock === 1) {
@@ -13,21 +13,20 @@ const Filtered = ({onReset,categorias, setOrder, price, setPrice, setCategory, s
     return (
         <div className="selectdiv">
             <label class="select">
-                <select onChange={(e) => setOrder(e.target.value)} >
-                    <option value="" disabled="disabled" selected="selected">Sort by price</option>
+                <select value={order} onChange={(e) => setOrder(e.target.value)} >
+                    <option value="toprated" disabled="disabled" selected="selected">Sort by price</option>
                     <option value="lowest">lowest</option>
                     <option value="highest">highest</option>
-                    <option value="toprated">toprated</option>
                 </select>
                 <svg>
                     <use ></use>
                 </svg>
             </label>
             <label class="select" for="slct">
-                <select onChange={(e) => setCategory(e.target.value)} required="required">
+                <select value={category} onChange={(e) => setCategory(e.target.value)} required="required">
                     <option value="" disabled="disabled" selected="selected">Category</option>
                     {
-                        categorias.map(e=><option value={e._id}>{e.name}</option>)
+                        categorias.map(e=><option value={e.name}>{e.name}</option>)
                     }
                 </select>
                 <svg>
@@ -35,11 +34,11 @@ const Filtered = ({onReset,categorias, setOrder, price, setPrice, setCategory, s
                 </svg>
             </label>
             <label class="select" for="slct">
-                <select onChange={e => setPrice(e.target.value)} required="required">
-                    <option value="" disabled="disabled" selected="selected">Price</option>
+                <select value={price} onChange={e => setPrice(e.target.value)} required="required">
+                    <option value={"default"} disabled="disabled" selected="selected">Price</option>
                     <option value={"Bajo"}>To $500</option>
                     <option value={"Medio"}>$500 To $1000</option>
-                    <option value={"Alto"}>More of $1000</option>
+                    <option value={"Alto"}>More than $1000</option>
                     <option value={"Crear"}>Custom price</option>
 
                 </select>

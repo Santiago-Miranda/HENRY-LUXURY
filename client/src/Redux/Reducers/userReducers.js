@@ -1,4 +1,6 @@
 import {
+  USER_CONFIRM_PASSWORD,
+  USER_CONFIRM_PASSWORD_FAIL,
   USER_DETAILS_FAIL,
   USER_DETAILS_REQUEST,
   USER_DETAILS_RESET,
@@ -10,9 +12,13 @@ import {
   USER_REGISTER_FAIL,
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
+  USER_RESET_PASSWORD,
+  USER_RESET_PASSWORD_FAIL,
   USER_UPDATE_PROFILE_FAIL,
   USER_UPDATE_PROFILE_REQUEST,
   USER_UPDATE_PROFILE_SUCCESS,
+  USER_CONFIRM_MAIL,
+  USER_CONFIRM_MAIL_FAIL,
   USER_LOGIN_GOOGLE_FAIL,
   USER_LOGIN_GOOGLE_REQUEST,
   USER_LOGIN_GOOGLE_SUCCESS,
@@ -78,6 +84,61 @@ export const userUpdateProfileReducer = (state = {}, action) => {
       return state;
   }
 };
+
+
+
+//* RESET PASSWORD
+export const userResetPasswordReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_RESET_PASSWORD:
+      return { loading: true };
+     case USER_RESET_PASSWORD_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+
+//* CONFIRM PASSWORD userConfirmPassword
+
+
+export const  userConfirmPasswordReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_CONFIRM_PASSWORD:
+      return { loading: true };
+     case USER_CONFIRM_PASSWORD_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+//* Confirm mail + codigode verificacion  userConfirmMail
+
+export const  userConfirmMailReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_CONFIRM_MAIL:
+      return { loading: true };
+     case  USER_CONFIRM_MAIL_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //google
 export const googleLoginReducer = (state = {}, action) => {

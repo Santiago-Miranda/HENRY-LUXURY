@@ -9,6 +9,7 @@ import Message from "../LoadingError/Error";
 
 const ShopSection = (props) => {
   const { keyword,  loading, error, products, page, pages } = props;
+  console.log(props.product)
 
   return (
     <>
@@ -43,8 +44,6 @@ const ShopSection = (props) => {
                                 {product.name}
                               </Link>
                             </p>
-
-                          <p>categories:{product.categories.name}</p>
                             <Rating
                               value={product.rating}
                               text={`${product.numReviews} reviews`}
@@ -61,7 +60,7 @@ const ShopSection = (props) => {
                 <Pagination
                   pages={pages}
                   page={page}
-                  
+                  keyword={keyword}
                 />
               </div>
             </div>

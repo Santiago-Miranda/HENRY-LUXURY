@@ -20,13 +20,14 @@ const HomeScreen = ({ match }) => {
   window.scrollTo(0, 0);
   const keyword = match.params.keyword;
   const pagenumber = match.params.pagenumber;
-  const [order, setOrder] = useState()
+  const [order, setOrder] = useState("toprated")
   const [category, setCategory] = useState();
   const [min, setMin] = useState(0)
   const [max, setMax] = useState(20000)
-  const [price, setPrice] = useState("");
+  const [price, setPrice] = useState("default");
   const [creaPrice, setCreaPrice] = useState(false)
   const [stock, setStock] = useState(1);
+  console.log(keyword)
 
 
 
@@ -38,12 +39,16 @@ const HomeScreen = ({ match }) => {
   const { loading, error, products, page, pages } = productList;
 
   useEffect(() => {
-    dispatch(getCategories())
-    dispatch(listProduct(category,order, keyword, pagenumber ,min, max,stock));
-  }, [dispatch,category, order, keyword, pagenumber, min, max,stock]);
+    dispatch(getCategories());
+    if (keyword) {
+      dispatch(listProduct(category,  pagenumber ,min, max,stock,order,keyword, ));
+    }else{
+      dispatch(listProduct(category,  pagenumber ,min, max,stock,order, ));
+    }
+  }, [dispatch,category, pagenumber, min, max,stock,order, keyword,]);
 
   useEffect(() => {
-    if (price === "") {
+    if (price === "default") {
       setMin(0);
       setMax(2000000)
     }
@@ -66,10 +71,10 @@ const HomeScreen = ({ match }) => {
 
   const onReset = ()=>{
     setCategory("");
-    setMax(1000000000)
-    setMin(0);
+    setPrice("default")
     setStock("");
     setStock(1)
+    setOrder("toprated")
   }
 
 

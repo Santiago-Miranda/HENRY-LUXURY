@@ -13,6 +13,9 @@ import {
   userLoginReducer,
   userRegisterReducer,
   userUpdateProfileReducer,
+  userResetPasswordReducer,
+  userConfirmPasswordReducer,
+  userConfirmMailReducer,
   googleLoginReducer,
   logoutReducer
 } from "./Reducers/userReducers";
@@ -28,7 +31,6 @@ const reducer = combineReducers({
   productList: productListReducer,
   productDetails: productDetailsReducer,
   productReviewCreate: productCreateReviewReducer,
- 
   cart: cartReducer,
   userLogout: logoutReducer,
   userGoogle: googleLoginReducer,
@@ -41,7 +43,9 @@ const reducer = combineReducers({
   orderPay: orderPayReducer,
   orderListMy: orderListMyReducer,
   allCategories: categoriesListReducer,
-  
+  userResetPassword:userResetPasswordReducer,
+  userConfirmPassword:userConfirmPasswordReducer,
+  userConfirmMail:userConfirmMailReducer
 });
 
 const cartItemsFromLocalStorage = localStorage.getItem("cartItems")
