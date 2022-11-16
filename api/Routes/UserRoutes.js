@@ -14,7 +14,6 @@ userRouter.post("/login", asyncHandler(async (req, res) => {
 
 
     if (user && user.status === "Pending"){
-      console.log(user.status)
       res.status(401)
       throw new Error("Please confirm your email.")
     } else if (user && (await user.matchPassword(password))) {
@@ -142,18 +141,23 @@ userRouter.put("/ban", protect, admin, asyncHandler(async(req, res) => {
     const { email } = req.body;
     const user = await User.findOne({email: email})
     
-    if(user && !user.isBaned) {
-      user.isBaned = true
-      sendBanEmail(user.name, user.email)
-      user.save()
-      res.status(200).send("User banned.")
-    } else if (user && user.isBaned){
-      user.isBaned = false
-      sendUnbanEmail(user.name, user.email)
-      user.save()
-      res.status(200).send("User unbanned.")
-    } else {res.status(404);
-    throw new Error('User not found')}
+    if(user && !user.isAdmin){
+      if(user && !user.isBaned) {
+        user.isBaned = true
+        sendBanEmail(user.name, user.email)
+        user.save()
+        res.status(200).send("User banned.")
+      } else if (user && user.isBaned){
+        user.isBaned = false
+        sendUnbanEmail(user.name, user.email)
+        user.save()
+        res.status(200).send("User unbanned.")
+      } 
+    } else if (user && user.isAdmin){
+      res.status(400).send("You cant ban an admin")
+    } else {
+      res.status(404);
+      throw new Error('User not found')}
 }))
 
 //FORGOT PASSWORD EMAIL
@@ -162,7 +166,6 @@ userRouter.put('/PassCode', asyncHandler(async (req, res) => {
   const user = await User.findOne({email: email})
   const numbers = "1234567890"
   let token=""
-
 
   if(user){
     for(var i = 0; i < 6; i++) {
@@ -194,15 +197,18 @@ userRouter.put("/resetPass", asyncHandler(async(req, res) => {
   } else {res.status(404).send("user not found")}
 }));
 
-//CHANGE ADMIN STATUS  protect, admin,
-userRouter.put("/changeAdmin", asyncHandler(async(req, res) => {
+//CHANGE ADMIN STATUS  
+userRouter.put("/changeAdmin", protect, admin, asyncHandler(async(req, res) => {
   const {email} = req.body;
   const user = await User.findOne({email: email})
-  if(user && user.Supreme != undefined){
+  if(user && user.isOwner == false){
     user.isAdmin = !user.isAdmin
     user.save()
     res.status(200).send("User status changed succesfully")
-  } else {
+  } else if(user && user.isOwner == true){
+    res.status(400).send("You can't change the status of this user.")
+  }
+  else {
     res.status(404).send("User not found.")
   }
 }))
