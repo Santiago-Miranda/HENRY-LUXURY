@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Modal from "react-modal";
 import CrearPrice from "../components/homeComponents/CrearPrice";
 import { getCategories } from "../Redux/Actions/CategoriesActions";
+import Bot from "../components/Bot/Bot";
 
 
 Modal.setAppElement("#root");
@@ -27,6 +28,8 @@ const HomeScreen = ({ match }) => {
   const [price, setPrice] = useState("default");
   const [creaPrice, setCreaPrice] = useState(false)
   const [stock, setStock] = useState(1);
+
+  const [chatbBot, setChatBot] = useState(false)
   console.log(keyword)
 
 
@@ -85,6 +88,9 @@ const HomeScreen = ({ match }) => {
       <div className="productosFilter">
       <ShopSection keyword={keyword} loading={loading} error={error} products={products} page={page} pages={pages} pagenumber={pagenumber} />
       </div>
+      {
+        chatbBot === true ? <Bot setChatBot={setChatBot}/>: <button onClick={()=>setChatBot(true)} className="boooot">Virtual Assistant</button>
+      }
       <CalltoActionSection />
       <ContactInfo />
       <Footer />
@@ -104,7 +110,6 @@ const HomeScreen = ({ match }) => {
         closeTimeoutMS={500}
       >
         <CrearPrice setMin={setMin} setMax={setMax} setCreaPrice={setCreaPrice}/>
-
       </Modal>
     </div>
   );
