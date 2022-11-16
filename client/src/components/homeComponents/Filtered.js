@@ -26,7 +26,7 @@ const Filtered = ({onReset,categorias, setOrder, order, price, setPrice, setCate
                 <select value={category} onChange={(e) => setCategory(e.target.value)} required="required">
                     <option value="" disabled="disabled" selected="selected">Category</option>
                     {
-                        categorias.map(e=><option value={e.name}>{e.name}</option>)
+                        categorias.map(e=><option value={e._id}>{e.name}</option>)
                     }
                 </select>
                 <svg>
@@ -46,15 +46,15 @@ const Filtered = ({onReset,categorias, setOrder, order, price, setPrice, setCate
                     <use ></use>
                 </svg>
             </label>
+            
             <button class="btn-track" onClick={onReset}><div class="--text">Reset</div></button>
 
             <button  onClick={onClick} class="btn-track">
                 {
-                    stock === 0 ? <div class="--text">Available</div>:<div class="--text">Not available</div>
+                    stock === 0 ? <div class="--text">Stock</div>:<div class="--text">Not stock</div>
                 }
                 
             </button>
-
         </div>
 
     );
