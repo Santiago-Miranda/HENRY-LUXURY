@@ -34,4 +34,23 @@ categoryRoute.post('/', protect, admin, asyncHandler(async(req, res) => {
     }
 }))
 
+//usar ruta get para traer los productos, guardar en array, limpiar productos con un 
+//for y despues eliminar la categoria
+categoryRoute.delete("/", asyncHandler(async(req, res) => {
+    const {id} = req.body
+    const deletedOne = await Category.findById(id)
+    const search = await Product.find({categories:`${id}`})
+    if(deletedOne){
+    for(var i = 0; i<search.length; i++){
+        if(search[i].categories.includes(deletedOne._id)){
+            search[i].categories = search[i].categories.filter(_id => id != deletedOne.id)
+            search[i].save()
+            console.log(search[i])
+        }
+    }
+    deletedOne.remove()
+    res.status(200).send('Categorie deleted succesfully')
+    } else {res.status(404).send("an error has occurred, please try again")}
+}))
+
 export default categoryRoute

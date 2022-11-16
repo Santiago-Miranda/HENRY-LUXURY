@@ -99,7 +99,7 @@ orderRouter.put("/:id/pay", protect, asyncHandler(async (req, res) => {
 );
 
 // ORDER IS DELIVERED 
-orderRouter.put("/:id/delivered", protect, asyncHandler(async (req, res) => {
+orderRouter.put("/:id/delivered", protect, admin, asyncHandler(async (req, res) => {
     const order = await Order.findById(req.params.id).populate(
       "user",
       "name email"

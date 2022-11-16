@@ -21,7 +21,7 @@ const HomeScreen = ({ match }) => {
   const keyword = match.params.keyword;
   const pagenumber = match.params.pagenumber;
   const [order, setOrder] = useState("toprated")
-  const [category, setCategory] = useState();
+  const [category, setCategory] = useState("");
   const [min, setMin] = useState(0)
   const [max, setMax] = useState(20000)
   const [price, setPrice] = useState("default");
