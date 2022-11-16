@@ -101,8 +101,6 @@ export const userResetPasswordReducer = (state = {}, action) => {
 
 
 //* CONFIRM PASSWORD userConfirmPassword
-
-
 export const  userConfirmPasswordReducer = (state = {}, action) => {
   switch (action.type) {
     case USER_CONFIRM_PASSWORD:
@@ -115,7 +113,6 @@ export const  userConfirmPasswordReducer = (state = {}, action) => {
 };
 
 //* Confirm mail + codigode verificacion  userConfirmMail
-
 export const  userConfirmMailReducer = (state = {}, action) => {
   switch (action.type) {
     case USER_CONFIRM_MAIL:
@@ -129,17 +126,6 @@ export const  userConfirmMailReducer = (state = {}, action) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 //google
 export const googleLoginReducer = (state = {}, action) => {
   switch (action.type) {
@@ -149,11 +135,13 @@ export const googleLoginReducer = (state = {}, action) => {
       return { loading: false, userGoogle: action.payload };
     case USER_LOGIN_GOOGLE_FAIL:
       return { loading: false, error: action.payload };
+      case USER_LOGOUT_GOOGLE:
+        return {};
     default:
       return state;
   }
 };
-
+/*
 export const logoutReducer = (state = {}, action) => {
   switch (action.type) {
     case USER_LOGOUT_GOOGLE:
@@ -161,4 +149,4 @@ export const logoutReducer = (state = {}, action) => {
       default:
       return state;
   }
-}
+}*/

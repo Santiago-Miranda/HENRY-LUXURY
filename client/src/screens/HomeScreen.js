@@ -15,7 +15,7 @@ import Bot from "../components/Bot/Bot";
 
 Modal.setAppElement("#root");
 
-// import FIlterProduct from "./FilterProduct";
+
 
 const HomeScreen = ({ match }) => {
   window.scrollTo(0, 0);
@@ -84,16 +84,13 @@ const HomeScreen = ({ match }) => {
   return (
     <div>
       <Header />
-      <div className="productosFilter">
       <Filtered onReset={onReset} categorias={categories} setCategory={setCategory} setOrder={setOrder} stock={stock} setStock={setStock} price={price} setPrice={setPrice} setMin={setMin} setMax={setMax}  products={products} />
-      
+      <div className="productosFilter">
       <ShopSection keyword={keyword} loading={loading} error={error} products={products} page={page} pages={pages} pagenumber={pagenumber} />
-
       </div>
       {
         chatbBot === true ? <Bot setChatBot={setChatBot}/>: <button onClick={()=>setChatBot(true)} className="boooot">Virtual Assistant</button>
       }
-      
       <CalltoActionSection />
       <ContactInfo />
       <Footer />
@@ -113,7 +110,6 @@ const HomeScreen = ({ match }) => {
         closeTimeoutMS={500}
       >
         <CrearPrice setMin={setMin} setMax={setMax} setCreaPrice={setCreaPrice}/>
-
       </Modal>
     </div>
   );
