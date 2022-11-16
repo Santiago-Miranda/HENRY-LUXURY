@@ -32,7 +32,7 @@ const reducer = combineReducers({
   productDetails: productDetailsReducer,
   productReviewCreate: productCreateReviewReducer,
   cart: cartReducer,
-  userLogout: logoutReducer,
+  //userLogout: logoutReducer,
   userGoogle: googleLoginReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,

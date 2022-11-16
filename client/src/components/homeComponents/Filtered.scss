@@ -32,15 +32,13 @@
     pointer-events: none;
   }
   .select select {
-    padding: 7px 40px 7px 12px;
     width: 100%;
     border: 1px solid #e8eaed;
-    border-radius: 5px;
+    border-radius: 0.4rem;
     background: #fff;
-    box-shadow: 0 1px 3px -2px #9098a9;
     cursor: pointer;
     font-family: inherit;
-    font-size: 16px;
+    font-size: 1rem;
     transition: all 150ms ease;
   }
   .select select:required:invalid {
@@ -69,8 +67,8 @@
   }
 
 .inputttt{
-    border-radius: 5px;
-    margin: 1px;
+    border-radius: 1rem;
+    margin: 0.6rem;
     
 }
 
@@ -79,22 +77,21 @@
   text-decoration: none;
   overflow: hidden;
   background: #fff;
-  box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.3);
-  border-radius: 8px;
-  margin: 1rem;
+  border-radius: 0.2rem solid #e8eaed;
+  border: 0.1rem solid #e8eaed;
+  margin: 0.4rem;
   transition: all 0.1s ease;
 }
 
 .btn-track .--text {
   float: left;
-  color: #000;
   white-space: nowrap;
-  line-height: 20px;
-  height: 33px;
-  padding: 10px;
-  border-radius: 0 8px 8px 0;
-  font-size: 16px;
-  font-weight: 500;
+  line-height: 1rem;
+  height: 0.8rem;
+  padding: 0.8rem;
+  padding-top: 0.2rem;
+  border-radius: 0.4rem solid #e8eaed;
+  font-size: 1rem;
 }
 
 .boooot{

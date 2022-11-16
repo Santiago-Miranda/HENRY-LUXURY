@@ -32,7 +32,7 @@ const Filtered = ({ onReset, categorias, setOrder, order, price, setPrice, setCa
                     <ul class="centre-text bold-text">
                         <label class="select">
                             <select value={order} onChange={(e) => setOrder(e.target.value)} >
-                                <option value="toprated" disabled="disabled" selected="selected">Sort by price</option>
+                                <option value="toprated" disabled="disabled" selected="selected">By price</option>
                                 <option value="lowest">lowest</option>
                                 <option value="highest">highest</option>
                             </select>
@@ -54,11 +54,10 @@ const Filtered = ({ onReset, categorias, setOrder, order, price, setPrice, setCa
                         <label class="select" for="slct">
                             <select value={price} onChange={e => setPrice(e.target.value)} required="required">
                                 <option value={"default"} disabled="disabled" selected="selected">Price</option>
-                                <option value={"Bajo"}>To $500</option>
-                                <option value={"Medio"}>$500 To $1000</option>
-                                <option value={"Alto"}>More than $1000</option>
-                                <option value={"Crear"}>Custom price</option>
-
+                                <option value={"Bajo"}>- $500</option>
+                                <option value={"Medio"}>- $1000</option>
+                                <option value={"Alto"}>+ $1000</option>
+                                <option value={"Crear"}>Customize</option>
                             </select>
                             <svg>
                                 <use ></use>
@@ -82,7 +81,7 @@ const Filtered = ({ onReset, categorias, setOrder, order, price, setPrice, setCa
             <div className="selectdiv">
                 <label class="select">
                     <select value={order} onChange={(e) => setOrder(e.target.value)} >
-                        <option value="toprated" disabled="disabled" selected="selected">Sort by price</option>
+                        <option value="toprated" disabled="disabled" selected="selected">By price</option>
                         <option value="lowest">lowest</option>
                         <option value="highest">highest</option>
                     </select>
@@ -104,11 +103,10 @@ const Filtered = ({ onReset, categorias, setOrder, order, price, setPrice, setCa
                 <label class="select" for="slct">
                     <select value={price} onChange={e => setPrice(e.target.value)} required="required">
                         <option value={"default"} disabled="disabled" selected="selected">Price</option>
-                        <option value={"Bajo"}>To $500</option>
-                        <option value={"Medio"}>$500 To $1000</option>
-                        <option value={"Alto"}>More than $1000</option>
-                        <option value={"Crear"}>Custom price</option>
-
+                        <option value={"Bajo"}>- $500</option>
+                        <option value={"Medio"}>- $1000</option>
+                        <option value={"Alto"}>+ $1000</option>
+                        <option value={"Crear"}>Customize</option>
                     </select>
                     <svg>
                         <use ></use>
