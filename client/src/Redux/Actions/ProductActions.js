@@ -26,7 +26,7 @@ export const listProduct = (category="", order = "", keyword = " ", pageNumber =
     //?category=${category}&keyword=${keyword}&pageNumber=${pageNumber}&min=${min}&max=${max}&stock=${stock}&order=${order}
     try {
       dispatch({ type: PRODUCT_LIST_REQUEST });
-      const { data } = await axios.get(`/api/products?pageNumber=${pageNumber}&min=${min}&max=${max}&stock=${stock}&order=${order}`
+      const { data } = await axios.get(`/api/products?pageNumber=${pageNumber}&min=${min}&max=${max}&stock=${stock}&order=${order}&keyword=${keyword}`
         //`/api/products?category=${category}&keyword=${keyword}&pageNumber=${pageNumber}&min=${min}&max=${max}&stock=${stock}&order=${order}`
       );
 
@@ -131,12 +131,12 @@ export function orderCountinStock(payload){
 
 
 //* Ruta de Todas las Categorias
-export function getAllCategory(){
+export function getAllCategory(category=""){
   return async function(dispatch){
-      const resul = await axios.get("http://localhost:3001/api/category")
+      const {data} = await axios.get(`http://localhost:3001/api/category?category=${category}`)
       dispatch({
           type:GET_ALL_CATEGORY,
-      payload:resul.data
+      payload:data
       })
   }
 } 
