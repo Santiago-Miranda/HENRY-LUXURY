@@ -129,7 +129,7 @@ const ProfileTabs = () => {
       </form>
     </>
   );
-} else if(User){
+} else if(userGoogle){
   return (
     <>
       <Toast />
@@ -139,7 +139,7 @@ const ProfileTabs = () => {
 
         <div className="col-md-6">
           <div className="form">
-            <label for="account-fn">UserName</label>
+            <label for="account-fn" style={{color: "black"}}>UserName</label>
             <input
               className="form-control"
               type="text"
@@ -152,7 +152,7 @@ const ProfileTabs = () => {
 
         <div className="col-md-6">
           <div className="form">
-            <label for="account-email">E-mail Address</label>
+            <label for="account-email" style={{color: "black"}}>E-mail Address</label>
             <input
               className="form-control"
               type="email"
@@ -164,7 +164,7 @@ const ProfileTabs = () => {
         </div>
         <div className="col-md-6">
           <div className="form">
-            <label for="account-pass">New Password</label>
+            <label for="account-pass" style={{color: "black"}}>New Password</label>
             <input
               className="form-control"
               type="password"
@@ -175,7 +175,7 @@ const ProfileTabs = () => {
         </div>
         <div className="col-md-6">
           <div className="form">
-            <label for="account-confirm-pass">Confirm Password</label>
+            <label for="account-confirm-pass" style={{color: "black"}}>Confirm Password</label>
             <input
               className="form-control"
               type="password"

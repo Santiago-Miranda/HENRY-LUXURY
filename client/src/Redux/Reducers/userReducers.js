@@ -88,9 +88,16 @@ export const googleLoginReducer = (state = {}, action) => {
       return { loading: false, userGoogle: action.payload };
     case USER_LOGIN_GOOGLE_FAIL:
       return { loading: false, error: action.payload };
-    case USER_LOGOUT_GOOGLE:
-      return {};
     default:
       return state;
   }
 };
+
+export const logoutReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_LOGOUT_GOOGLE:
+      return {};
+      default:
+      return state;
+  }
+}

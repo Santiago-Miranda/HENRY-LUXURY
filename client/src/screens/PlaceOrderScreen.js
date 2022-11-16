@@ -11,6 +11,7 @@ const PlaceOrderScreen = ({ history }) => {
 
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
+
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
@@ -33,6 +34,10 @@ const PlaceOrderScreen = ({ history }) => {
   const orderCreate = useSelector((state) => state.orderCreate);
   const { order, success, error } = orderCreate;
 
+  const User = useSelector((state) => state.userGoogle);
+  const {userGoogle} = User;
+  console.log(userGoogle)
+
   useEffect(() => {
     if (success) {
       history.push(`/order/${order._id}`);
@@ -40,7 +45,9 @@ const PlaceOrderScreen = ({ history }) => {
       }
   }, [history, dispatch, success, order]);
 
+
   const placeOrderHandler = () => {
+   
     dispatch(
       createOrder({
         orderItems: cart.cartItems,
@@ -54,11 +61,7 @@ const PlaceOrderScreen = ({ history }) => {
     );
   };
 
-  const User = useSelector((state) => state.userGoogle);
-  const {userGoogle} = User;
-  console.log(userGoogle)
-
-
+  
 
 if(userInfo){
   return (
@@ -195,7 +198,7 @@ if(userInfo){
       </div>
     </>
   );
-} else if(User){
+} else if(userGoogle){
   return (
     <>
       <Header />
@@ -212,8 +215,8 @@ if(userInfo){
                 <h5>
                   <strong>Customer</strong>
                 </h5>
-                <p>{User.userGoogle.userName}</p>
-                <p>{User.userGoogle.userMail}</p>
+                <p>{userGoogle.given_name}</p>
+                <p>{userGoogle.userMail}</p>
               </div>
             </div>
           </div>

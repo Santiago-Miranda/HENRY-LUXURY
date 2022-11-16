@@ -47,6 +47,7 @@ const Filtered = ({onReset,categorias, setOrder, price, setPrice, setCategory, s
                     <use ></use>
                 </svg>
             </label>
+            
             <button class="btn-track" onClick={onReset}><div class="--text">Reset</div></button>
 
             <button  onClick={onClick} class="btn-track">
@@ -55,7 +56,6 @@ const Filtered = ({onReset,categorias, setOrder, price, setPrice, setCategory, s
                 }
                 
             </button>
-
         </div>
 
     );

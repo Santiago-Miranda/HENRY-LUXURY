@@ -26,7 +26,11 @@ const CartScreen = ({ match, location, history }) => {
   
 
   const checkOutHandler = () => {
-    history.push("/login?redirect=shipping");
+    if(userInfo || userGoogle){
+    history.push("/shipping");
+    }else{
+    history.push("/register");
+    }
   };
 
   const removeFromCartHandle = (id) => {

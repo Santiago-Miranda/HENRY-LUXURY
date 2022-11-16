@@ -4,7 +4,7 @@ import ShopSection from "./../components/homeComponents/ShopSection";
 import ContactInfo from "./../components/homeComponents/ContactInfo";
 import CalltoActionSection from "./../components/homeComponents/CalltoActionSection";
 import Footer from "./../components/Footer";
-import Filtered from "../components/homeComponents/Filtered";
+//import Filtered from "../components/homeComponents/Filtered";
 import { listProduct } from "../Redux/Actions/ProductActions";
 import { useDispatch, useSelector } from "react-redux";
 import Modal from "react-modal";
@@ -77,7 +77,7 @@ const HomeScreen = ({ match }) => {
     <div>
       <Header />
       <div className="productosFilter">
-      <Filtered onReset={onReset} categorias={categories} setCategory={setCategory} setOrder={setOrder} stock={stock} setStock={setStock} price={price} setPrice={setPrice} setMin={setMin} setMax={setMax}  products={products} />
+      {/*<Filtered onReset={onReset} categorias={categories} setCategory={setCategory} setOrder={setOrder} stock={stock} setStock={setStock} price={price} setPrice={setPrice} setMin={setMin} setMax={setMax}  products={products} />*/}
       
       <ShopSection keyword={keyword} loading={loading} error={error} products={products} page={page} pages={pages} pagenumber={pagenumber} />
 

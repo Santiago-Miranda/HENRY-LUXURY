@@ -33,6 +33,7 @@ userRouter.post("/login", asyncHandler(async (req, res) => {
   })
 );
 
+
 // REGISTER
 userRouter.post("/", asyncHandler(async (req, res) => {
     const { name, email, password } = req.body;
