@@ -20,6 +20,7 @@ import {
 } from "../Constants/ProductConstants";
 import { logout } from "./userActions";
 
+
 // PRODUCT LIST
 export const listProduct = (category="",  pageNumber = " ",min = 0,max = 0,stock = 0, order = "",keyword="",) =>
   async (dispatch) => {
@@ -82,16 +83,19 @@ export const createProductReview =
     try {
       dispatch({ type: PRODUCT_CREATE_REVIEW_REQUEST });
 
+    
       const {
         userLogin: { userInfo },
       } = getState();
 
+  
       const config = {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${userInfo.token}`,
         },
       };
+    
 
       await axios.post(`/api/products/${productId}/review`, review, config);
       dispatch({ type: PRODUCT_CREATE_REVIEW_SUCCESS });
