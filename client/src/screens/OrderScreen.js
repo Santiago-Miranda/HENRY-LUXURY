@@ -20,7 +20,7 @@ const OrderScreen = ({ match }) => {
   const { order, loading, error } = orderDetails;
   const orderPay = useSelector((state) => state.orderPay);
   const { loading: loadingPay, success: successPay } = orderPay;
-
+ console.log("orderpay",orderPay)
   if (!loading) {
     const addDecimals = (num) => {
       return (Math.round(num * 100) / 100).toFixed(2);
@@ -34,6 +34,7 @@ const OrderScreen = ({ match }) => {
   useEffect(() => {
     const addPayPalScript = async () => {
       const { data: clientId } = await axios.get("/api/config/paypal");
+      console.log("Client",clientId)
       const script = document.createElement("script");
       script.type = "text/javascript";
       script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
@@ -56,6 +57,9 @@ const OrderScreen = ({ match }) => {
   }, [dispatch, orderId, successPay, order]);
 
   const successPaymentHandler = (paymentResult) => {
+    console.log("Pago",paymentResult)
+    console.log("orderId",orderId)
+   
     dispatch(payOrder(orderId, paymentResult));
   };
 

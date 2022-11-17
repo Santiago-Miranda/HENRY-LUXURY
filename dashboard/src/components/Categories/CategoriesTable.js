@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux"
-import { Link } from "react-router-dom";
-import { getCategories } from "../../Redux/Actions/CategoriesActions";
+//import { Link } from "react-router-dom";
+import { getCategories,deleteCategories } from "../../Redux/Actions/CategoriesActions";
 
 const CategoriesTable = () => {
 
@@ -13,6 +13,16 @@ const CategoriesTable = () => {
   }, [dispatch])
 
   console.log(categories)
+
+  const deleteCategory = (e) => {
+    e.preventDefault();
+    console.log(e.target.value)
+    dispatch(deleteCategories(e.target.value))
+    alert("Delete Category correcty")
+   
+  }
+
+
 
   return (
     <div className="col-md-12 col-lg-8">
@@ -32,7 +42,14 @@ const CategoriesTable = () => {
                 <td>
                   <b>{e.name}</b>
                 </td>
-                
+                <button
+ type="button" class="btn btn-outline-secondary"
+
+                 value={e.id}
+                  onClick={deleteCategory}
+          
+          
+                     >Delete category</button>
               </tr>
             ))
           }
