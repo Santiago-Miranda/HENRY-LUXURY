@@ -10,7 +10,7 @@ import { PRODUCT_UPDATE_RESET } from "../../Redux/Constants/ProductConstants";
 import { toast } from "react-toastify";
 import Message from "../LoadingError/Error";
 import Loading from "../LoadingError/Loading";
-
+import Cloudinary from "../../screens/Cloudinary";
 const ToastObjects = {
   pauseOnFocusLoss: false,
   draggable: false,
@@ -181,13 +181,7 @@ const EditProductMain = (props) => {
                       </div>
                       <div className="mb-4">
                         <label className="form-label">Images</label>
-                        <input
-                          className="form-control"
-                          type="text"
-                          value={image}
-                          required
-                          onChange={(e) => setImage(e.target.value)}
-                        />
+                        <Cloudinary setCloudinary={setImage}/>
                       </div>
                     </>
                   )}
