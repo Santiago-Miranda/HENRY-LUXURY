@@ -7,6 +7,12 @@ import {
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
   USER_LOGOUT,
+  USER_ADMIN,
+  USER_ADMIN_FAIL,
+  USER_ADMIN_SUCCES,
+  USER_BAN,
+  USER_BAN_FAIL,
+  USER_BAN_SUCCES,
   ORDER_STALL,ORDER_STATUS,ORDER_MAIL,ORDER_NAME
 } from "../Constants/UserContants";
 import axios from "axios";
@@ -124,7 +130,70 @@ export function orderStatus(payload){
 
 export function orderMail(payload){
   console.log(payload)
- return{
-         type: ORDER_MAIL,
-         payload
- }}
+  return{
+          type: ORDER_MAIL,
+          payload
+  }}
+
+//Baneo
+  export const banUser = (payload) => async (dispatch, getState) => {
+    try {
+      dispatch({ type: USER_BAN });
+      const config = {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+
+      const {
+        userLogin: { userInfo },
+      } = getState();
+  
+      const { data } = await axios.put(`/api/users/ban`, config, payload);
+  
+      dispatch({ type: USER_BAN_SUCCES, payload: data });
+    } catch (error) {
+      const message =
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message;
+      if (message === "Not authorized, token failed") {
+        dispatch(logout());
+      }
+      dispatch({
+        type: USER_BAN_FAIL,
+        payload: message,
+      });
+    }
+  };
+
+  export const adminUser = (payload) => async (dispatch, getState) => {
+    try {
+      dispatch({ type: USER_ADMIN });
+      const config = {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+
+      const {
+        userLogin: { userInfo },
+      } = getState();
+  
+      const { data } = await axios.put(`/api/users/changeAdmin`, config, payload);
+  
+      dispatch({ type: USER_ADMIN_SUCCES, payload: data });
+    } catch (error) {
+      const message =
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message;
+      if (message === "Not authorized, token failed") {
+        dispatch(logout());
+      }
+      dispatch({
+        type: USER_ADMIN_FAIL,
+        payload: message,
+      });
+    }
+  };

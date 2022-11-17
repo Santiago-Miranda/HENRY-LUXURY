@@ -8,6 +8,13 @@ export const USER_LIST_SUCCESS = "USER_LIST_SUCCESS";
 export const USER_LIST_FAIL = "USER_LIST_FAIL";
 export const USER_LIST_RESET = "USER_LIST_RESET";
 
+export const USER_ADMIN = "USER_ADMIN";
+export const USER_ADMIN_FAIL = "USER_ADMIN_FAIL";
+export const USER_ADMIN_SUCCES = "USER_ADMIN_FAIL";
+export const USER_BAN = "USER_BAN";
+export const USER_BAN_FAIL = "USER_BAN_FAIL";
+export const USER_BAN_SUCCES = "USER_BAN_SUCCES"
+
 export const ORDER_NAME = "ORDER_NAME"
 export const ORDER_MAIL ="ORDER_MAIL"
 export const ORDER_STATUS ="ORDER_STATUS"
