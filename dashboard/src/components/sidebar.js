@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
-import logo from "./logo.png";
+import logo from "./Logoo.png";
 
 const Sidebar = () => {
   return (
