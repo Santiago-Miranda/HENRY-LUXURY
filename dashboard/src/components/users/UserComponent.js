@@ -324,6 +324,9 @@ const UserComponent = () => {
                   }
                   {
                     //si e.isadmin=true boton rojo, e.isadmin=false, boton verde
+                    <div>
+                      <button></button>
+                    </div>
                   }
                   {/* {
                   disablePrice === false ?  <div class="product-cell price">
