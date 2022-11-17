@@ -41,6 +41,11 @@ const AddProductMain = () => {
     }
   }, [product, dispatch]);
 
+  const clearCategories = (e)=>{
+    e.preventDefault()
+    setCategorias([])
+  }
+
   useEffect(() => {
     dispatch(getCategories());
   }, [dispatch]);
@@ -133,6 +138,7 @@ const AddProductMain = () => {
                         )
                       }
                     </select>
+                    <button onClick={clearCategories}>Clear categories</button>
                     <h3>{categorias.length?categorias.join(", "): "Choose at least one category."}</h3>
                   </div>
                   <div className="mb-4">

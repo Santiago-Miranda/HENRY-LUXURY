@@ -26,6 +26,7 @@ const EditProductMain = (props) => {
   const [price, setPrice] = useState(0);
   const [image, setImage] = useState("");
   const [categorias, setCategorias] = useState([]);
+  const [categoriasNames, setCategoriasNames] = useState([])
   const [countInStock, setCountInStock] = useState(0);
   const [description, setDescription] = useState("");
 
@@ -42,8 +43,17 @@ const EditProductMain = (props) => {
     success: successUpdate,
   } = productUpdate;
 
-  console.log("categorias", categorias)
+  const manias = (id) => {
+    const algo = categories.filter(e=>e._id == id).map(e=>e.name)
+    setCategoriasNames([...categoriasNames, algo[0]])
+  }
 
+  const clearCategories = (e) =>{
+    e.preventDefault()
+    setCategoriasNames([])
+    setCategorias([])
+  }
+  
   useEffect(() => {
     if (successUpdate) {
       dispatch({ type: PRODUCT_UPDATE_RESET });
@@ -58,10 +68,10 @@ const EditProductMain = (props) => {
         setImage(product.image);
         setPrice(product.price);
         setCategorias(product.categories.map(e=>e._id))
+        setCategoriasNames(product.categories.map(e=>e.name))
       }
     }
   }, [product, dispatch, productId, successUpdate]);
-console.log("setCategories",categorias)
   useEffect(() => {
     dispatch(getCategories());
   }, [dispatch]);
@@ -159,16 +169,19 @@ console.log("setCategories",categorias)
 
                         <label className="form-label">Category</label>
                         <select
-                          onChange={(e) => setCategorias([...categorias, e.target.value])} class="block form-control appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                          onChange={(e) =>{ setCategorias([...categorias, e.target.value])
+                          manias(e.target.value)
+                          }} class="block form-control appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                           <option disabled selected defaultValue>
                             Categories
                           </option>
                           {
                             categories.map(e => 
-                              <option value={e._id}>{e.name}</option>)
+                              <option value={e._id} name={e.name}>{e.name}</option>)
                           }
                         </select>
-                        <h3>{categorias.length?categorias.join(", "): "Choose at least one category."}</h3>
+                        <button onClick={clearCategories}>Clear categories.</button>
+                        <h5>{categoriasNames.length?categoriasNames.join(", "): "Choose at least one category."}</h5>
                       </div>
                       <div className="mb-4">
                         <label className="form-label">Description</label>

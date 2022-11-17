@@ -80,8 +80,8 @@ const SingleProduct = ({ history, match }) => {
                   </div>
 
 
+                  <div>{productDetails.product.categories?productDetails.product.categories.map(e=>e.name).join(", "): null}</div>
                   <p>{product.description}</p>
-                  <div>{productDetails.product.categories?productDetails.product.categories.map(e=>e.name): null}</div>
                   <div className="product-count col-lg-7 ">
                     <div className="flex-box d-flex justify-content-between align-items-center">
                       <h6>Price</h6>
