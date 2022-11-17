@@ -150,7 +150,7 @@ a.disabled {
 body {
   position: relative;
   min-height: 100vh;
-  background-color: #252525;
+  background-color: #e1d1d1;
 }
 
 body.offcanvas-active {
