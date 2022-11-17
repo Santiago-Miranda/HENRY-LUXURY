@@ -19,6 +19,13 @@ const CreateCategory = () => {
     setName("")
   }
 
+
+  
+
+
+
+
+
   return (
     <div className="col-md-12 col-lg-4">
       <form onSubmit={(e)=> onSubmit(e)}>
@@ -39,7 +46,9 @@ const CreateCategory = () => {
         <div className="d-grid">
           <button className="btn btn-primary py-3">Create category</button>
         </div>
-      </form>
+        </form>
+        <br/>
+       
     </div>
   );
 };

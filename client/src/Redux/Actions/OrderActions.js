@@ -102,13 +102,12 @@ export const payOrder =
           Authorization: `Bearer ${userInfo.token}`,
         },
       };
+      const { data } = await axios.put(`/api/orders/${orderId}/pay`,paymentResult,config);
+      console.log("data",data)
+      console.log("action",paymentResult)
+      console.log("Order id",orderId)
 
-      const { data } = await axios.put(
-        `/api/orders/${orderId}/pay`,
-        paymentResult,
-        config
-      );
-      dispatch({ type: ORDER_PAY_SUCCESS, payload: data });
+     dispatch({ type: ORDER_PAY_SUCCESS, payload: data });
     } catch (error) {
       const message =
         error.response && error.response.data.message
@@ -125,6 +124,8 @@ export const payOrder =
   };
 
 // USER ORDERS
+
+
 export const listMyOrders = () => async (dispatch, getState) => {
   try {
     dispatch({ type: ORDER_LIST_MY_REQUEST });

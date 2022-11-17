@@ -141,7 +141,9 @@ export function orderMail(payload){
         userLogin: { userInfo },
       } = getState();
 
+
       
+
       dispatch({ type: USER_BAN });
       const config = {
         headers: {
@@ -149,10 +151,12 @@ export function orderMail(payload){
         },
       };
 
+
   
       const { data } = await axios.put(`/api/users/ban`, {payload}, config,);
   
       dispatch({ type: USER_BAN_SUCCES, payload: data });
+
     } catch (error) {
       const message =
         error.response && error.response.data.message
@@ -170,10 +174,11 @@ export function orderMail(payload){
 
   export const adminUser = (payload) => async (dispatch, getState) => {
     try {
-      
+
       const {
         userLogin: { userInfo },
       } = getState();
+  
 
       dispatch({ type: USER_ADMIN });
       const config = {
@@ -184,6 +189,7 @@ export function orderMail(payload){
 
       const { data } = await axios.put(`/api/users/changeAdmin`, {payload}, config);
   
+
       dispatch({ type: USER_ADMIN_SUCCES, payload: data });
     } catch (error) {
       const message =

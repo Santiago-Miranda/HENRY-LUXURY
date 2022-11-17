@@ -140,10 +140,11 @@ userRouter.put("/authMail", asyncHandler(async(req, res) => {
 }))
 
 //BORRADO LOGICO 
+
 userRouter.put("/ban", protect, admin, asyncHandler(async(req, res) => {
     const { payload } = req.body;
     const user = await User.findOne({email: payload})
-    
+   
     if(user && !user.isAdmin){
       if(user && !user.isBaned) {
         user.isBaned = true
@@ -201,9 +202,11 @@ userRouter.put("/resetPass", asyncHandler(async(req, res) => {
 }));
 
 //CHANGE ADMIN STATUS  
+
 userRouter.put("/changeAdmin", protect, admin, asyncHandler(async(req, res) => {
   const {payload} = req.body;
   const user = await User.findOne({email: payload})
+
   if(user && user.isOwner == false){
     user.isAdmin = !user.isAdmin
     user.save()

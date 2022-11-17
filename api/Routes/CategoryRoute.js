@@ -38,6 +38,7 @@ categoryRoute.post('/', protect, admin, asyncHandler(async(req, res) => {
 //for y despues eliminar la categoria
 categoryRoute.delete("/", asyncHandler(async(req, res) => {
     const {id} = req.body
+    console.log("Body",req.body)
     const deletedOne = await Category.findById(id)
     const search = await Product.find({categories:`${id}`})
     if(deletedOne){

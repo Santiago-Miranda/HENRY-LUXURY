@@ -29,11 +29,11 @@ const UserComponent = () => {
   const userList = useSelector((state) => state.userList);
   const { loading, error, users } = userList;
 
+  console.log(users)
+
   useEffect(() => {
     dispatch(listUser());
   }, [dispatch]);
-
-
   const OrderByNames = e => {
     if (name === "ASCENDENTE") {
       e.preventDefault();
@@ -47,7 +47,6 @@ const UserComponent = () => {
       setName("ASCENDENTE");
     }
   };
-
   const OrderByStall = e => {
     if (stall === "ASCENDENTE") {
       e.preventDefault();
@@ -61,7 +60,6 @@ const UserComponent = () => {
       setStall("ASCENDENTE");
     }
   };
-
   const OrderByEmails = e => {
     if (email === "ASCENDENTE") {
       e.preventDefault();
@@ -76,9 +74,7 @@ const UserComponent = () => {
     }
   };
 
-  
-
-  useEffect(() => {
+    useEffect(() => {
     $("[data-trigger]").on("click", function (e) {
       e.preventDefault();
       e.stopPropagation();
@@ -101,7 +97,6 @@ const UserComponent = () => {
     dispatch(logout());
   };
 
- 
 
 const baneoUsuario = e => {
   e.preventDefault();
@@ -113,16 +108,12 @@ const baneoUsuario = e => {
 
 
 
+
 const adminUserUsuario = e => {
   e.preventDefault();
   dispatch(adminUser(e.target.value))
   alert("Usuario administrador")
 }
-
-
-
-
-
 
 
 
@@ -363,9 +354,11 @@ const adminUserUsuario = e => {
                     >Baner</button>
 
                     <button type="button" class="btn-outline-danger"
+
                     value={e.email}
                     onClick={adminUserUsuario}>
                     Admin</button>
+
                   </div>
                   }
                   {/* {
