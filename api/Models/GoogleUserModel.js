@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 
 const GoogleUserSchema =  mongoose.Schema({
     name:{type:String},
-    email: {type: String, required: true},
+    email: {type: String},
     image:{type:String},
 })
   

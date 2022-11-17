@@ -40,7 +40,8 @@ const productSchema = mongoose.Schema(
     },
     categories:[{
       type: Schema.Types.ObjectId,
-      ref: "Category"}],
+      ref: "Category"}
+    ],
     reviews: [reviewSchema],
     rating: {
       type: Number,

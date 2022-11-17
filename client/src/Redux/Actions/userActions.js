@@ -1,10 +1,32 @@
 import {
-  USER_DETAILS_FAIL, USER_DETAILS_REQUEST, USER_DETAILS_RESET, USER_DETAILS_SUCCESS,
-  USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT, USER_REGISTER_FAIL,
-  USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_UPDATE_PROFILE_FAIL, USER_UPDATE_PROFILE_REQUEST,
-   USER_UPDATE_PROFILE_SUCCESS,USER_RESET_PASSWORD,USER_CONFIRM_PASSWORD,USER_CONFIRM_PASSWORD_FAIL,USER_RESET_PASSWORD_FAIL,USER_CONFIRM_MAIL,USER_CONFIRM_MAIL_FAIL } from "../Constants/UserContants";
+  USER_DETAILS_FAIL,
+  USER_DETAILS_REQUEST, 
+  USER_DETAILS_RESET, 
+  USER_DETAILS_SUCCESS,
+  USER_LOGIN_FAIL, 
+  USER_LOGIN_REQUEST, 
+  USER_LOGIN_SUCCESS, 
+  USER_LOGOUT, 
+  USER_REGISTER_FAIL,
+  USER_REGISTER_REQUEST, 
+  USER_REGISTER_SUCCESS, 
+  USER_UPDATE_PROFILE_FAIL, 
+  USER_UPDATE_PROFILE_REQUEST,
+  USER_UPDATE_PROFILE_SUCCESS, 
+  USER_RESET_PASSWORD, 
+  USER_CONFIRM_PASSWORD, 
+  USER_CONFIRM_PASSWORD_FAIL,
+  USER_RESET_PASSWORD_FAIL, 
+  USER_CONFIRM_MAIL, 
+  USER_CONFIRM_MAIL_FAIL,  
+  USER_LOGIN_GOOGLE_FAIL,
+  USER_LOGIN_GOOGLE_SUCCESS, 
+  USER_LOGIN_GOOGLE_REQUEST, 
+  USER_LOGOUT_GOOGLE,
+  } from "../Constants/UserContants";
 import axios from "axios";
 import { ORDER_LIST_MY_RESET } from "../Constants/OrderConstants";
+
 
 // LOGIN
 export const login = (email, password) => async (dispatch) => {
@@ -40,6 +62,14 @@ export const login = (email, password) => async (dispatch) => {
 export const logout = () => (dispatch) => {
   localStorage.removeItem("userInfo");
   dispatch({ type: USER_LOGOUT });
+  dispatch({ type: USER_DETAILS_RESET });
+  dispatch({ type: ORDER_LIST_MY_RESET });
+};
+
+//LOGOUT GOOGLE
+export const logoutGoogle = () => (dispatch) => {
+  localStorage.removeItem("userGoogle");
+  dispatch({ type: USER_LOGOUT_GOOGLE });
   dispatch({ type: USER_DETAILS_RESET });
   dispatch({ type: ORDER_LIST_MY_RESET });
 };
@@ -113,12 +143,13 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
 
     const {
       userLogin: { userInfo },
+      userGoogle: {userGoogle}
     } = getState();
 
     const config = {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${userInfo.token}`,
+        Authorization: `Bearer ${userInfo.token || userGoogle.google}`,
       },
     };
 
@@ -127,6 +158,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
 
     localStorage.setItem("userInfo", JSON.stringify(data));
+    localStorage.setItem("userGoogle", JSON.stringify(data));
   } catch (error) {
     const message =
       error.response && error.response.data.message
@@ -138,6 +170,36 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
     dispatch({
       type: USER_UPDATE_PROFILE_FAIL,
       payload: message,
+    });
+  }
+};
+// Google
+export const Google = (email, name) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: USER_LOGIN_GOOGLE_REQUEST });
+
+   
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const { data } = await axios.post(
+      `/auth/loginGoogle`,{ email, name },
+      config
+    );
+    dispatch({ type: USER_LOGIN_GOOGLE_SUCCESS, payload: data });
+
+    localStorage.setItem("userGoogle", JSON.stringify(data));
+  } catch (error) {
+    dispatch({
+      type: USER_LOGIN_GOOGLE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
     });
   }
 };

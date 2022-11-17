@@ -5,7 +5,6 @@ const userSchema = mongoose.Schema(
   {
     name: {
       type: String,
-      required: true,
     },
     email: {
       type: String,
@@ -19,7 +18,6 @@ const userSchema = mongoose.Schema(
     },
     password: {
       type: String,
-      required: true,
     },
     isAdmin: {
       type: Boolean,
@@ -35,6 +33,11 @@ const userSchema = mongoose.Schema(
       type: String,
       enum: ['Pending', 'Active'],
       default: 'Pending'
+    },
+    isOwner: {
+      type: Boolean,
+      required: true,
+      default: false
     },
     confirmationCode: { 
       type: String, 

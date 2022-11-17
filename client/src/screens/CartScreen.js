@@ -14,6 +14,7 @@ const CartScreen = ({ match, location, history }) => {
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
 
+
   const total = cartItems.reduce((a, i) => a + i.qty * i.price, 0).toFixed(2);
 
   useEffect(() => {
@@ -22,13 +23,28 @@ const CartScreen = ({ match, location, history }) => {
     }
   }, [dispatch, productId, qty]);
 
+
+  
+
   const checkOutHandler = () => {
-    history.push("/login?redirect=shipping");
+    if(userInfo || userGoogle){
+    history.push("/shipping");
+    }else{
+    history.push("/register");
+    }
   };
 
   const removeFromCartHandle = (id) => {
     dispatch(removefromcart(id));
   };
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+  
+  const User = useSelector((state) => state.userGoogle);
+  const {userGoogle} = User;
+  console.log(User)
+ 
   return (
     <>
       <Header />

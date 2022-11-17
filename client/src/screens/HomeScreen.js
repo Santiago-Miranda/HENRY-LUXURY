@@ -10,23 +10,27 @@ import { useDispatch, useSelector } from "react-redux";
 import Modal from "react-modal";
 import CrearPrice from "../components/homeComponents/CrearPrice";
 import { getCategories } from "../Redux/Actions/CategoriesActions";
+import Bot from "../components/Bot/Bot";
 
 
 Modal.setAppElement("#root");
 
-// import FIlterProduct from "./FilterProduct";
+
 
 const HomeScreen = ({ match }) => {
   window.scrollTo(0, 0);
   const keyword = match.params.keyword;
   const pagenumber = match.params.pagenumber;
-  const [order, setOrder] = useState()
-  const [category, setCategory] = useState();
+  const [order, setOrder] = useState("toprated")
+  const [category, setCategory] = useState("");
   const [min, setMin] = useState(0)
   const [max, setMax] = useState(20000)
-  const [price, setPrice] = useState("");
+  const [price, setPrice] = useState("default");
   const [creaPrice, setCreaPrice] = useState(false)
   const [stock, setStock] = useState(1);
+
+  const [chatbBot, setChatBot] = useState(false)
+  console.log(keyword)
 
 
 
@@ -38,12 +42,16 @@ const HomeScreen = ({ match }) => {
   const { loading, error, products, page, pages } = productList;
 
   useEffect(() => {
-    dispatch(getCategories())
-    dispatch(listProduct(category,order, keyword, pagenumber ,min, max,stock));
-  }, [dispatch,category, order, keyword, pagenumber, min, max,stock]);
+    dispatch(getCategories());
+    if (keyword) {
+      dispatch(listProduct(category,  pagenumber ,min, max,stock,order,keyword, ));
+    }else{
+      dispatch(listProduct(category,  pagenumber ,min, max,stock,order, ));
+    }
+  }, [dispatch,category, pagenumber, min, max,stock,order, keyword,]);
 
   useEffect(() => {
-    if (price === "") {
+    if (price === "default") {
       setMin(0);
       setMax(2000000)
     }
@@ -66,22 +74,23 @@ const HomeScreen = ({ match }) => {
 
   const onReset = ()=>{
     setCategory("");
-    setMax(1000000000)
-    setMin(0);
+    setPrice("default")
     setStock("");
     setStock(1)
+    setOrder("toprated")
   }
 
 
   return (
     <div>
       <Header />
-      <div className="productosFilter">
       <Filtered onReset={onReset} categorias={categories} setCategory={setCategory} setOrder={setOrder} stock={stock} setStock={setStock} price={price} setPrice={setPrice} setMin={setMin} setMax={setMax}  products={products} />
-      
+      <div className="productosFilter">
       <ShopSection keyword={keyword} loading={loading} error={error} products={products} page={page} pages={pages} pagenumber={pagenumber} />
-
       </div>
+      {
+        chatbBot === true ? <Bot setChatBot={setChatBot}/>: <button onClick={()=>setChatBot(true)} className="boooot">Virtual Assistant</button>
+      }
       <CalltoActionSection />
       <ContactInfo />
       <Footer />
@@ -101,7 +110,6 @@ const HomeScreen = ({ match }) => {
         closeTimeoutMS={500}
       >
         <CrearPrice setMin={setMin} setMax={setMax} setCreaPrice={setCreaPrice}/>
-
       </Modal>
     </div>
   );

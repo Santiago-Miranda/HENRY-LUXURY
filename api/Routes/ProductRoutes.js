@@ -14,17 +14,11 @@ productRoute.get("/", asyncHandler(async (req, res) => {
   const pageSize = 6;
   const page = Number(req.query.pageNumber) || 1;
   const order = req.query.order || '';
-  const rating =
-    req.query.rating && Number(req.query.rating) !== 0
-      ? Number(req.query.rating)
-      : 0;
+  
   const stock =
     req.query.stock && Number(req.query.stock) !== 0
       ? Number(req.query.stock)
       : 0;
-
-
-  const ratingFilter = rating ? { rating: { $gte: rating } } : {};
   const category = req.query.category ? { categories: req.query.category } : {};
   const stockFilter = stock ? { countInStock: { $gte: stock } } : {};
   const priceFilter = req.query.min && req.query.max ? { price: { $gte: req.query.min, $lte: req.query.max } } : {};
@@ -45,8 +39,8 @@ productRoute.get("/", asyncHandler(async (req, res) => {
         : order === 'toprated'
           ? { rating: -1 }
           : { _id: -1 };
-  const count = await Product.countDocuments({ ...keyword, ...priceFilter, ...category, ...ratingFilter, ...stockFilter});
-  const products = await Product.find({ ...keyword, ...category, ...stock, ...priceFilter, ...ratingFilter, ...stockFilter }).populate("categories")
+  const count = await Product.countDocuments({ ...keyword, ...priceFilter, ...stock, ...category, ...stockFilter});
+  const products = await Product.find({ ...keyword, ...category, ...stock, ...priceFilter, ...stockFilter }).populate("categories")
     .limit(pageSize)
     .skip(pageSize * (page - 1))
     .sort(sortOrder);
@@ -160,13 +154,15 @@ productRoute.post("/", protect, admin, asyncHandler(async (req, res) => {
 productRoute.put("/:id", protect, admin, asyncHandler(async (req, res) => {
   const { name, price, description, image, countInStock, categories } = req.body;
   const product = await Product.findById(req.params.id);
+  console.log(categories)
+  //const categorias = await categories.map(e=> Category.findOne({e}))
   if (product) {
     product.name = name || product.name;
     product.price = price || product.price;
     product.description = description || product.description;
     product.image = image || product.image;
     product.countInStock = countInStock || product.countInStock;
-    product.categories = categories || product.categories;
+    product.categories = categorias || product.categories;
     const updatedProduct = await product.save();
     res.json(updatedProduct);
   } else {

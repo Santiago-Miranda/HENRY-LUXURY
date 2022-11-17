@@ -20,13 +20,25 @@ import {
 } from "../Constants/ProductConstants";
 import { logout } from "./userActions";
 
+
 // PRODUCT LIST
-export const listProduct = (category="", order = "", keyword = " ", pageNumber = " ",min = 0,max = 0,stock = 0,) =>
+export const listProduct = (category="",  pageNumber = " ",min = 0,max = 0,stock = 0, order = "",keyword="",) =>
   async (dispatch) => {
     //?category=${category}&keyword=${keyword}&pageNumber=${pageNumber}&min=${min}&max=${max}&stock=${stock}&order=${order}
     try {
       dispatch({ type: PRODUCT_LIST_REQUEST });
-      const { data } = await axios.get(`/api/products?pageNumber=${pageNumber}&min=${min}&max=${max}&stock=${stock}&order=${order}&keyword=${keyword}`
+      const { data } = await axios.get("/api/products/",{
+
+        params:{
+          category, 
+          pageNumber,
+          min,
+          max,
+          stock,
+          order,
+          keyword,
+        }
+      }
         //`/api/products?category=${category}&keyword=${keyword}&pageNumber=${pageNumber}&min=${min}&max=${max}&stock=${stock}&order=${order}`
       );
 
@@ -71,16 +83,19 @@ export const createProductReview =
     try {
       dispatch({ type: PRODUCT_CREATE_REVIEW_REQUEST });
 
+    
       const {
         userLogin: { userInfo },
       } = getState();
 
+  
       const config = {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${userInfo.token}`,
         },
       };
+    
 
       await axios.post(`/api/products/${productId}/review`, review, config);
       dispatch({ type: PRODUCT_CREATE_REVIEW_SUCCESS });

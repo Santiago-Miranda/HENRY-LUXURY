@@ -52,6 +52,12 @@ const ProfileTabs = () => {
       }
     }
   };
+
+  const User = useSelector((state) => state.userGoogle);
+  const {userGoogle} = User;
+  console.log(User)
+ 
+  if(user){
   return (
     <>
       <Toast />
@@ -63,13 +69,13 @@ const ProfileTabs = () => {
         <div>
           {user.image === 0 ? (
             <>
-              <img src={user.image} alt="userprofileimage" />
+              <img src={user.image} alt="image" />
             </>
               ):(
             <>
               <Cloudinary setCloudinary={setImage}/>
             </>
-          )}
+              )}
         </div>
 
         <div className="col-md-6">
@@ -105,12 +111,73 @@ const ProfileTabs = () => {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              placeholder="New password"
             />
           </div>
         </div>
         <div className="col-md-6">
           <div className="form">
             <label for="account-confirm-pass">Confirm Password</label>
+            <input
+              className="form-control"
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              placeholder="Confirm new password"
+            />
+          </div>
+        </div>
+        <button type="submit">Update Profile</button>
+      </form>
+    </>
+  );
+} else if(userGoogle){
+  return (
+    <>
+      <Toast />
+      {loading && <Loading />}
+      {updateLoading && <Loading />}
+      <form className="row  form-container" onSubmit={submitHandler}>
+
+        <div className="col-md-6">
+          <div className="form">
+            <label for="account-fn" style={{color: "black"}}>UserName</label>
+            <input
+              className="form-control"
+              type="text"
+              required
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+        </div>
+
+        <div className="col-md-6">
+          <div className="form">
+            <label for="account-email" style={{color: "black"}}>E-mail Address</label>
+            <input
+              className="form-control"
+              type="email"
+              value={email}
+              required
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+        </div>
+        <div className="col-md-6">
+          <div className="form">
+            <label for="account-pass" style={{color: "black"}}>New Password</label>
+            <input
+              className="form-control"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+        </div>
+        <div className="col-md-6">
+          <div className="form">
+            <label for="account-confirm-pass" style={{color: "black"}}>Confirm Password</label>
             <input
               className="form-control"
               type="password"
@@ -123,6 +190,7 @@ const ProfileTabs = () => {
       </form>
     </>
   );
+}
 };
 
 export default ProfileTabs;
