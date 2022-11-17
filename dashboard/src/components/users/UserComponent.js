@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { listUser, orderMail, OrderName, orderStall } from "../../Redux/Actions/userActions";
+import { listUser, orderMail, OrderName, orderStall , banUser ,  adminUser} from "../../Redux/Actions/userActions";
 import logo from "../logo.png";
 import { logout } from "../../Redux/Actions/userActions";
 import $ from "jquery";
@@ -14,7 +14,11 @@ const UserComponent = () => {
   const [disableCategory, setDisableCategory] = useState(false)
   //const [disableStatus, setDisableStatus] = useState(false)
   const [disablePrice, setDisablePrice] = useState(false)
-  // const [disableAction, setDisableAction] = useState(false)
+   const [disableAction, setDisableAction] = useState(false)
+   const [disableUser,setDisableUSer] = useState(false)
+
+
+
 
 
   const [order, setOrder] = useState("");
@@ -25,11 +29,11 @@ const UserComponent = () => {
   const userList = useSelector((state) => state.userList);
   const { loading, error, users } = userList;
 
+  console.log(users)
+
   useEffect(() => {
     dispatch(listUser());
   }, [dispatch]);
-
-
   const OrderByNames = e => {
     if (name === "ASCENDENTE") {
       e.preventDefault();
@@ -43,7 +47,6 @@ const UserComponent = () => {
       setName("ASCENDENTE");
     }
   };
-
   const OrderByStall = e => {
     if (stall === "ASCENDENTE") {
       e.preventDefault();
@@ -57,7 +60,6 @@ const UserComponent = () => {
       setStall("ASCENDENTE");
     }
   };
-
   const OrderByEmails = e => {
     if (email === "ASCENDENTE") {
       e.preventDefault();
@@ -72,9 +74,7 @@ const UserComponent = () => {
     }
   };
 
-  
-
-  useEffect(() => {
+    useEffect(() => {
     $("[data-trigger]").on("click", function (e) {
       e.preventDefault();
       e.stopPropagation();
@@ -97,7 +97,22 @@ const UserComponent = () => {
     dispatch(logout());
   };
 
-  console.log(users)
+ 
+const baneoUsuario = e => {
+  e.preventDefault();
+  dispatch(banUser(e.target.value))
+  alert("Usuario Baneado")
+}
+
+
+const adminUserUsuario = e => {
+  e.preventDefault();
+  dispatch(adminUser(e.target.value))
+  alert("Usuario adminitrador")
+}
+
+
+
 
   return (
     <section className="content-main">
@@ -286,9 +301,9 @@ const UserComponent = () => {
                   </button>
                 </div> : null
               }
-              {/* {
-              disableAction === false ? <div class="product-cell sales">Action</div>: null
-            }   */}
+              {
+              disableAction === false ? <div class="product-cell  sales">Action</div>: null
+            }   
 
             </div>
             {users &&
@@ -324,9 +339,20 @@ const UserComponent = () => {
                   }
                   {
                     //si e.isadmin=true boton rojo, e.isadmin=false, boton verde
-                    <div>
-                      <button></button>
-                    </div>
+                    <div className="row">
+                    <button type="button" class="btn-outline-success"
+                    value={e.email}
+                    onClick={baneoUsuario}
+                    
+                    
+                    >Baner</button>
+
+                    <button type="button" class="btn-outline-danger"
+                     value={e.email}
+                    onClick={adminUserUsuario}
+                    
+                    >Admin</button>
+                  </div>
                   }
                   {/* {
                   disablePrice === false ?  <div class="product-cell price">
