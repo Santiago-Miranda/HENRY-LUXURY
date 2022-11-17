@@ -3,6 +3,7 @@ import asyncHandler from "express-async-handler";
 import { admin, protect } from "../Middleware/AuthMiddleware.js";
 import Order from "./../Models/OrderModel.js";
 import { sendOrderEmail, orderPaidEmail, orderDelivered } from "../config/nodemailer.js"
+import Product from "../Models/ProductModel.js";
 
 const orderRouter = express.Router();
 
@@ -17,7 +18,7 @@ orderRouter.post("/", protect, asyncHandler(async (req, res) => {
       shippingPrice,
       totalPrice,
     } = req.body;
-
+    
     if (orderItems && orderItems.length === 0) {
       res.status(400);
       throw new Error("No order items");
@@ -32,6 +33,11 @@ orderRouter.post("/", protect, asyncHandler(async (req, res) => {
         shippingPrice,
         totalPrice,
       });
+      for(var i=0; i<orderItems.length; i++){
+        const menos = await Product.findById(orderItems[i].product)
+        menos.countInStock = menos.countInStock - orderItems[i].qty
+        menos.save()
+      }
       sendOrderEmail(req.user.name, req.user.email, orderItems.length)
       const createOrder = await order.save();
       res.status(201).json(createOrder);

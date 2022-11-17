@@ -129,7 +129,6 @@ export function orderStatus(payload){
 }
 
 export function orderMail(payload){
-  console.log(payload)
   return{
           type: ORDER_MAIL,
           payload
@@ -141,15 +140,23 @@ export function orderMail(payload){
       const {
         userLogin: { userInfo },
       } = getState();
+
+
+      
+
       dispatch({ type: USER_BAN });
       const config = {
         headers: {
           Authorization: `Bearer ${userInfo.token}`,
         },
       };
-      const { data } = await axios.put(`/api/users/ban`, config, payload);
-      console.log("banUser",data)
-        dispatch({ type: USER_BAN_SUCCES, payload: data });
+
+
+  
+      const { data } = await axios.put(`/api/users/ban`, {payload}, config,);
+  
+      dispatch({ type: USER_BAN_SUCCES, payload: data });
+
     } catch (error) {
       const message =
         error.response && error.response.data.message
@@ -167,10 +174,12 @@ export function orderMail(payload){
 
   export const adminUser = (payload) => async (dispatch, getState) => {
     try {
+
       const {
         userLogin: { userInfo },
       } = getState();
   
+
       dispatch({ type: USER_ADMIN });
       const config = {
         headers: {
@@ -178,9 +187,9 @@ export function orderMail(payload){
         },
       };
 
-     
-      const { data } = await axios.put(`/api/users/changeAdmin`, config, payload);
-      console.log("adminUser",data)
+      const { data } = await axios.put(`/api/users/changeAdmin`, {payload}, config);
+  
+
       dispatch({ type: USER_ADMIN_SUCCES, payload: data });
     } catch (error) {
       const message =

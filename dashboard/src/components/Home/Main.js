@@ -56,10 +56,7 @@ const Main = () => {
             </Link>
             <div className="dropdown-menu dropdown-menu-end">
               <Link className="dropdown-item" to="/">
-                My profile
-              </Link>
-              <Link className="dropdown-item" to="#">
-                Settings
+                Dashboard
               </Link>
               <Link
                 onClick={logoutHandler}

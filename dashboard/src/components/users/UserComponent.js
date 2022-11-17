@@ -97,7 +97,7 @@ const UserComponent = () => {
     dispatch(logout());
   };
 
- 
+
 const baneoUsuario = e => {
   e.preventDefault();
   dispatch(banUser(e.target.value))
@@ -105,12 +105,15 @@ const baneoUsuario = e => {
 }
 
 
+
+
+
+
 const adminUserUsuario = e => {
   e.preventDefault();
   dispatch(adminUser(e.target.value))
-  alert("Usuario adminitrador")
+  alert("Usuario administrador")
 }
-
 
 
 
@@ -335,6 +338,9 @@ const adminUserUsuario = e => {
                       {
                         e.isAdmin && e.isAdmin === true ? <span className="status active">Admin</span> : <span className="status disabled">User</span>
                       }
+                      {
+                      e.isBaned && e.isBaned === true ? <span className="status disabled">Banned</span>:<span className="status active">Unbanned</span>
+                      }
                     </div> : null
                   }
                   {
@@ -348,10 +354,11 @@ const adminUserUsuario = e => {
                     >Baner</button>
 
                     <button type="button" class="btn-outline-danger"
-                     value={e.email}
-                    onClick={adminUserUsuario}
-                    
-                    >Admin</button>
+
+                    value={e.email}
+                    onClick={adminUserUsuario}>
+                    Admin</button>
+
                   </div>
                   }
                   {/* {
@@ -361,7 +368,7 @@ const adminUserUsuario = e => {
                 } */}
                   {/* {
                   disableAction === false ? <td class="product-cell py-4 whitespace-no-wrap text-sm leading-5">
-                 
+                
                 </td>:null
                 } */}
 
