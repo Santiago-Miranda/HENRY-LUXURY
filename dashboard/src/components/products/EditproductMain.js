@@ -7,10 +7,11 @@ import {
   updateProduct,
 } from "./../../Redux/Actions/ProductActions";
 import { PRODUCT_UPDATE_RESET } from "../../Redux/Constants/ProductConstants";
+import { getCategories } from "../../Redux/Actions/CategoriesActions";
 import { toast } from "react-toastify";
 import Message from "../LoadingError/Error";
 import Loading from "../LoadingError/Loading";
-import Cloudinary from "../../screens/Cloudinary";
+
 const ToastObjects = {
   pauseOnFocusLoss: false,
   draggable: false,
@@ -24,12 +25,13 @@ const EditProductMain = (props) => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [image, setImage] = useState("");
-  const [categories, setCategories] = useState("");
+  const [categorias, setCategorias] = useState([]);
   const [countInStock, setCountInStock] = useState(0);
   const [description, setDescription] = useState("");
 
   const dispatch = useDispatch();
-
+  const category = useSelector(state=>state.allCategories)
+  const { categories } = category
   const productEdit = useSelector((state) => state.productEdit);
   const { loading, error, product } = productEdit;
 
@@ -39,6 +41,8 @@ const EditProductMain = (props) => {
     error: errorUpdate,
     success: successUpdate,
   } = productUpdate;
+
+  console.log("categorias", categorias)
 
   useEffect(() => {
     if (successUpdate) {
@@ -53,10 +57,14 @@ const EditProductMain = (props) => {
         setCountInStock(product.countInStock);
         setImage(product.image);
         setPrice(product.price);
-        setCategories(product.categories)
+        setCategorias(product.categories.map(e=>e._id))
       }
     }
   }, [product, dispatch, productId, successUpdate]);
+console.log("setCategories",categorias)
+  useEffect(() => {
+    dispatch(getCategories());
+  }, [dispatch]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -68,7 +76,7 @@ const EditProductMain = (props) => {
         description,
         image,
         countInStock,
-        categories
+        categorias
       })
     );
   };
@@ -151,22 +159,16 @@ const EditProductMain = (props) => {
 
                         <label className="form-label">Category</label>
                         <select
-                          onChange={(e) => setCategories(e.target.value)} class="block form-control appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                          onChange={(e) => setCategorias([...categorias, e.target.value])} class="block form-control appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                           <option disabled selected defaultValue>
-                            {categories}
+                            Categories
                           </option>
-                          <option value="tipos">all</option>
-                          <option value="Jewerly">Jewerly</option>
-                          <option value="Shoes">Shoes</option>
-                          <option value="Phone">Phone</option>
-                          <option value="Brand clothing">Brand clothing</option>
-                          <option value="Watches">Watches</option>
-                          <option value="Clothes">Clothes</option>
-                          <option value="Antique">Antique</option>
-                          <option value="Motorbike">Motorbike</option>
-                          <option value="Vehicle">Vehicle</option>
-
+                          {
+                            categories.map(e => 
+                              <option value={e._id}>{e.name}</option>)
+                          }
                         </select>
+                        <h3>{categorias.length?categorias.join(", "): "Choose at least one category."}</h3>
                       </div>
                       <div className="mb-4">
                         <label className="form-label">Description</label>
@@ -181,7 +183,13 @@ const EditProductMain = (props) => {
                       </div>
                       <div className="mb-4">
                         <label className="form-label">Images</label>
-                        <Cloudinary setCloudinary={setImage}/>
+                        <input
+                          className="form-control"
+                          type="text"
+                          value={image}
+                          required
+                          onChange={(e) => setImage(e.target.value)}
+                        />
                       </div>
                     </>
                   )}
