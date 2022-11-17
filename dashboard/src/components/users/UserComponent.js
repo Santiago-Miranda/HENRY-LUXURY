@@ -12,9 +12,10 @@ const UserComponent = () => {
 
   const [disableItem, setDisableItem] = useState(false)
   const [disableCategory, setDisableCategory] = useState(false)
-  const [disableStatus, setDisableStatus] = useState(false)
+  //const [disableStatus, setDisableStatus] = useState(false)
   const [disablePrice, setDisablePrice] = useState(false)
   // const [disableAction, setDisableAction] = useState(false)
+
 
   const [order, setOrder] = useState("");
   const [name, setName] = useState("ASCENDENTE");
@@ -213,7 +214,7 @@ const UserComponent = () => {
 
           <div class="products-area-wrapper tableView">
             <div class="products-header">
-              {
+              { 
                 disableItem === false ? <div class="product-cell image">
                   Customers
                   <button onClick={OrderByNames} class="sort-button">
@@ -320,6 +321,9 @@ const UserComponent = () => {
                         e.isAdmin && e.isAdmin === true ? <span className="status active">Admin</span> : <span className="status disabled">User</span>
                       }
                     </div> : null
+                  }
+                  {
+                    //si e.isadmin=true boton rojo, e.isadmin=false, boton verde
                   }
                   {/* {
                   disablePrice === false ?  <div class="product-cell price">
