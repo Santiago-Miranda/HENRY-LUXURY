@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { listUser, orderMail, OrderName, orderStall } from "../../Redux/Actions/userActions";
-import Loading from "../LoadingError/Loading";
-import Message from "../LoadingError/Error";
 import logo from "../logo.png";
 import { logout } from "../../Redux/Actions/userActions";
 import $ from "jquery";
