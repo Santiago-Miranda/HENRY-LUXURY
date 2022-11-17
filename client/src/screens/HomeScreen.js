@@ -11,6 +11,7 @@ import Modal from "react-modal";
 import CrearPrice from "../components/homeComponents/CrearPrice";
 import { getCategories } from "../Redux/Actions/CategoriesActions";
 import Bot from "../components/Bot/Bot";
+import Carrousel from "../components/ExtrasComponents/Carrousel";
 
 
 Modal.setAppElement("#root");
@@ -91,7 +92,7 @@ const HomeScreen = ({ match }) => {
       {
         chatbBot === true ? <Bot setChatBot={setChatBot}/>: <button onClick={()=>setChatBot(true)} className="boooot">Virtual Assistant</button>
       }
-      <CalltoActionSection />
+      <Carrousel />
       <ContactInfo />
       <Footer />
       <Modal

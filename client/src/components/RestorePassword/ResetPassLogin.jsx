@@ -4,7 +4,7 @@ import { userConfirmPassword } from '../../Redux/Actions/userActions';
 import Header from '../Header'
 
 
-const ResetPassLogin = () => {
+const ResetPassLogin = ({history}) => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -15,6 +15,8 @@ const ResetPassLogin = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(userConfirmPassword(email,token,password));
+    history.push("/login")
+    alert("Reset Password Successfully")
   };
 
   return (

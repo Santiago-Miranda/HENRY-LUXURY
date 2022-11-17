@@ -1,5 +1,5 @@
 {
-  "name": "Luxury",
+  "name": "luxury",
   "version": "0.1.0",
   "proxy": "http://localhost:3001",
   "cookie": "http://localhost:3000",

@@ -4,12 +4,17 @@ import moment from "moment";
 
 const Orders = (props) => {
   const { orders } = props;
+  for(var i = 0; i<orders.length; i++){
+    if(orders[i].user == null){
+      console.log(orders[i])
+    }
+  }
   return (
     <table className="table">
       <thead>
         <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Email</th>
+          <th scope="col">Id</th>
+          <th scope="col"></th>
           <th scope="col">Total</th>
           <th scope="col">Paid</th>
           <th scope="col">Date</th>
@@ -23,7 +28,7 @@ const Orders = (props) => {
         {orders.map((order) => (
           <tr key={order._id}>
             <td>
-              <b>{order.name}</b>
+              <b>{order._id}</b>
             </td>
             <td>{order.email}</td>
             <td>${order.totalPrice}</td>

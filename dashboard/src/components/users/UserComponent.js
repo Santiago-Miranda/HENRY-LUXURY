@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { listUser, orderMail, OrderName, orderStall } from "../../Redux/Actions/userActions";
-import Loading from "../LoadingError/Loading";
-import Message from "../LoadingError/Error";
 import logo from "../logo.png";
 import { logout } from "../../Redux/Actions/userActions";
 import $ from "jquery";
@@ -14,9 +12,10 @@ const UserComponent = () => {
 
   const [disableItem, setDisableItem] = useState(false)
   const [disableCategory, setDisableCategory] = useState(false)
-  const [disableStatus, setDisableStatus] = useState(false)
+  //const [disableStatus, setDisableStatus] = useState(false)
   const [disablePrice, setDisablePrice] = useState(false)
   // const [disableAction, setDisableAction] = useState(false)
+
 
   const [order, setOrder] = useState("");
   const [name, setName] = useState("ASCENDENTE");
@@ -215,7 +214,7 @@ const UserComponent = () => {
 
           <div class="products-area-wrapper tableView">
             <div class="products-header">
-              {
+              { 
                 disableItem === false ? <div class="product-cell image">
                   Customers
                   <button onClick={OrderByNames} class="sort-button">
@@ -322,6 +321,12 @@ const UserComponent = () => {
                         e.isAdmin && e.isAdmin === true ? <span className="status active">Admin</span> : <span className="status disabled">User</span>
                       }
                     </div> : null
+                  }
+                  {
+                    //si e.isadmin=true boton rojo, e.isadmin=false, boton verde
+                    <div>
+                      <button></button>
+                    </div>
                   }
                   {/* {
                   disablePrice === false ?  <div class="product-cell price">

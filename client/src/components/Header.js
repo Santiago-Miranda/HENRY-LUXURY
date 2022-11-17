@@ -52,7 +52,7 @@ const Header = () => {
         <div className="container"> 
           <div className="row">
             <div className="col-md-6 d-flex align-items-center display-none">
-             <Link to="/landing"><p>Landing</p></Link>
+            
              <Link to="/favorite"><p>Favourites</p></Link>
              <Link to="/about"><p>About</p></Link>
             
@@ -237,7 +237,7 @@ const Header = () => {
         <div className="container"> 
           <div className="row">
             <div className="col-md-6 d-flex align-items-center display-none">
-             <Link to="/landing"><p>Landing</p></Link>
+             
              <Link to="/favorite"><p>Favourites</p></Link>
              <Link to="/about"><p>About</p></Link>
             
@@ -417,7 +417,7 @@ const Header = () => {
         <div className="container"> 
           <div className="row">
             <div className="col-md-6 d-flex align-items-center display-none">
-             <Link to="/landing"><p>Landing</p></Link>
+            
              <Link to="/favorite"><p>Favourites</p></Link>
              <Link to="/about"><p>About</p></Link>
             

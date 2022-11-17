@@ -7,6 +7,12 @@ import {
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
   USER_LOGOUT,
+  USER_ADMIN,
+  USER_ADMIN_FAIL,
+  USER_ADMIN_SUCCES,
+  USER_BAN,
+  USER_BAN_FAIL,
+  USER_BAN_SUCCES,
   ORDER_STALL, ORDER_STATUS, ORDER_MAIL, ORDER_NAME
 } from "../Constants/UserContants";
 
@@ -149,6 +155,32 @@ export const userListReducer = (state = { users: [] }, action) => {
         ...state,
         users: category
       }
+    default:
+      return state;
+  }
+  
+};
+export const userBanReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_BAN:
+      return { loading: true };
+    case USER_BAN_SUCCES:
+      return { loading: false, userInfo: action.payload };
+    case USER_BAN_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const userAdminReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_ADMIN:
+      return { loading: true };
+    case USER_ADMIN_SUCCES:
+      return { loading: false, userInfo: action.payload };
+    case USER_ADMIN_FAIL:
+      return { loading: false, error: action.payload };
     default:
       return state;
   }
