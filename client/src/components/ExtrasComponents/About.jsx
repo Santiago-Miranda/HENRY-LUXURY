@@ -62,7 +62,7 @@ import Header from '../Header'
                              <img src="https://ca.slack-edge.com/TPRS7H4PN-U03DW9YEWFK-d5279260e109-512" alt=""/>
                         </div>
                         <h3 class="title">Santiago Miranda </h3>
-                        <span class="post">Web developer</span>
+                        <span class="post">Full Stack Developer</span>
                     </div>
                 </div>
                 
